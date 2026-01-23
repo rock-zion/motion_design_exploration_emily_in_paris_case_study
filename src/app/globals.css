@@ -2,7 +2,10 @@
 
 
 :root {
-  --bg: #000000;
+  --background: #000000;
+  --black: #000000;
+
+    /* Paris colors */
   --paris-bg: #eed5bb;
   
   /* Rome colors */
@@ -32,6 +35,35 @@
   font-display: swap;
 }
 
+
+@font-face {
+  font-family: 'RoslindaleSemiBold';
+  src: url(/fonts/Roslindale-DisplayCondensedSemiBold-Testing.ttf);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RumbleBrave';
+  src: url(/fonts/Rumble\ Brave.otf);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NeueMontrealMedium';
+  src: url(/fonts/ppneuemontreal-medium.otf);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NeueMontrealBook';
+  src: url(/fonts/ppneuemontreal-book.otf);
+  font-style: normal;
+  font-display: swap;
+}
+
 [data-theme="paris"] {
   --background: var(--paris-bg);
 }
@@ -44,11 +76,19 @@
     @apply absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2
 }
 
+@utility flex-col-center {
+    @apply flex flex-col justify-center items-center
+}
+
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-family-serif: 'Roslindale', serif;
+  --font-family-serif-semi-bold: 'RoslindaleSemiBold', serif;
+  --font-family-rumble: 'RumbleBrave', serif;
+  --font-family-montreal-medium: 'NeueMontrealMedium', sans-serif;
+  --font-family-montreal-book: 'NeueMontrealBook', sans-serif
 }
 
 @media (prefers-color-scheme: dark) {
@@ -110,6 +150,18 @@ small {
   font-size: var(--font-size-sm);
 }
 
+.rumble {
+  font-family: RumbleBrave, serif;
+}
+
+.montreal_medium {
+  font-family: NeueMontrealMedium, Arial, Helvetica, sans-serif
+}
+
+.montreal-book {
+  font-family: NeueMontrealBook, Arial, Helvetica, sans-serif;
+}
+
 .choose_adventure_wrapper {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), black);
   aspect-ratio: 9/16;
@@ -117,5 +169,9 @@ small {
 
   width: auto; 
   max-width: 100%;
+}
 
+.blur-40 {
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
 }

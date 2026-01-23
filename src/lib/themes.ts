@@ -9,6 +9,11 @@ export const themes = {
     poster: '/images/paris-hero.mp4',
     cta: 'Explore Paris',
     description: 'Discover romantic streets and café culture',
+    hero: {
+      title: "Live the paris you've only seen on screen",
+      subtitle:
+        'Created for people who dream of paris and want to live it, not just visit',
+    },
   },
   rome: {
     name: 'Rome',
@@ -19,6 +24,10 @@ export const themes = {
     poster: '/images/paris-hero.mp4',
     cta: 'Explore Rome',
     description: 'Walk through ancient history and Italian charm',
+    hero: {
+      title: '',
+      subtitle: '',
+    },
   },
 } as const;
 
