@@ -1,7 +1,8 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, ReactNode } from 'react';
 import { themes, type ThemeName } from '@/lib/themes';
+import { usePathname, useRouter } from 'next/navigation';
 
 type ThemeContextType = {
   currentTheme: ThemeName | null;
@@ -12,16 +13,33 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [currentTheme, setCurrentTheme] = useState<ThemeName | null>(null);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const themeSegment = pathname?.split('/')[1];
+  const isTheme = isValidThemeName(themeSegment);
+
+  const currentTheme = isTheme ? (themeSegment as ThemeName) : null;
+  const setTheme = (theme: ThemeName | null) => {
+    if (theme) {
+      router.push(`/${theme}`);
+    } else {
+      router.push('/');
+    }
+  };
+
+  if (!currentTheme && pathname != '/') {
+    return null;
+  }
 
   return (
     <ThemeContext.Provider
       value={{
         currentTheme,
         theme: themes[currentTheme!],
-        setTheme: setCurrentTheme,
+        setTheme,
       }}>
-      <div data-theme={currentTheme}>{children}</div>
+      <body data-theme={currentTheme}>{children}</body>
     </ThemeContext.Provider>
   );
 }
@@ -30,4 +48,8 @@ export function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) throw new Error('useTheme must be used within ThemeProvider');
   return context;
+}
+
+function isValidThemeName(theme: string): theme is ThemeName {
+  return theme in themes;
 }
