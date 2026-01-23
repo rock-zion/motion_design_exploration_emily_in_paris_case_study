@@ -2,8 +2,12 @@
 
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #000000;
+  --paris-bg: #eed5bb;
+  
+  /* Rome colors */
+  --rome-bg: #8f1b32;
+
    /* Body text */
   --font-size-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
   --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
@@ -29,17 +33,15 @@
 }
 
 [data-theme="paris"] {
-  --background: #fff;
-  --foreground: #171717;
-  --accent: #ff69b4;
-  --hero-gradient: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%);
+  --background: var(--paris-bg);
 }
 
 [data-theme="rome"] {
-  --background: #fef9f3;
-  --foreground: #2d1810;
-  --accent: #d4af37;
-  --hero-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  --background: var(--rome-bg);
+}
+
+@utility center-absolute {
+    @apply absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2
 }
 
 
@@ -106,4 +108,14 @@ p {
 
 small {
   font-size: var(--font-size-sm);
+}
+
+.choose_adventure_wrapper {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), black);
+  aspect-ratio: 9/16;
+  max-height: 70vh;
+
+  width: auto; 
+  max-width: 100%;
+
 }
