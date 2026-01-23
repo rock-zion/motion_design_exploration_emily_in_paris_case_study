@@ -4,11 +4,26 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+   /* Body text */
+  --font-size-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+  --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);
+  
+  /* Headings */
+  --font-size-h6: clamp(1rem, 0.7rem + 1vw, 1.5rem);
+  --font-size-h5: clamp(1.25rem, 0.5rem + 2.5vw, 2.5rem);
+  --font-size-h4: clamp(1.75rem, 0.5rem + 4vw, 3.5rem);
+  --font-size-h3: clamp(2rem, 0.8rem + 4vw, 4rem);
+  --font-size-h2: clamp(3rem, 1.5rem + 5vw, 5.5rem);
+  --font-size-h1: clamp(3.5rem, 1.5rem + 7vw, 7rem);
+  
+  /* Display */
+  --font-size-display: clamp(4rem, 0rem + 14vw, 18rem);
 }
 
 @font-face {
   font-family: 'Roslindale';
-  src: url(/fonts/Roslindale-DisplayCondensedBold-Testing.ttf);
+  src: url(/fonts/Roslindale-DisplayCondensedLight-Testing.ttf);
   font-style: normal;
   font-display: swap;
 }
@@ -45,4 +60,50 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Roslindale, serif;
+}
+
+
+h1 {
+  font-size: var(--font-size-h1);
+  line-height: 1;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  line-height: 1.1;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  line-height: 1.1;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+p {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+
+small {
+  font-size: var(--font-size-sm);
 }
