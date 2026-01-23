@@ -37,6 +37,7 @@ export default function Home() {
       const tl = gsap.timeline({
         onComplete: () => setAnimationComplete(true),
       });
+
       tl.to(titleSplit.words, {
         opacity: 1,
         yPercent: 0,
