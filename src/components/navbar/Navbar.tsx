@@ -10,19 +10,10 @@ import { forwardRef, useRef, useImperativeHandle } from 'react';
 const Navbar = forwardRef((props, ref) => {
   const navBarRef = useRef<HTMLDivElement>(null);
 
-  const { contextSafe } = useGSAP(
-    () => {
-      if (!navBarRef.current) return;
-
-      gsap.set('.nav-wrapper > *', { y: '90px' });
-    },
-    { scope: navBarRef },
-  );
+  const { contextSafe } = useGSAP(() => {}, { scope: navBarRef });
   const { theme } = useTheme();
 
   const revealMenu = contextSafe(() => {
-    console.log('yaga');
-
     gsap.to('.nav-wrapper > *', {
       y: 0,
       duration: 1.5,
@@ -37,17 +28,26 @@ const Navbar = forwardRef((props, ref) => {
   }));
 
   return (
-    <div
-      ref={navBarRef}
-      className='fixed z-100 h-[90px] w-screen flex justify-between items-center nav-wrapper overflow-hidden'>
-      <nav className='flex justify-between items-center w-[96vw] mx-auto'>
-        <div className='flex-1'>
-          <MenuBtn />
-        </div>
-        <h4 className='uppercase flex-1 font-rumble'>{theme.title}</h4>
-        <BubbleButton variant='out'>View Experiences</BubbleButton>
-      </nav>
-    </div>
+    <>
+      <div
+        ref={navBarRef}
+        className='fixed z-100 h-[90px] w-screen flex justify-between items-center overflow-hidden'>
+        <nav className='flex justify-between items-center w-[96vw] mx-auto nav-wrapper'>
+          <div className='flex-1 translate-y-[90px] hide-in-mobile'>
+            <MenuBtn />
+          </div>
+          <h4 className='translate-y-[90px] uppercase flex-1 font-rumble max-md:ml-[16px]'>
+            {theme.title}
+          </h4>
+          <div className='translate-y-[90px] hide-in-mobile'>
+            <BubbleButton variant='out'>View Experiences</BubbleButton>
+          </div>
+          <div className='translate-y-[90px] hidden max-md:block'>
+            <MenuBtn />
+          </div>
+        </nav>
+      </div>
+    </>
   );
 });
 
