@@ -50,10 +50,6 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
         background: '#000000',
       });
 
-      gsap.set(['.hero-title', '.hero-subtitle-wrapper'], {
-        yPercent: 100,
-      });
-
       //   tweens
       tl.to(title.chars, {
         opacity: 1,
@@ -156,15 +152,21 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
         '>',
       );
 
-      tl.to(
+      tl.fromTo(
         ['.hero-title', '.hero-subtitle-wrapper'],
         {
-          yPercent: 0,
+          y: '500px',
+          // autoAlpha: 0,
+        },
+        {
+          y: '0px',
+          // autoAlpha: 1,
           stagger: 0.2,
           duration: 1.5,
+          ease: 'power2.out',
           onStart: () => {
-            triggerMenuReveal()
-          }
+            triggerMenuReveal();
+          },
         },
         '<',
       );
@@ -187,13 +189,13 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
             src={theme.heroVideo}
             ref={videoRef}
           />
-          <div className='z-20 overflow-hidden left-8 bottom-8 absolute flex items-center'>
-            <h1 className='hero-title selection:bg-(--bg-brand) selection:text-black w-[50%] font-serif-semi-bold'>
+          <div className='z-20 overflow-hidden left-8 bottom-8 absolute flex items-center max-md:flex-col max-md:items-start max-md:justify-start'>
+            <h1 className='hero-title translate-y-[500px] selection:bg-(--bg-brand) selection:text-black w-[50%] font-serif-semi-bold max-md:w-[100%]'>
               {theme.hero.title}
             </h1>
-            <div className='flex w-[50%] justify-center hero-subtitle-wrapper'>
-              <div className='w-[50%]'>
-                <h5 className='selection:bg-(--bg-brand) selection:text-black leading-5 mb-4'>
+            <div className='flex w-[50%] justify-center hero-subtitle-wrapper translate-y-[500px] max-md:w-[100%] max-md:justify-start'>
+              <div className='w-[clamp(250px,50%,600px)]'>
+                <h5 className='selection:bg-(--bg-brand) selection:text-black leading-5 mb-4 max-md:my-4'>
                   {theme.hero.subtitle}
                 </h5>
                 <BubbleButton variant='in' href='mxm'>
@@ -204,7 +206,7 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
           </div>
         </div>
         <div className='overflow-hidden title-wrapper'>
-          <h3 className='font-rumble text-[64px]'>{theme.title}</h3>
+          <h3 className='font-rumble text-[64px]!'>{theme.title}</h3>
         </div>
         <div className='overflow-hidden subtitle-wrapper'>
           <small className='montreal-book text-[.75rem]!'>

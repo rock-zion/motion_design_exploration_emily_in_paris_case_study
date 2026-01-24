@@ -95,11 +95,11 @@ const BubbleButton = ({
       </div>
 
       {isBubbleIn ? (
-        <span className='font-montreal-medium text-[18px] block mx-[32px]'>
+        <span className='font-montreal-medium generic text-center block mx-[32px]'>
           {children}
         </span>
       ) : (
-        <div className='font-montreal-medium bg-white text-[18px] h-[60px] flex items-center rounded-full px-[32px]'>
+        <div className='font-montreal-medium bg-white generic h-[60px] flex items-center rounded-full px-[32px]'>
           {children}
         </div>
       )}
