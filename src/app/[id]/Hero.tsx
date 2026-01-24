@@ -5,6 +5,7 @@ import parse from 'html-react-parser';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/all';
 import { gsap } from 'gsap';
+import BubbleButton from '@/components/buttons/BubbleButton';
 
 const Hero = () => {
   const container = useRef<HTMLElement>(null);
@@ -90,7 +91,7 @@ const Hero = () => {
       tl.to(
         '.video-overlay',
         {
-          opacity: 0,
+          opacity: 0.3,
           duration: 1,
         },
         '<',
@@ -161,7 +162,7 @@ const Hero = () => {
       className='h-screen w-screen bg-background p-2'>
       <div className='w-full h-full flex-col-center relative'>
         <div className='center-absolute video-wrapper rounded-[32px] overflow-hidden w-full h-full'>
-          <div className='absolute video-overlay inset-0 z-10 bg-black' />
+          <div className='absolute rounded-[32px] video-overlay inset-0 z-10 bg-black' />
           <video
             muted
             loop
@@ -170,18 +171,23 @@ const Hero = () => {
             ref={videoRef}
           />
           <div className='z-20 left-8 bottom-8 absolute flex items-center'>
-            <h1 className='w-[50%] font-family-serif-semi-bold'>
+            <h1 className='selection:bg-(--bg-brand) selection:text-black w-[50%] font-serif-semi-bold'>
               {theme.hero.title}
             </h1>
             <div className='flex w-[50%] justify-center'>
               <div className='w-[50%]'>
-                <h5 className='leading-5'>{theme.hero.subtitle}</h5>
+                <h5 className='selection:bg-(--bg-brand) selection:text-black leading-5 mb-4'>
+                  {theme.hero.subtitle}
+                </h5>
+                <BubbleButton variant='in' href='mxm'>
+                  View Experience
+                </BubbleButton>
               </div>
             </div>
           </div>
         </div>
         <div className='overflow-hidden title-wrapper'>
-          <h3 className='rumble text-[64px]!'>{theme.title}</h3>
+          <h3 className='font-rumble text-[64px]'>{theme.title}</h3>
         </div>
         <div className='overflow-hidden subtitle-wrapper'>
           <small className='montreal-book text-[.75rem]!'>
