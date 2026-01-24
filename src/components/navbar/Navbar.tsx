@@ -7,7 +7,13 @@ import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { forwardRef, useRef, useImperativeHandle } from 'react';
 
-const Navbar = forwardRef((props, ref) => {
+export interface INavbarHandle {
+  triggerMyFunction: () => void;
+}
+
+type NavbarProps = React.HTMLAttributes<HTMLDivElement>;
+
+const Navbar = forwardRef<INavbarHandle, NavbarProps>((props, ref) => {
   const navBarRef = useRef<HTMLDivElement>(null);
 
   const { contextSafe } = useGSAP(() => {}, { scope: navBarRef });
