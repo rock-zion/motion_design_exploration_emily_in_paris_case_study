@@ -7,7 +7,7 @@ import { SplitText } from 'gsap/all';
 import { gsap } from 'gsap';
 import BubbleButton from '@/components/buttons/BubbleButton';
 
-const Hero = () => {
+const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
   const container = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { theme } = useTheme();
@@ -48,6 +48,10 @@ const Hero = () => {
 
       gsap.set(container.current, {
         background: '#000000',
+      });
+
+      gsap.set(['.hero-title', '.hero-subtitle-wrapper'], {
+        yPercent: 100,
       });
 
       //   tweens
@@ -151,6 +155,19 @@ const Hero = () => {
         },
         '>',
       );
+
+      tl.to(
+        ['.hero-title', '.hero-subtitle-wrapper'],
+        {
+          yPercent: 0,
+          stagger: 0.2,
+          duration: 1.5,
+          onStart: () => {
+            triggerMenuReveal()
+          }
+        },
+        '<',
+      );
     },
     { scope: container },
   );
@@ -170,11 +187,11 @@ const Hero = () => {
             src={theme.heroVideo}
             ref={videoRef}
           />
-          <div className='z-20 left-8 bottom-8 absolute flex items-center'>
-            <h1 className='selection:bg-(--bg-brand) selection:text-black w-[50%] font-serif-semi-bold'>
+          <div className='z-20 overflow-hidden left-8 bottom-8 absolute flex items-center'>
+            <h1 className='hero-title selection:bg-(--bg-brand) selection:text-black w-[50%] font-serif-semi-bold'>
               {theme.hero.title}
             </h1>
-            <div className='flex w-[50%] justify-center'>
+            <div className='flex w-[50%] justify-center hero-subtitle-wrapper'>
               <div className='w-[50%]'>
                 <h5 className='selection:bg-(--bg-brand) selection:text-black leading-5 mb-4'>
                   {theme.hero.subtitle}
