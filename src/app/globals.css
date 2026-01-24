@@ -1,15 +1,57 @@
 @import "tailwindcss";
 
 
+.hide-in-mobile {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .hide-in-mobile {
+    display: none;
+  }
+}
+
+
+
 :root {
+  --primitive-neutral-0: #ffffff;
+  --primitive-neutral-50: #f2f2f2;
+  --primitive-neutral-100: #e5e5e5;
+  --primitive-neutral-200: #cccccc;
+  --primitive-neutral-300: #b2b2b2;
+  --primitive-neutral-600: #666666;
+  --primitive-neutral-800: #333333;
+  --primitive-neutral-900: #1a1a1a;
+  --primitive-neutral-1000: #000000;
+
+  /* Brand colors */
+  --primitive-brand-500: #ff7782;
+  --primitive-brand-600: #cc5f68;
+  --primitive-brand-700: #99474e;
+
+  /* Accent colors */
+  --primitive-lavender-500: #d3d3ff;
+  --primitive-nude-100: #fbf5ee;
+  --primitive-nude-400: #eed5bb;
+  --primitive-power-blue-500: #b8e3e9;
+  
+  /* Rome specific */
+  --primitive-dark-amaranth-500: #8f1b32;
+  --primitive-sweet-salmon-500: #fb9f89;
+  --primitive-linen-500: #feefe5;
+  --primitive-seaweed-500: #21a179;
+  --primitive-khaki-500: #c4af9a;
+
+  /* Status colors */
+  --primitive-blue-500: #3355ff;
+  --primitive-red-500: #e50000;
+  --primitive-orange-500: #ff8000;
+  --primitive-green-500: #009933;
+
+  /* Legacy */
   --background: #000000;
   --black: #000000;
-
-    /* Paris colors */
-  --paris-bg: #eed5bb;
-  
-  /* Rome colors */
-  --rome-bg: #8f1b32;
+  --lavender: #d3d3ff;
 
    /* Body text */
   --font-size-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
@@ -65,11 +107,76 @@
 }
 
 [data-theme="paris"] {
-  --background: var(--paris-bg);
+  --background: var(--primitive-nude-400);
+  --foreground: var(--primitive-neutral-0);
+
+  /* Backgrounds */
+  --bg-primary: var(--primitive-neutral-0);
+  --bg-inverse: var(--primitive-neutral-1000);
+  --bg-brand: var(--primitive-brand-500);
+  --bg-brand-secondary: var(--primitive-lavender-500);
+  --bg-brand-tertiary: var(--primitive-power-blue-500);
+  --bg-neutral-subtle: var(--primitive-nude-100);
+  --bg-neutral: var(--primitive-nude-400);
+  --bg-neutral-hover: var(--primitive-nude-300);
+  
+  /* Content/Text */
+  --content-primary: var(--primitive-neutral-900);
+  --content-primary-inverse: var(--primitive-neutral-0);
+  --content-secondary: var(--primitive-neutral-800);
+  --content-tertiary: var(--primitive-neutral-600);
+  --content-brand: var(--primitive-brand-500);
+  
+  /* Borders */
+  --border-primary: var(--primitive-neutral-900);
+  --border-secondary: var(--primitive-neutral-600);
+  --border-tertiary: var(--primitive-neutral-300);
+  --border-brand: var(--primitive-brand-500);
+  --border-inverse: var(--primitive-neutral-0);
+  
+  /* Buttons */
+  --button-primary-bg: var(--primitive-neutral-0);
+  --button-primary-text: var(--primitive-neutral-900);
+  --button-primary-border: var(--primitive-neutral-900);
+  --button-primary-bg-hover: var(--primitive-neutral-1000);
+  --button-primary-text-hover: var(--primitive-neutral-0);
+
 }
 
 [data-theme="rome"] {
-  --background: var(--rome-bg);
+  /* Backgrounds */
+  --bg-primary: var(--primitive-dark-amaranth-500);
+  --bg-inverse: var(--primitive-neutral-0);
+  --bg-brand: var(--primitive-sweet-salmon-500);
+  --bg-brand-secondary: var(--primitive-linen-500);
+  --bg-brand-tertiary: var(--primitive-seaweed-500);
+  --bg-neutral-subtle: var(--primitive-nude-100);
+  --bg-neutral: var(--primitive-nude-400);
+  --bg-neutral-hover: var(--primitive-nude-600);
+  
+  /* Content/Text */
+  --content-primary: var(--primitive-neutral-0);
+  --content-primary-inverse: var(--primitive-neutral-900);
+  --content-secondary: var(--primitive-neutral-100);
+  --content-tertiary: var(--primitive-neutral-300);
+  --content-brand: var(--primitive-sweet-salmon-500);
+  
+  /* Borders */
+  --border-primary: var(--primitive-neutral-0);
+  --border-secondary: var(--primitive-neutral-300);
+  --border-tertiary: var(--primitive-khaki-500);
+  --border-brand: var(--primitive-brand-400);
+  --border-inverse: var(--primitive-neutral-900);
+  
+  /* Buttons */
+  --button-primary-bg: var(--primitive-neutral-0);
+  --button-primary-text: var(--primitive-neutral-900);
+  --button-primary-border: var(--primitive-neutral-0);
+  --button-primary-bg-hover: var(--primitive-neutral-900);
+  --button-primary-text-hover: var(--primitive-neutral-0);
+
+  --background: var(--primitive-dark-amaranth-500);
+  --foreground: var(--primitive-neutral-0);
 }
 
 @utility center-absolute {
@@ -82,13 +189,11 @@
 
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-family-serif: 'Roslindale', serif;
-  --font-family-serif-semi-bold: 'RoslindaleSemiBold', serif;
-  --font-family-rumble: 'RumbleBrave', serif;
-  --font-family-montreal-medium: 'NeueMontrealMedium', sans-serif;
-  --font-family-montreal-book: 'NeueMontrealBook', sans-serif
+  --font-serif: 'Roslindale', serif;
+  --font-serif-semi-bold: 'RoslindaleSemiBold', serif;
+  --font-rumble: 'RumbleBrave', serif;
+  --font-montreal-medium: 'NeueMontrealMedium', sans-serif;
+  --font-montreal-book: 'NeueMontrealBook', sans-serif
 }
 
 @media (prefers-color-scheme: dark) {
@@ -141,7 +246,7 @@ h6 {
   font-weight: 400;
 }
 
-p {
+p, .generic {
   font-size: var(--font-size-base);
   line-height: 1.5;
 }
@@ -175,3 +280,4 @@ small {
   filter: blur(10px);
   -webkit-filter: blur(10px);
 }
+
