@@ -154,13 +154,9 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
 
       tl.fromTo(
         ['.hero-title', '.hero-subtitle-wrapper'],
-        {
-          y: '500px',
-          // autoAlpha: 0,
-        },
+        { y: '500px' },
         {
           y: '0px',
-          // autoAlpha: 1,
           stagger: 0.2,
           duration: 1.5,
           ease: 'power2.out',
