@@ -267,14 +267,6 @@ small {
   font-family: NeueMontrealBook, Arial, Helvetica, sans-serif;
 }
 
-.choose_adventure_wrapper {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), black);
-  aspect-ratio: 9/16;
-  max-height: 70vh;
-
-  width: auto; 
-  max-width: 100%;
-}
 
 .blur-40 {
   filter: blur(10px);

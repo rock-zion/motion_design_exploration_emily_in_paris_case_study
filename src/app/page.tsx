@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/all';
 import { useRef, useState } from 'react';
 import { themes, type ThemeName } from '@/lib/themes';
+import Link from 'next/link';
 
 export default function Home() {
   const container = useRef<HTMLElement>(null);
@@ -22,31 +23,25 @@ export default function Home() {
         '.choose_adventure_wrapper',
       ) as HTMLElement[];
 
-      gsap.set(titleSplit.words, {
-        opacity: 0,
-        yPercent: 50,
-      });
-
-      adventureCards.forEach((card, index) => {
-        gsap.set(card, {
-          scale: 0,
-          rotate: (index + 1) % 2 == 0 ? '20deg' : '-20deg',
-        });
-      });
-
       const tl = gsap.timeline({
         onComplete: () => setAnimationComplete(true),
       });
 
-      tl.to(titleSplit.words, {
-        opacity: 1,
-        yPercent: 0,
-        duration: 0.5,
-        stagger: {
-          each: 0.1,
-          amount: 0,
+      tl.to('.home_headline', { autoAlpha: 1, duration: 1 });
+      tl.fromTo(
+        titleSplit.words,
+        { y: '200px' },
+        {
+          autoAlpha: 1,
+          y: '0px',
+          duration: 0.5,
+          stagger: {
+            each: 0.1,
+            amount: 0,
+          },
         },
-      });
+        '<',
+      );
 
       tl.to(adventureCards, {
         scale: 1,
@@ -163,16 +158,17 @@ export default function Home() {
     <section
       ref={container}
       className='w-screen h-screen flex justify-center items-center bg-background'>
-      <div className='overflow-hidden pb-[10] home_headline'>
-        <h1 className='max-w-[14ch] text-center'>
+      <div className=' pb-[10] invisible home_headline overflow-hidden'>
+        <h1 className='max-w-[14ch] text-center '>
           Where will your Emily story begin?
         </h1>
       </div>
-      <div className='choose_adventure absolute flex h-[75vh] mx-auto'>
+      <div className='choose_adventure absolute flex w-[90vw] max-w-[800px] aspect-[9/8] mx-auto'>
         {Object.keys(themes).map((key, index) => (
-          <div
+          <Link
+            href={`/${key}`}
             key={key}
-            className={`choose_adventure_wrapper h-full w-full rounded-[32px] overflow-hidden relative ${(index + 1) % 2 == 0 ? 'rotate-6' : '-rotate-6 mr-[-2.4vw]'}`}>
+            className={`flex h-full w-full choose_adventure_wrapper bg-gradient-to-b from-black/50 to-black scale-0 rounded-[32px] overflow-hidden relative ${(index + 1) % 2 == 0 ? 'rotate-6' : '-rotate-6 mr-[-2.4vw]'}`}>
             <div className='absolute inset-0'>
               <video
                 loop
@@ -184,10 +180,10 @@ export default function Home() {
             </div>
 
             <h2 className='center-absolute'>{themes[key as ThemeName].name}</h2>
-            <h4 className='absolute uppercase text-nowrap bottom-0 left-1/2 -translate-x-1/2'>
+            <h5 className='absolute font-rumble uppercase text-nowrap bottom-0 left-1/2 -translate-x-1/2'>
               {themes[key as ThemeName].title}
-            </h4>
-          </div>
+            </h5>
+          </Link>
         ))}
       </div>
     </section>
