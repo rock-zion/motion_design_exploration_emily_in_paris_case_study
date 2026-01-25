@@ -179,9 +179,10 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
         <div className='center-absolute video-wrapper rounded-[32px] overflow-hidden w-full h-full'>
           <div className='absolute rounded-[32px] video-overlay inset-0 z-10 bg-black' />
           <video
+            playsInline
             muted
             loop
-            className='video w-full h-full object-cover'
+            className='video w-full h-full object-cover pointer-events-none'
             src={theme.heroVideo}
             ref={videoRef}
           />

@@ -171,11 +171,12 @@ export default function Home() {
             className={`flex h-full w-full choose_adventure_wrapper bg-gradient-to-b from-black/50 to-black scale-0 rounded-[32px] overflow-hidden relative ${(index + 1) % 2 == 0 ? 'rotate-6' : '-rotate-6 mr-[-2.4vw]'}`}>
             <div className='absolute inset-0'>
               <video
+                playsInline
                 loop
                 autoPlay
                 muted
                 src={themes[key as ThemeName].heroVideo}
-                className='h-full w-full object-cover'
+                className='h-full w-full object-cover pointer-events-none'
               />
             </div>
 
