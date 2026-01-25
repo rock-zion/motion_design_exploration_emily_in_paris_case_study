@@ -14,6 +14,10 @@ export const themes = {
       subtitle:
         'Created for people who dream of paris and want to live it, not just visit',
     },
+    unlockExperience: {
+      title: 'Explore at your own pace',
+      ctaBtnText: 'View Experiences',
+    },
   },
   rome: {
     name: 'Rome',
@@ -25,8 +29,14 @@ export const themes = {
     cta: 'Explore Rome',
     description: 'Walk through ancient history and Italian charm',
     hero: {
-      title: '',
-      subtitle: '',
+      title: "Live the Rome you've only seen on screen",
+      subtitle:
+        'Created for people who dream of Rome and want to live it, not just visit',
+    },
+    unlockExperience: {
+      title: 'Explore at your own pace',
+      ctaBtnText: 'View Experiences',
+      cta: '<span>Unlock The Emily in<span>paris<span>Rome</span></span>Experience</span>',
     },
   },
 } as const;
