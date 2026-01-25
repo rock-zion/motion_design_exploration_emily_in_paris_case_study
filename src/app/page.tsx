@@ -63,62 +63,96 @@ export default function Home() {
   );
 
   useGSAP(
-    () => {
+    (_context, contextSafe) => {
       if (!animationComplete) return;
 
       const adventureCards = gsap.utils.toArray(
         '.choose_adventure_wrapper',
       ) as HTMLElement[];
 
+      const cleanupFunctions: (() => void)[] = [];
+
+      const onEnterHandler = contextSafe!(
+        ({ index, alternate }: { index: number; alternate: number }) => {
+          return () => {
+            gsap.to(adventureCards[index], {
+              rotate: 0,
+              scale: 1.1,
+            });
+
+            gsap.to(adventureCards[alternate], {
+              scale: 0.9,
+              x: (index + 1) % 2 == 0 ? '-100px' : '100px',
+            });
+
+            gsap.to(container.current, {
+              background:
+                (index + 1) % 2 == 0
+                  ? 'var(--primitive-dark-amaranth-500)'
+                  : 'var(--primitive-nude-400)',
+            });
+          };
+        },
+      );
+
+      const onLeaveHandler = contextSafe!(
+        ({ index, alternate }: { index: number; alternate: number }) => {
+          return (e: MouseEvent) => {
+            const rect = adventureCards[index].getBoundingClientRect();
+            let movingToNeighbour = false;
+
+            if (index % 2 === 0) {
+              if (e.clientX >= rect.right) {
+                movingToNeighbour = true;
+              }
+            } else {
+              if (e.clientX <= rect.left) {
+                movingToNeighbour = true;
+              }
+            }
+
+            gsap.to(adventureCards[index], {
+              scale: 1,
+              rotate: (index + 1) % 2 == 0 ? '6deg' : '-6deg',
+            });
+
+            gsap.to(adventureCards[alternate], {
+              scale: 1,
+              x: '0',
+            });
+
+            if (!movingToNeighbour) {
+              gsap.to(container.current, {
+                background: 'var(--bg)',
+              });
+            } else {
+              onEnterHandler({ index: alternate, alternate: index })();
+            }
+          };
+        },
+      );
+
       adventureCards.forEach((card, index) => {
         const alternate = adventureCards.length - (index + 1);
+        const onEnter = onEnterHandler;
+        const onLeave = onLeaveHandler;
 
-        const onEnter = () => {
-          gsap.to(card, {
-            rotate: 0,
-            scale: 1.1,
-          });
+        card.addEventListener('mouseenter', onEnter({ index, alternate }));
+        card.addEventListener('mouseleave', onLeave({ index, alternate }));
 
-          gsap.to(adventureCards[alternate], {
-            scale: 0.9,
-            x: (index + 1) % 2 == 0 ? '-100px' : '100px',
-          });
-
-          gsap.to(container.current, {
-            background:
-              (index + 1) % 2 == 0 ? 'var(--paris-bg)' : 'var(--rome-bg)',
-          });
-        };
-
-        const onLeave = () => {
-          // reset animations
-          gsap.to(card, {
-            scale: 1,
-            rotate: (index + 1) % 2 == 0 ? '6deg' : '-6deg',
-          });
-
-          gsap.to(adventureCards[alternate], {
-            scale: 1,
-            x: '0',
-          });
-
-          gsap.to(container.current, {
-            background: 'var(--bg)',
-          });
-        };
-
-        card.addEventListener('mouseenter', onEnter);
-        card.addEventListener('mouseleave', onLeave);
+        cleanupFunctions.push(() => {
+          card.removeEventListener('mouseenter', onEnter({ index, alternate }));
+          card.removeEventListener('mouseleave', onLeave({ index, alternate }));
+        });
 
         if (card.matches(':hover')) {
-          onEnter();
+          onEnter({ index, alternate })();
         }
       });
 
       return () => {
-        adventureCards.forEach(card => {
-          const clone = card.cloneNode(true);
-          card.parentNode?.replaceChild(clone, card);
+        cleanupFunctions.forEach(cleanFn => {
+          cleanFn();
         });
       };
     },
