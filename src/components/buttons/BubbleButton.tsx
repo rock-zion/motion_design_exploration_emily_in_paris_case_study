@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React, { useRef } from 'react';
 import { BsArrowUpRight } from 'react-icons/bs';
 import { gsap } from 'gsap';
+import { useMediaQuery } from 'react-responsive';
 
 type BubbleButtonProps = {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ const BubbleButton = ({
   onClick,
   variant = 'in',
 }: BubbleButtonProps) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const containerRef = useRef<HTMLDivElement>(null);
 
   const isBubbleIn = variant === 'in';
@@ -53,8 +55,8 @@ const BubbleButton = ({
         gsap.to('.icon-wrapper-left', {
           duration: buttonPRoperties.duration,
           ease: 'power2.inOut',
-          width: '56px',
-          height: '56px',
+          width: isMobile ? '48px' : '56px',
+          height: isMobile ? '48px' : '56px',
           scale: 1,
           rotate: '45deg',
           transformOrigin: 'center',
@@ -66,8 +68,8 @@ const BubbleButton = ({
           duration: buttonPRoperties.duration,
           ease: 'power2.inOut',
           rotate: '0deg',
-          width: '56px',
-          height: '56px',
+          width: isMobile ? '48px' : '56px',
+          height: isMobile ? '48px' : '56px',
           scale: 1,
           transformOrigin: buttonPRoperties.rightOrigin,
         });
@@ -87,15 +89,15 @@ const BubbleButton = ({
       container.addEventListener('mouseleave', onLeave);
 
       return () => {
-        container.removeEventListener('mouseenter', onEnter);
-        container.removeEventListener('mouseleave', onLeave);
+        container.addEventListener('mouseenter', onEnter);
+        container.addEventListener('mouseleave', onLeave);
       };
     },
     { scope: containerRef },
   );
 
-  const baseStyles = `flex items-center h-[64px] text-black rounded-full p-1 cursor-pointer ${buttonPRoperties.containerClasses}`;
-  const iconBaseStyles = `flex justify-center items-center w-[calc(64px-0.5rem)] h-[calc(64px-0.5rem)] rounded-full overflow-hidden`;
+  const baseStyles = `flex items-center h-[64px] max-md:h-[56px] text-black rounded-full p-1 cursor-pointer ${buttonPRoperties.containerClasses}`;
+  const iconBaseStyles = `flex justify-center items-center w-[calc(64px-0.5rem)] h-[calc(64px-0.5rem)] max-md:w-[calc(56px-0.5rem)] max-md:h-[calc(56px-0.5rem)] rounded-full overflow-hidden`;
 
   const InnerContent = (
     <>
@@ -109,7 +111,7 @@ const BubbleButton = ({
           {children}
         </span>
       ) : (
-        <div className='font-montreal-medium bg-white text-p h-[60px] flex items-center rounded-full px-[32px]'>
+        <div className='font-montreal-medium bg-white text-p h-[60px] max-md:h-[52px] flex items-center rounded-full px-[32px]'>
           {children}
         </div>
       )}
