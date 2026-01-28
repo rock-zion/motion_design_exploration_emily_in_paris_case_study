@@ -44,7 +44,7 @@ const Explore = () => {
       const createTrail = (x: number, y: number) => {
         const img = document.createElement('img');
         img.classList.add('image-trail');
-        img.src = images[currentImageIndex];
+        img.src = images[currentImageIndex].img;
         imageCanvas.current?.appendChild(img);
 
         currentImageIndex = (currentImageIndex + 1) % images.length;
@@ -105,14 +105,14 @@ const Explore = () => {
 
       <div className='marquee relative w-[100vw] mt-16 overflow-hidden hidden max-md:block'>
         <div className='marquee-inner flex flex-auto gap-x-[16px] h-[30vh] w-fit'>
-          {theme.unlockExperience.cursorTrailImages.map((img, index) => (
+          {theme.unlockExperience.cursorTrailImages.map(img => (
             <div
               className='marquee-image-wrapper h-full w-[45vw] overflow-hidden shrink-[0] rounded-4xl'
-              key={`first-${index}`}>
+              key={`first-${img.id}`}>
               <img
                 className='h-full w-full object-cover'
-                src={img}
-                alt={img.split('/')[2].replaceAll('_', ' ') ?? 'Image'}
+                src={img.img}
+                alt={img.img.split('/')[2].replaceAll('_', ' ') ?? 'Image'}
               />
             </div>
           ))}
@@ -120,11 +120,11 @@ const Explore = () => {
           {theme.unlockExperience.cursorTrailImages.map((img, index) => (
             <div
               className='marquee-image-wrapper h-full w-[40vw] overflow-hidden shrink-[0] rounded-2xl'
-              key={`second-${index}`}>
+              key={`second-${img.id}`}>
               <img
                 className='h-full w-full object-cover'
-                src={img}
-                alt={img.split('/')[2].replaceAll('_', ' ') ?? 'Image'}
+                src={img.img}
+                alt={img.img.split('/')[2].replaceAll('_', ' ') ?? 'Image'}
               />
             </div>
           ))}
