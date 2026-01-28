@@ -7,6 +7,7 @@ import Explore from './Explore';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import VideoSection from './VideoSection';
+import Activities from './Activities';
 
 export const HomePage = () => {
   const navBarRef = useRef<INavbarHandle>(null);
@@ -39,6 +40,8 @@ export const HomePage = () => {
       <Hero triggerMenuReveal={triggerMenuReveal} />
       <Explore />
       <VideoSection />
+      <Activities />
+      <section className='h-screen'></section>
     </main>
   );
 };
