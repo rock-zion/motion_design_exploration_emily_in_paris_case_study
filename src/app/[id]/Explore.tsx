@@ -85,47 +85,6 @@ const Explore = () => {
     dependencies: [],
   });
 
-  // useGSAP(
-  //   (_, contextSafe) => {
-  //     let currentScroll = 0;
-  //     let isScrollingDown = true;
-  //     gsap.set('.marquee-inner', { xPercent: 0 });
-
-  //     const tween = gsap
-  //       .to('.marquee-inner', {
-  //         xPercent: -100,
-  //         repeat: -1,
-  //         duration: 60,
-  //         ease: 'linear',
-  //       })
-  //       .totalProgress(0.5);
-
-  //     const handleMarqueeDirectionFlip = contextSafe!(() => {
-  //       console.log('scrolling');
-
-  //       if (window.pageYOffset > currentScroll) {
-  //         console.log('scrolling down', window.pageYOffset, currentScroll);
-  //         isScrollingDown = true;
-  //       } else {
-  //         isScrollingDown = false;
-  //         console.log('scrolling up');
-  //       }
-
-  //       gsap.to(tween, {
-  //         timeScale: isScrollingDown ? 1 : -1,
-  //       });
-  //       currentScroll = window.pageYOffset;
-  //     });
-
-  //     window.addEventListener('scroll', handleMarqueeDirectionFlip);
-
-  //     return () => {
-  //       tween.kill();
-  //     };
-  //   },
-  //   { dependencies: [] },
-  // );
-
   return (
     <section
       ref={container}
