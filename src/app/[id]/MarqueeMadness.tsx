@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
-import { NEXT_ACTION_REVALIDATED_HEADER } from 'next/dist/client/components/app-router-headers';
 
 const MarqueeMadness = () => {
   const { theme } = useTheme();
@@ -19,30 +18,28 @@ const MarqueeMadness = () => {
         const marqueeContent = marquee.querySelector('.marquee-inner');
 
         if (!marqueeContent) return;
-        const marqueeContentClone = marqueeContent.cloneNode(
-          true,
-        ) as HTMLElement;
-
-        marqueeContentClone.setAttribute('aria-hidden', 'true');
-
-        marquee.append(marqueeContentClone);
 
         const width = marqueeContent.getBoundingClientRect().width;
+        const screenWidth = window.innerWidth;
 
-        const targets = [marqueeContent, marqueeContentClone];
+        const requiredClones = Math.ceil(screenWidth / width) + 1;
+
+        for (let i = 0; i < requiredClones; i++) {
+          const clone = marqueeContent.cloneNode(true) as HTMLElement;
+          clone.setAttribute('aria-hidden', 'true');
+          marquee.append(clone);
+        }
+
+        const allTracks = marquee.querySelectorAll('.marquee-inner');
 
         const distanceToTranslate = -1 * width;
 
-        gsap.fromTo(
-          targets,
-          { x: 0 },
-          {
-            x: distanceToTranslate,
-            duration: 10,
-            ease: 'linear',
-            repeat: -1,
-          },
-        );
+        gsap.to(allTracks, {
+          x: distanceToTranslate,
+          duration: 10,
+          ease: 'linear',
+          repeat: -1,
+        });
 
         console.log({ width });
       });
@@ -51,7 +48,9 @@ const MarqueeMadness = () => {
   );
 
   return (
-    <section className='mt-[15vh]' ref={containerRef}>
+    <section
+      className='my-[15vh] w-screen overflow-x-clip flex items-center flex-col'
+      ref={containerRef}>
       {theme.maequeeMadness.map((marquee, index) => {
         const isItem1 = index % 3 === 0;
         const isItem2 = index % 3 === 1;
@@ -60,85 +59,35 @@ const MarqueeMadness = () => {
         return (
           <div
             key={marquee.id}
-            className={`marquee flex relative overflow-hidden ]
+            className={`marquee flex relative overflow-hidden mx-[-10vw]
                 ${isItem1 ? '-rotate-4 bg-(--bg-brand-tertiary)' : ''} 
                 ${isItem2 ? 'rotate-4 bg-(--bg-brand-secondary)' : ''} 
                 ${isItem3 ? '-rotate-4 bg-(--bg-brand)' : ''}
         `}>
-            {isItem2 ? (
-              <div className='marquee-inner flex shrink-0'>
-                <div className='flex items-center gap-0 shrink-0 font-serif-semi-bold'>
-                  <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
-                    {marquee.textA}
-                  </h1>
-                  <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
-                    <img
-                      className='w-full h-full'
-                      alt={marquee.textA}
-                      src={marquee.stickerA}
-                    />
-                  </div>
-                  <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
-                    {marquee.textB}
-                  </h1>
-                  <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
-                    <img
-                      className='w-full h-full'
-                      alt={marquee.textB}
-                      src={marquee.stickerB}
-                    />
-                  </div>
+            <div className='marquee-inner flex shrink-0'>
+              <div className='flex items-center gap-0 shrink-0 font-serif-semi-bold'>
+                <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
+                  {marquee.textA}
+                </h1>
+                <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
+                  <img
+                    className='w-full h-full'
+                    alt={marquee.textA}
+                    src={marquee.stickerA}
+                  />
                 </div>
-
-                <div className='flex items-center gap-0 shrink-0 font-serif-semi-bold'>
-                  <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
-                    {marquee.textA}
-                  </h1>
-                  <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
-                    <img
-                      className='w-full h-full'
-                      alt={marquee.textA}
-                      src={marquee.stickerA}
-                    />
-                  </div>
-                  <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
-                    {marquee.textB}
-                  </h1>
-                  <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
-                    <img
-                      className='w-full h-full'
-                      alt={marquee.textB}
-                      src={marquee.stickerB}
-                    />
-                  </div>
+                <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
+                  {marquee.textB}
+                </h1>
+                <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
+                  <img
+                    className='w-full h-full'
+                    alt={marquee.textB}
+                    src={marquee.stickerB}
+                  />
                 </div>
               </div>
-            ) : (
-              <div className='marquee-inner flex shrink-0'>
-                <div className='flex items-center gap-0 shrink-0 font-serif-semi-bold'>
-                  <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
-                    {marquee.textA}
-                  </h1>
-                  <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
-                    <img
-                      className='w-full h-full'
-                      alt={marquee.textA}
-                      src={marquee.stickerA}
-                    />
-                  </div>
-                  <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
-                    {marquee.textB}
-                  </h1>
-                  <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
-                    <img
-                      className='w-full h-full'
-                      alt={marquee.textB}
-                      src={marquee.stickerB}
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
+            </div>
           </div>
         );
       })}
