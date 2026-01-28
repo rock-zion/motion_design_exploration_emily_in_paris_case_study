@@ -174,7 +174,7 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
     <section
       ref={container}
       id='hero'
-      className='h-screen w-screen bg-background p-2'>
+      className='h-screen w-screen bg-background p-2 overflow-hidden'>
       <div className='w-full h-full flex-col-center relative'>
         <div className='center-absolute video-wrapper rounded-[32px] overflow-hidden w-full h-full'>
           <div className='absolute rounded-[32px] video-overlay inset-0 z-10 bg-black' />
