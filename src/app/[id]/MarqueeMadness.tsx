@@ -19,10 +19,10 @@ const MarqueeMadness = () => {
 
         if (!marqueeContent) return;
 
-        const width = marqueeContent.getBoundingClientRect().width;
+        const width = marqueeContent.scrollWidth;
         const screenWidth = window.innerWidth;
 
-        const requiredClones = Math.ceil(screenWidth / width) + 1;
+        const requiredClones = Math.ceil(screenWidth / width) + 2;
 
         for (let i = 0; i < requiredClones; i++) {
           const clone = marqueeContent.cloneNode(true) as HTMLElement;
@@ -37,7 +37,7 @@ const MarqueeMadness = () => {
         gsap.to(allTracks, {
           x: distanceToTranslate,
           duration: 10,
-          ease: 'linear',
+          ease: 'none',
           repeat: -1,
         });
 
