@@ -38,9 +38,8 @@ const Events = () => {
     <section ref={containerRef} className='pt-[5vh]'>
       {theme.unlockExperience.emilyActivities.map((activity, index) => (
         <div
-    
           key={activity.id}
-          className='flex items-end activity-wrapper sticky top-0 w-[95vw] h-[85vh] overflow-hidden rounded-[32px] bg-amber-500 mx-auto '>
+          className='flex items-end activity-wrapper sticky top-0 w-[95vw] h-[85vh] overflow-hidden rounded-[32px] mx-auto '>
           <div className='inset-0 absolute z-[-1]'>
             <video
               playsInline
@@ -51,24 +50,24 @@ const Events = () => {
               className='pointer-events-none w-full h-full object-cover'
             />
           </div>
-          <div className='bg-black/0.5 p-[40px] w-full'>
-            <div className='font-mango text-h5-sm leading-0 px-[24px] pt-[6px] bg-(--bg-brand-secondary) w-fit text-(--content-primary)'>
+          <div className='bg-black/0.5 p-[40px] w-full max-md:flex max-md:flex-col max-md:items-center'>
+            <div className='font-mango text-h5 leading-0 px-[24px] pt-[6px] bg-(--bg-brand-secondary) w-fit text-(--content-primary) '>
               {theme.unlockExperience.emilyActivities[index].type}
             </div>
-            <h3 className='font-serif-bold text-start max-md:text-center my-4'>
+            <h2 className='font-serif-bold text-start max-md:text-center my-4'>
               {parse(theme.unlockExperience.emilyActivities[index].title)}
-            </h3>
-            <div className='flex justify-between items-center'>
-              <div className='flex'>
-                <div className='flex items-center font-mango text-h5-sm pt-[6px] leading-0 px-[32px] bg-(--bg-brand-secondary) rounded-full text-(--content-primary)'>
-                  <text>
+            </h2>
+            <div className='flex justify-between items-center max-md:flex-col'>
+              <div className='flex max-md:mb-4'>
+                <div className='flex items-center font-mango text-h5 pt-[6px] leading-0 px-[32px] bg-(--bg-brand-secondary) rounded-full text-(--content-primary) '>
+                  <span>
                     {theme.unlockExperience.emilyActivities[index].duration}
-                  </text>
+                  </span>
                 </div>
-                <div className='flex items-center font-mango text-h5-sm pt-[6px] leading-0 px-[32px] bg-(--bg-brand-secondary) rounded-full text-(--content-primary)'>
-                  <text>
+                <div className='flex items-center font-mango text-h5 pt-[6px] leading-0 px-[32px] bg-(--bg-brand-secondary) rounded-full text-(--content-primary) '>
+                  <span>
                     {theme.unlockExperience.emilyActivities[index].price}
-                  </text>
+                  </span>
                 </div>
               </div>
               <BubbleButton href='/' variant='out'>
