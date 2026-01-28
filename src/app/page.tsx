@@ -19,9 +19,9 @@ export default function Home() {
         linesClass: 'line-wrapper',
       });
 
-      const adventureCards = gsap.utils.toArray(
+      const adventureCards: HTMLElement[] = gsap.utils.toArray(
         '.choose_adventure_wrapper',
-      ) as HTMLElement[];
+      );
 
       const tl = gsap.timeline({
         onComplete: () => setAnimationComplete(true),
@@ -61,9 +61,9 @@ export default function Home() {
     (_context, contextSafe) => {
       if (!animationComplete) return;
 
-      const adventureCards = gsap.utils.toArray(
+      const adventureCards: HTMLElement[] = gsap.utils.toArray(
         '.choose_adventure_wrapper',
-      ) as HTMLElement[];
+      );
 
       const cleanupFunctions: (() => void)[] = [];
 
