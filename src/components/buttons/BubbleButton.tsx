@@ -33,56 +33,66 @@ const BubbleButton = ({
     rightIconBg: isBubbleIn ? 'bg-(--bg-brand-secondary)' : 'bg-(--bg-brand)',
   };
 
-  const { contextSafe } = useGSAP(
-    () => {
+  useGSAP(
+    (_, contextSafe) => {
+      if (!containerRef.current) return;
+      const container = containerRef.current;
       gsap.set('.icon-wrapper-left', { width: 0, height: 0, scale: 0 });
+
+      const onEnter = contextSafe!(() => {
+        gsap.to('.icon-wrapper-right', {
+          duration: buttonPRoperties.duration,
+          ease: 'power2.inOut',
+          rotate: '45deg',
+          width: 0,
+          height: 0,
+          scale: 0,
+          transformOrigin: buttonPRoperties.rightOrigin,
+        });
+
+        gsap.to('.icon-wrapper-left', {
+          duration: buttonPRoperties.duration,
+          ease: 'power2.inOut',
+          width: '56px',
+          height: '56px',
+          scale: 1,
+          rotate: '45deg',
+          transformOrigin: 'center',
+        });
+      });
+
+      const onLeave = contextSafe!(() => {
+        gsap.to('.icon-wrapper-right', {
+          duration: buttonPRoperties.duration,
+          ease: 'power2.inOut',
+          rotate: '0deg',
+          width: '56px',
+          height: '56px',
+          scale: 1,
+          transformOrigin: buttonPRoperties.rightOrigin,
+        });
+
+        gsap.to('.icon-wrapper-left', {
+          duration: buttonPRoperties.duration,
+          ease: 'power2.inOut',
+          width: 0,
+          height: 0,
+          scale: 0,
+          rotate: '0',
+          transformOrigin: 'center',
+        });
+      });
+
+      container.addEventListener('mouseenter', onEnter);
+      container.addEventListener('mouseleave', onLeave);
+
+      return () => {
+        container.removeEventListener('mouseenter', onEnter);
+        container.removeEventListener('mouseleave', onLeave);
+      };
     },
     { scope: containerRef },
   );
-
-  const onEnter = contextSafe(() => {
-    gsap.to('.icon-wrapper-right', {
-      duration: buttonPRoperties.duration,
-      ease: 'power2.inOut',
-      rotate: '45deg',
-      width: 0,
-      height: 0,
-      scale: 0,
-      transformOrigin: buttonPRoperties.rightOrigin,
-    });
-
-    gsap.to('.icon-wrapper-left', {
-      duration: buttonPRoperties.duration,
-      ease: 'power2.inOut',
-      width: '56px',
-      height: '56px',
-      scale: 1,
-      rotate: '45deg',
-      transformOrigin: 'center',
-    });
-  });
-
-  const onLeave = contextSafe(() => {
-    gsap.to('.icon-wrapper-right', {
-      duration: buttonPRoperties.duration,
-      ease: 'power2.inOut',
-      rotate: '0deg',
-      width: '56px',
-      height: '56px',
-      scale: 1,
-      transformOrigin: buttonPRoperties.rightOrigin,
-    });
-
-    gsap.to('.icon-wrapper-left', {
-      duration: buttonPRoperties.duration,
-      ease: 'power2.inOut',
-      width: 0,
-      height: 0,
-      scale: 0,
-      rotate: '0',
-      transformOrigin: 'center',
-    });
-  });
 
   const baseStyles = `flex items-center h-[64px] text-black rounded-full p-1 cursor-pointer ${buttonPRoperties.containerClasses}`;
   const iconBaseStyles = `flex justify-center items-center w-[calc(64px-0.5rem)] h-[calc(64px-0.5rem)] rounded-full overflow-hidden`;
@@ -95,11 +105,11 @@ const BubbleButton = ({
       </div>
 
       {isBubbleIn ? (
-        <span className='font-montreal-medium generic text-center block mx-[32px]'>
+        <span className='font-montreal-medium text-p text-center block mx-[32px]'>
           {children}
         </span>
       ) : (
-        <div className='font-montreal-medium bg-white generic h-[60px] flex items-center rounded-full px-[32px]'>
+        <div className='font-montreal-medium bg-white text-p h-[60px] flex items-center rounded-full px-[32px]'>
           {children}
         </div>
       )}
@@ -112,11 +122,7 @@ const BubbleButton = ({
   );
 
   return (
-    <div
-      ref={containerRef}
-      className='inline-block'
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}>
+    <div ref={containerRef} className='inline-block'>
       {href ? (
         <Link href={href} className={baseStyles}>
           {InnerContent}
