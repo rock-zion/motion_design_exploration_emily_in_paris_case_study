@@ -14,43 +14,25 @@ const VideoSection = () => {
           className='pointer-events-none absolute inset-0 w-full h-full object-cover rounded-4xl'
         />
 
-        <div className='absolute overflow-hidden z-[50] w-[25%] aspect-square rounded-4xl left-[-12.5%] top-[30%]'>
-          <video
-            autoPlay
-            playsInline
-            muted
-            loop
-            src={theme.unlockExperience.videoSection.main1.video}
-            className='pointer-events-none absolute inset-0 w-full h-full object-cover'
-          />
-        </div>
+        <VideoSectioBubble
+          classNames='w-[25%] left-[-12.5%] top-[30%]'
+          srcImgs={theme.unlockExperience.videoSection.main1.video}
+        />
 
-        <div className='absolute overflow-hidden z-[50] w-[30%] right-[-10%] top-[25%] aspect-square rounded-4xl'>
-          <video
-            autoPlay
-            playsInline
-            muted
-            loop
-            src={theme.unlockExperience.videoSection.main2.video}
-            className='pointer-events-none absolute inset-0 w-full h-full object-cover'
-          />
-        </div>
+        <VideoSectioBubble
+          classNames='w-[30%] right-[-10%] top-[25%]'
+          srcImgs={theme.unlockExperience.videoSection.main2.video}
+        />
 
-        <div className='absolute overflow-hidden z-[50] w-[25%] bottom-[-12.5%] left-[20%] aspect-square rounded-4xl'>
-          <video
-            autoPlay
-            playsInline
-            muted
-            loop
-            src={theme.unlockExperience.videoSection.main3.video}
-            className='pointer-events-none absolute inset-0 w-full h-full object-cover'
-          />
-        </div>
+        <VideoSectioBubble
+          classNames='w-[25%] bottom-[-12.5%] left-[20%]'
+          srcImgs={theme.unlockExperience.videoSection.main3.video}
+        />
       </div>
 
       <div className='marquee relative w-[100vw] overflow-hidden pt-[20vh] max-md:pt-[10vh]'>
         <div className='marquee-inner flex w-fit'>
-          {new Array(10).fill('').map((_, index) => (
+          {new Array(20).fill('').map((_, index) => (
             <div
               className='flex items-center gap-0 shrink-0 font-serif-bold'
               key={`marquee-item-${index}`}>
@@ -73,3 +55,27 @@ const VideoSection = () => {
 };
 
 export default VideoSection;
+
+const VideoSectioBubble = ({
+  classNames,
+  srcImgs,
+}: Readonly<VideoSectioBubbleProps>) => {
+  return (
+    <div
+      className={`absolute overflow-hidden z-[50] ${classNames} aspect-square rounded-4xl`}>
+      <video
+        autoPlay
+        playsInline
+        muted
+        loop
+        src={srcImgs}
+        className='pointer-events-none absolute inset-0 w-full h-full object-cover'
+      />
+    </div>
+  );
+};
+
+type VideoSectioBubbleProps = {
+  classNames: string;
+  srcImgs: string;
+};
