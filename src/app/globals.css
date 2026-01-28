@@ -77,10 +77,24 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'MangoRegular';
+  src: url(/fonts/MangoGrotesque-Regular.ttf);
+  font-style: normal;
+  font-display: swap;
+}
+
 
 @font-face {
   font-family: 'RoslindaleSemiBold';
   src: url(/fonts/Roslindale-DisplayCondensedSemiBold-Testing.ttf);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RoslindaleBold';
+  src: url(/fonts/Roslindale-DisplayCondensedBold-Testing.ttf);
   font-style: normal;
   font-display: swap;
 }
@@ -191,9 +205,11 @@
 @theme inline {
   --font-serif: 'Roslindale', serif;
   --font-serif-semi-bold: 'RoslindaleSemiBold', serif;
+  --font-serif-bold: 'RoslindaleBold', serif;
   --font-rumble: 'RumbleBrave', serif;
   --font-montreal-medium: 'NeueMontrealMedium', sans-serif;
-  --font-montreal-book: 'NeueMontrealBook', sans-serif
+  --font-montreal-book: 'NeueMontrealBook', sans-serif;
+  --font-mango: 'MangoRegular', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -208,6 +224,8 @@ body {
   color: var(--foreground);
   font-family: Roslindale, serif;
 }
+
+
 
 
 h1 {
@@ -255,6 +273,12 @@ small {
   font-size: var(--font-size-sm);
 }
 
+.font-display {
+  font-size: var(--font-size-display);
+  line-height: 1;
+  font-weight: 400;
+}
+
 .rumble {
   font-family: RumbleBrave, serif;
 }
@@ -273,3 +297,15 @@ small {
   -webkit-filter: blur(10px);
 }
 
+
+.image-trail {
+    position: absolute;
+    left: -145px;
+    top: -180px;
+    width: 270px;
+    height: 360px;
+    pointer-events: none;
+    object-fit: cover;
+    border-radius: 20px;
+    opacity: 0;
+}
