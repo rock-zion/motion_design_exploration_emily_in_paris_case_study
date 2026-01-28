@@ -8,6 +8,7 @@ import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import VideoSection from './VideoSection';
 import Activities from './Activities';
+import MarqueeMadness from './MarqueeMadness';
 
 export const HomePage = () => {
   const navBarRef = useRef<INavbarHandle>(null);
@@ -41,6 +42,7 @@ export const HomePage = () => {
       <Explore />
       <VideoSection />
       <Activities />
+      <MarqueeMadness />
       <section className='h-screen'></section>
     </main>
   );
