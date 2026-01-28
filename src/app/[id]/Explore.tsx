@@ -4,6 +4,7 @@ import parse from 'html-react-parser';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef } from 'react';
+import useMarquee from '@/hooks/useMarquee';
 
 const Explore = () => {
   const { theme } = useTheme();
@@ -77,46 +78,53 @@ const Explore = () => {
     { scope: container },
   );
 
-  useGSAP(
-    (_, contextSafe) => {
-      let currentScroll = 0;
-      let isScrollingDown = true;
-      gsap.set('.marquee-inner', { xPercent: 0 });
+  useMarquee({
+    scope: container,
+    xPercent: -100,
+    duration: 120,
+    dependencies: [],
+  });
 
-      const tween = gsap
-        .to('.marquee-inner', {
-          xPercent: -50,
-          repeat: -1,
-          duration: 60,
-          ease: 'linear',
-        })
-        .totalProgress(0.5);
+  // useGSAP(
+  //   (_, contextSafe) => {
+  //     let currentScroll = 0;
+  //     let isScrollingDown = true;
+  //     gsap.set('.marquee-inner', { xPercent: 0 });
 
-      const handleMarqueeDirectionFlip = contextSafe!(() => {
-        console.log('scrolling');
+  //     const tween = gsap
+  //       .to('.marquee-inner', {
+  //         xPercent: -100,
+  //         repeat: -1,
+  //         duration: 60,
+  //         ease: 'linear',
+  //       })
+  //       .totalProgress(0.5);
 
-        if (window.pageYOffset > currentScroll) {
-          console.log('scrolling down', window.pageYOffset, currentScroll);
-          isScrollingDown = true;
-        } else {
-          isScrollingDown = false;
-          console.log('scrolling up');
-        }
+  //     const handleMarqueeDirectionFlip = contextSafe!(() => {
+  //       console.log('scrolling');
 
-        gsap.to(tween, {
-          timeScale: isScrollingDown ? 1 : -1,
-        });
-        currentScroll = window.pageYOffset;
-      });
+  //       if (window.pageYOffset > currentScroll) {
+  //         console.log('scrolling down', window.pageYOffset, currentScroll);
+  //         isScrollingDown = true;
+  //       } else {
+  //         isScrollingDown = false;
+  //         console.log('scrolling up');
+  //       }
 
-      window.addEventListener('scroll', handleMarqueeDirectionFlip);
+  //       gsap.to(tween, {
+  //         timeScale: isScrollingDown ? 1 : -1,
+  //       });
+  //       currentScroll = window.pageYOffset;
+  //     });
 
-      return () => {
-        tween.kill();
-      };
-    },
-    { dependencies: [] },
-  );
+  //     window.addEventListener('scroll', handleMarqueeDirectionFlip);
+
+  //     return () => {
+  //       tween.kill();
+  //     };
+  //   },
+  //   { dependencies: [] },
+  // );
 
   return (
     <section
