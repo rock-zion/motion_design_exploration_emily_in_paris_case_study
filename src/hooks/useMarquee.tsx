@@ -4,8 +4,8 @@ import { gsap } from 'gsap';
 type UseMarqueeProps = {
   scope: React.RefObject<HTMLElement | null>;
   dependencies: unknown[];
-  xPercent: number;
-  duration: number;
+  xPercent?: number;
+  duration?: number;
 };
 
 const useMarquee = ({
@@ -20,10 +20,19 @@ const useMarquee = ({
 
       let currentScroll = 0;
       let isScrollingDown = true;
-      gsap.set('.marquee-inner', { xPercent: 0 });
+      gsap.set(['.marquee-inner', '.marquee-inner-reverse'], { xPercent: 0 });
 
       const tween = gsap
         .to('.marquee-inner', {
+          xPercent: xPercent,
+          repeat: -1,
+          duration: duration,
+          ease: 'linear',
+        })
+        .totalProgress(0.5);
+
+      const tween2 = gsap
+        .to('.marquee-inner-reverse', {
           xPercent: xPercent,
           repeat: -1,
           duration: duration,
@@ -41,7 +50,15 @@ const useMarquee = ({
 
         gsap.to(tween, {
           timeScale: isScrollingDown ? 1 : -1,
+          duration: 0.2,
         });
+
+        gsap.to(tween2, {
+          timeScale: isScrollingDown ? -1 : 1,
+          duration: 0.2,
+          overwrite: true,
+        });
+
         currentScroll = window.pageYOffset;
       });
 
@@ -49,6 +66,7 @@ const useMarquee = ({
 
       return () => {
         tween.kill();
+        tween2.kill();
         window.removeEventListener('scroll', handleMarqueeDirectionFlip);
       };
     },
