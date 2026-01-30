@@ -2,47 +2,57 @@
 
 import './globals.css';
 import { ThemeProvider } from '@/contexts/ThemeContext';
-// import Lenis from 'lenis';
-// import { useEffect } from 'react';
-// import { ScrollTrigger } from 'gsap/all';
-// import { gsap } from 'gsap';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useRef } from 'react';
 
 type RootLayoutProps = {
   children: React.ReactNode;
 };
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
-  // useEffect(() => {
-  //   const lenis = new Lenis({
-  //     duration: 4,
-  //     easing: (t: number): number => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  //     smoothWheel: true,
-  //   });
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  //   lenis.on('scroll', ScrollTrigger.update);
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
 
-  //   gsap.ticker.add(time => {
-  //     lenis.raf(time * 1000);
-  //   });
+      let yAxis: number;
+      let xAxis: number;
 
-  //   gsap.ticker.lagSmoothing(0);
+      const page = containerRef.current;
 
-  //   function raf(time: number): void {
-  //     lenis.raf(time);
-  //     requestAnimationFrame(raf);
-  //   }
+      const handleMouseTrack = (e: MouseEvent) => {
+        xAxis = e.clientX - 10;
+        yAxis = e.clientY - 10;
 
-  //   requestAnimationFrame(raf);
+        console.log({ x: e.clientX, y: e.clientY });
 
-  //   return () => {
-  //     gsap.ticker.remove(lenis.raf);
-  //     lenis.destroy();
-  //   };
-  // }, []);
+        gsap.to('.mouse-tracker', {
+          x: xAxis,
+          y: yAxis,
+          duration: 0.5,
+        });
+      };
+
+      page.addEventListener('mousemove', handleMouseTrack);
+
+      return () => {
+        page.removeEventListener('mousemove', handleMouseTrack);
+      };
+    },
+    { scope: containerRef },
+  );
 
   return (
     <html suppressHydrationWarning lang='en'>
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider>
+        <div ref={containerRef}>
+          <div className='fixed z-[900] mouse-tracker w-[8px] h-[8px] rounded-full bg-black'></div>
+
+          {children}
+        </div>
+      </ThemeProvider>
     </html>
   );
 }
