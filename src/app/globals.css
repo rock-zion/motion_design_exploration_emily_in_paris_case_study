@@ -1,5 +1,4 @@
-@import "tailwindcss";
-
+@import 'tailwindcss';
 
 .hide-in-mobile {
   display: block;
@@ -10,8 +9,6 @@
     display: none;
   }
 }
-
-
 
 :root {
   --primitive-neutral-0: #ffffff;
@@ -34,7 +31,7 @@
   --primitive-nude-100: #fbf5ee;
   --primitive-nude-400: #eed5bb;
   --primitive-power-blue-500: #b8e3e9;
-  
+
   /* Rome specific */
   --primitive-dark-amaranth-500: #8f1b32;
   --primitive-sweet-salmon-500: #fb9f89;
@@ -53,11 +50,11 @@
   --black: #000000;
   --lavender: #d3d3ff;
 
-   /* Body text */
+  /* Body text */
   --font-size-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
   --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
   --font-size-lg: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);
-  
+
   /* Headings */
   --font-size-h6: clamp(1rem, 0.7rem + 1vw, 1.5rem);
   --font-size-h5: clamp(1.25rem, 0.5rem + 2.5vw, 2.5rem);
@@ -66,7 +63,7 @@
   --font-size-h2: clamp(3rem, 1.5rem + 5vw, 5.5rem);
   --font-size-h1: clamp(3.5rem, 1.5rem + 7vw, 7rem);
   --font-size-h5-sm: clamp(1.125rem, 0.6rem + 1.75vw, 2rem);
-  
+
   /* Display */
   --font-size-display: clamp(4rem, 0rem + 14vw, 18rem);
   --font-size-display2: clamp(5rem, -2rem + 22vw, 26rem);
@@ -85,7 +82,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 
 @font-face {
   font-family: 'RoslindaleSemiBold';
@@ -122,7 +118,7 @@
   font-display: swap;
 }
 
-[data-theme="paris"] {
+[data-theme='paris'] {
   --background: var(--primitive-nude-400);
   --foreground: var(--primitive-neutral-0);
 
@@ -135,31 +131,30 @@
   --bg-neutral-subtle: var(--primitive-nude-100);
   --bg-neutral: var(--primitive-nude-400);
   --bg-neutral-hover: var(--primitive-nude-300);
-  
+
   /* Content/Text */
   --content-primary: var(--primitive-neutral-900);
   --content-primary-inverse: var(--primitive-neutral-0);
   --content-secondary: var(--primitive-neutral-800);
   --content-tertiary: var(--primitive-neutral-600);
   --content-brand: var(--primitive-brand-500);
-  
+
   /* Borders */
   --border-primary: var(--primitive-neutral-900);
   --border-secondary: var(--primitive-neutral-600);
   --border-tertiary: var(--primitive-neutral-300);
   --border-brand: var(--primitive-brand-500);
   --border-inverse: var(--primitive-neutral-0);
-  
+
   /* Buttons */
   --button-primary-bg: var(--primitive-neutral-0);
   --button-primary-text: var(--primitive-neutral-900);
   --button-primary-border: var(--primitive-neutral-900);
   --button-primary-bg-hover: var(--primitive-neutral-1000);
   --button-primary-text-hover: var(--primitive-neutral-0);
-
 }
 
-[data-theme="rome"] {
+[data-theme='rome'] {
   /* Backgrounds */
   --bg-primary: var(--primitive-dark-amaranth-500);
   --bg-inverse: var(--primitive-neutral-0);
@@ -169,21 +164,21 @@
   --bg-neutral-subtle: var(--primitive-nude-100);
   --bg-neutral: var(--primitive-nude-400);
   --bg-neutral-hover: var(--primitive-nude-600);
-  
+
   /* Content/Text */
   --content-primary: var(--primitive-neutral-0);
   --content-primary-inverse: var(--primitive-neutral-900);
   --content-secondary: var(--primitive-neutral-100);
   --content-tertiary: var(--primitive-neutral-300);
   --content-brand: var(--primitive-sweet-salmon-500);
-  
+
   /* Borders */
   --border-primary: var(--primitive-neutral-0);
   --border-secondary: var(--primitive-neutral-300);
   --border-tertiary: var(--primitive-khaki-500);
   --border-brand: var(--primitive-brand-400);
   --border-inverse: var(--primitive-neutral-900);
-  
+
   /* Buttons */
   --button-primary-bg: var(--primitive-neutral-0);
   --button-primary-text: var(--primitive-neutral-900);
@@ -196,13 +191,16 @@
 }
 
 @utility center-absolute {
-    @apply absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2
+  @apply absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2;
 }
 
 @utility flex-col-center {
-    @apply flex flex-col justify-center items-center
+  @apply flex flex-col justify-center items-center;
 }
 
+@utility back-drop {
+  @apply bg-gradient-to-b from-black/50 to-black;
+}
 
 @theme inline {
   --font-serif: 'Roslindale', serif;
@@ -227,34 +225,36 @@ body {
   font-family: Roslindale, serif;
 }
 
-
-
-
-h1, .text-h1 {
+h1,
+.text-h1 {
   font-size: var(--font-size-h1);
   line-height: 1;
   font-weight: 400;
 }
 
-h2,.text-h2 {
+h2,
+.text-h2 {
   font-size: var(--font-size-h2);
   line-height: 1.1;
   font-weight: 400;
 }
 
-h3,.text-h3 {
+h3,
+.text-h3 {
   font-size: var(--font-size-h3);
   line-height: 1.1;
   font-weight: 400;
 }
 
-h4, .text-h4 {
+h4,
+.text-h4 {
   font-size: var(--font-size-h4);
   line-height: 1.2;
   font-weight: 400;
 }
 
-h5, .text-h5 {
+h5,
+.text-h5 {
   font-size: var(--font-size-h5);
   line-height: 1.2;
   font-weight: 400;
@@ -262,17 +262,19 @@ h5, .text-h5 {
 
 .text-h5-sm {
   font-size: var(--font-size-h5-sm);
-  line-height: 1.25; 
+  line-height: 1.25;
   font-weight: 400;
 }
 
-h6, .text-h6 {
+h6,
+.text-h6 {
   font-size: var(--font-size-h6);
   line-height: 1.3;
   font-weight: 400;
 }
 
-p, .text-p {
+p,
+.text-p {
   font-size: var(--font-size-base);
   line-height: 1.5;
 }
@@ -282,7 +284,8 @@ p, .text-p {
   line-height: 1.5;
 }
 
-small, .text-small{
+small,
+.text-small {
   font-size: var(--font-size-sm);
 }
 
@@ -298,34 +301,86 @@ small, .text-small{
   font-weight: 400;
 }
 
-
 .rumble {
   font-family: RumbleBrave, serif;
 }
 
 .montreal_medium {
-  font-family: NeueMontrealMedium, Arial, Helvetica, sans-serif
+  font-family: NeueMontrealMedium, Arial, Helvetica, sans-serif;
 }
 
 .montreal-book {
   font-family: NeueMontrealBook, Arial, Helvetica, sans-serif;
 }
 
-
 .blur-40 {
   filter: blur(10px);
   -webkit-filter: blur(10px);
 }
 
-
 .image-trail {
-    position: absolute;
-    left: -145px;
-    top: -180px;
-    width: 270px;
-    height: 360px;
-    pointer-events: none;
-    object-fit: cover;
-    border-radius: 20px;
-    opacity: 0;
+  position: absolute;
+  left: -145px;
+  top: -180px;
+  width: 270px;
+  height: 360px;
+  pointer-events: none;
+  object-fit: cover;
+  border-radius: 20px;
+  opacity: 0;
+}
+
+.unlock-experiences {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.struckout {
+  display: inline;
+  position: relative;
+  background-repeat: no-repeat;
+  width: fit-content;
+}
+
+.struckout::after {
+  content: ' ';
+  display: block;
+  position: absolute;
+  background-image: url('/images/6943d9f1f49ba846ec85ad63_line.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+@media (max-width: 768px) {
+  .struckout {
+    display: none;
+  }
+}
+
+.stylised-rome.web {
+  max-width: 200px;
+  top: 40px;
+  left: 80%
+}
+
+@media (max-width: 768px) {
+  .stylised-rome.web {
+    display: none;
+  }
+}
+
+.stylised-rome.mobile {
+  display: none;
+  width: 20vw;
+}
+
+@media (max-width: 768px) {
+  .stylised-rome.mobile {
+    display: inline-block;
+  }
 }
