@@ -45,7 +45,6 @@ const useMarquee = ({
           isScrollingDown = true;
         } else {
           isScrollingDown = false;
-          console.log('scrolling up');
         }
 
         gsap.to(tween, {

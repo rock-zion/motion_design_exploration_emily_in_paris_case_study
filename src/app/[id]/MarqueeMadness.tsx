@@ -44,8 +44,6 @@ const MarqueeMadness = () => {
           ease: 'none',
           repeat: -1,
         });
-
-        console.log({ width });
       });
     },
     { scope: containerRef },

@@ -6,7 +6,6 @@ import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/all';
 import { gsap } from 'gsap';
 import BubbleButton from '@/components/buttons/BubbleButton';
-import useObserver from '@/hooks/useObserver';
 
 const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
   const containerRef = useRef<HTMLElement>(null);
@@ -170,12 +169,6 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
   useEffect(() => {
     const observerCallback: IntersectionObserverCallback = entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          console.log('should be playing');
-        } else {
-          console.log('should not be playing');
-        }
-
         if (entry.intersectionRatio <= 0.5) {
           videoRef.current?.pause();
         } else {
