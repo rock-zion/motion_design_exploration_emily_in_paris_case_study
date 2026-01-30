@@ -1,14 +1,15 @@
 'use client';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import parse from 'html-react-parser';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/all';
 import { gsap } from 'gsap';
 import BubbleButton from '@/components/buttons/BubbleButton';
+import useObserver from '@/hooks/useObserver';
 
 const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
-  const container = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { theme } = useTheme();
 
@@ -46,7 +47,7 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
         filter: 'blur(10px)',
       });
 
-      gsap.set(container.current, {
+      gsap.set(containerRef.current, {
         background: '#000000',
       });
 
@@ -69,10 +70,6 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
           ease: 'power2.out',
           stagger: {
             amount: staggerTime,
-          },
-          onComplete: () => {
-            if (!videoRef.current) return;
-            videoRef.current?.play();
           },
         },
         0,
@@ -144,7 +141,7 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
       );
 
       tl.to(
-        container.current,
+        containerRef.current,
         {
           duration: 1,
           background: 'var(--background)',
@@ -167,12 +164,41 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
         '<',
       );
     },
-    { scope: container },
+    { scope: containerRef },
   );
+
+  useEffect(() => {
+    const observerCallback: IntersectionObserverCallback = entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          console.log('should be playing');
+        } else {
+          console.log('should not be playing');
+        }
+
+        if (entry.intersectionRatio <= 0.5) {
+          videoRef.current?.pause();
+        } else {
+          videoRef.current?.play();
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      threshold: 0.5,
+    });
+
+    if (!containerRef.current) return;
+    observer.observe(containerRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  });
 
   return (
     <section
-      ref={container}
+      ref={containerRef}
       id='hero'
       className='h-screen w-screen bg-background p-2 overflow-hidden'>
       <div className='w-full h-full flex-col-center relative'>

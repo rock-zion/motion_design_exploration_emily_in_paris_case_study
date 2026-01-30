@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import BubbleButton from '@/components/buttons/BubbleButton';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useGSAP } from '@gsap/react';
@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/all';
 
 const Events = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const { theme } = useTheme();
 
   useGSAP(
@@ -17,22 +18,48 @@ const Events = () => {
 
       const activities: HTMLElement[] = gsap.utils.toArray('.activity-wrapper');
 
-      activities.forEach(activity => {
+      activities.forEach((activity, index) => {
         gsap.to(activity, {
           scale: 0.9,
-          filter: 'blur(5px)',
+          filter: index == activities.length - 1 ? '' : 'blur(5px)',
           scrollTrigger: {
             trigger: activity,
             start: 'top top',
             end: 'bottom center',
             scrub: true,
-            // markers: true,
           },
         });
       });
     },
     { scope: containerRef },
   );
+
+  useEffect(() => {
+    const observerCallback: IntersectionObserverCallback = entries => {
+      entries.forEach(entry => {
+        const video = entry.target as HTMLVideoElement;
+
+        if (entry.intersectionRatio > 0.5) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      threshold: 0.5,
+    });
+
+    // Observe each video individually
+    videoRefs.current.forEach(video => {
+      if (video) observer.observe(video);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <section ref={containerRef} className='pt-[5vh]'>
@@ -42,6 +69,9 @@ const Events = () => {
           className='flex items-end activity-wrapper sticky top-0 w-[95vw] h-[85vh] overflow-hidden rounded-[32px] mx-auto '>
           <div className='inset-0 absolute z-[-1]'>
             <video
+              ref={vid => {
+                videoRefs.current[index] = vid;
+              }}
               playsInline
               muted
               autoPlay

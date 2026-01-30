@@ -1,12 +1,49 @@
 import { useTheme } from '@/contexts/ThemeContext';
+import { nanoid } from 'nanoid';
+import { useEffect, useRef, forwardRef, useMemo } from 'react';
 const VideoSection = () => {
   const { theme } = useTheme();
+  const containerRef = useRef<HTMLElement>(null);
+  const mainVideoRef = useRef<HTMLVideoElement>(null);
+  const subVideosRef = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    const playPauseVideos = (action: 'play' | 'pause') => {
+      mainVideoRef.current?.[action]();
+      subVideosRef.current.forEach(video => video?.[action]());
+    };
+
+    const observerCallback: IntersectionObserverCallback = entries => {
+      entries.forEach(el => {
+        const action = el.isIntersecting ? 'play' : 'pause';
+        playPauseVideos(action);
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      threshold: 0.01,
+    });
+
+    if (!containerRef.current) return;
+    observer.observe(containerRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  });
+
+  const items = useMemo(
+    () => new Array(20).fill('').map(() => ({ id: nanoid() })),
+    [],
+  );
 
   return (
-    <section className='w-screen max-md:px-[24px] overflow-hidden'>
+    <section
+      ref={containerRef}
+      className='w-screen max-md:px-[24px] max-md:mt-[5vh] overflow-hidden'>
       <div className='z-[10] max-w-[1080px] w-[70%] max-md:w-[100%]  aspect-square mx-auto rounded-4xl relative '>
         <video
-          autoPlay
+          ref={mainVideoRef}
           playsInline
           muted
           loop
@@ -14,29 +51,37 @@ const VideoSection = () => {
           className='pointer-events-none absolute inset-0 w-full h-full object-cover rounded-4xl'
         />
 
-        <VideoSectioBubble
-          classNames='w-[25%] left-[-12.5%] top-[30%]'
-          srcImgs={theme.unlockExperience.videoSection.main1.video}
-        />
+        {Object.entries(theme.unlockExperience.videoSection.subSections).map(
+          ([, value], index) => {
+            const isItem1 = index % 3 === 0;
+            const isItem2 = index % 3 === 1;
+            const isItem3 = index % 3 === 2;
 
-        <VideoSectioBubble
-          classNames='w-[30%] right-[-10%] top-[25%]'
-          srcImgs={theme.unlockExperience.videoSection.main2.video}
-        />
-
-        <VideoSectioBubble
-          classNames='w-[25%] bottom-[-12.5%] left-[20%]'
-          srcImgs={theme.unlockExperience.videoSection.main3.video}
-        />
+            return (
+              <VideoSectioBubble
+                ref={el => {
+                  subVideosRef.current[index] = el;
+                }}
+                key={value.title}
+                classNames={`
+                  ${isItem1 ? 'w-[25%] left-[-12.5%] top-[30%]' : ''}
+                  ${isItem2 ? 'w-[30%] right-[-10%] top-[25%]' : ''}
+                  ${isItem3 ? 'w-[25%] bottom-[-12.5%] left-[20%]' : ''}
+                `}
+                srcImgs={value.video}
+              />
+            );
+          },
+        )}
       </div>
 
       <div className='marquee relative w-[100vw] overflow-hidden pt-[20vh] max-md:pt-[10vh]'>
         <div className='marquee-inner flex w-fit'>
-          {new Array(20).fill('').map((_, index) => (
+          {items.map(item => (
             <div
               className='flex items-center gap-0 shrink-0 font-serif-bold'
-              key={`marquee-item-${index}`}>
-              <h1 className='font-display text-(--content-primary) selection:bg-(--bg-brand)'>
+              key={item.id}>
+              <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
                 {theme.unlockExperience.videoSection.marqueeText}
               </h1>
               <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
@@ -56,24 +101,26 @@ const VideoSection = () => {
 
 export default VideoSection;
 
-const VideoSectioBubble = ({
-  classNames,
-  srcImgs,
-}: Readonly<VideoSectioBubbleProps>) => {
-  return (
-    <div
-      className={`absolute overflow-hidden z-[50] ${classNames} aspect-square rounded-4xl`}>
-      <video
-        autoPlay
-        playsInline
-        muted
-        loop
-        src={srcImgs}
-        className='pointer-events-none absolute inset-0 w-full h-full object-cover'
-      />
-    </div>
-  );
-};
+const VideoSectioBubble = forwardRef<HTMLVideoElement, VideoSectioBubbleProps>(
+  ({ classNames, srcImgs }, ref) => {
+    return (
+      <div
+        className={`absolute overflow-hidden z-[50] ${classNames} aspect-square rounded-4xl`}>
+        <video
+          ref={ref}
+          autoPlay
+          playsInline
+          muted
+          loop
+          src={srcImgs}
+          className='pointer-events-none absolute inset-0 w-full h-full object-cover'
+        />
+      </div>
+    );
+  },
+);
+
+VideoSectioBubble.displayName = 'VideoSectioBubble';
 
 type VideoSectioBubbleProps = {
   classNames: string;
