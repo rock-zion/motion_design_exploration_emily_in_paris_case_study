@@ -17,7 +17,6 @@ export const HomePage = () => {
 
   return (
     <main id='scrollArea'>
-      <div className='absolute z-[900] mouse-tracker w-[8px] h-[8px] rounded-full bg-black'></div>
       <Navbar ref={navBarRef} />
       <Hero triggerMenuReveal={triggerMenuReveal} />
       <Explore />
