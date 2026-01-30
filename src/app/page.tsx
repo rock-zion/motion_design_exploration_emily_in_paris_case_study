@@ -168,7 +168,7 @@ export default function Home() {
           <Link
             href={`/${key}`}
             key={key}
-            className={`flex h-full w-full choose_adventure_wrapper bg-gradient-to-b from-black/50 to-black scale-0 rounded-[32px] overflow-hidden relative ${(index + 1) % 2 == 0 ? 'rotate-6' : '-rotate-6 mr-[-2.4vw]'}`}>
+            className={`flex h-full w-full choose_adventure_wrapper back-drop scale-0 rounded-[32px] overflow-hidden relative ${(index + 1) % 2 == 0 ? 'rotate-6' : '-rotate-6 mr-[-2.4vw]'}`}>
             <div className='absolute inset-0'>
               <video
                 playsInline
