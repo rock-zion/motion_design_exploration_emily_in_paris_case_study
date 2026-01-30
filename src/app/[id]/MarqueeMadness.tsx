@@ -12,7 +12,8 @@ const MarqueeMadness = () => {
       if (!containerRef.current) return;
       const marquees: HTMLElement[] = gsap.utils.toArray('.marquee');
 
-      marquees.forEach(marquee => {
+      marquees.forEach((marquee, index) => {
+        const isEven = (index + 1) % 2 == 0;
         if (!marquee) return;
 
         const marqueeContent = marquee.querySelector('.marquee-inner');
@@ -33,10 +34,13 @@ const MarqueeMadness = () => {
         const allTracks = marquee.querySelectorAll('.marquee-inner');
 
         const distanceToTranslate = -1 * width;
+        if (isEven) {
+          gsap.set(marquee, { x: distanceToTranslate });
+        }
 
         gsap.to(allTracks, {
-          x: distanceToTranslate,
-          duration: 10,
+          x: isEven ? -distanceToTranslate : distanceToTranslate,
+          duration: 30,
           ease: 'none',
           repeat: -1,
         });
@@ -49,7 +53,7 @@ const MarqueeMadness = () => {
 
   return (
     <section
-      className='my-[15vh] w-screen overflow-x-clip flex items-center flex-col'
+      className='my-[15vh] min-h-[80vh] max-md:min-h-fit w-screen overflow-x-clip flex items-center flex-col relative'
       ref={containerRef}>
       {theme.maequeeMadness.map((marquee, index) => {
         const isItem1 = index % 3 === 0;
@@ -59,14 +63,14 @@ const MarqueeMadness = () => {
         return (
           <div
             key={marquee.id}
-            className={`marquee flex relative overflow-hidden mx-[-10vw]
-                ${isItem1 ? '-rotate-4 bg-(--bg-brand-tertiary)' : ''} 
-                ${isItem2 ? 'rotate-4 bg-(--bg-brand-secondary)' : ''} 
-                ${isItem3 ? '-rotate-4 bg-(--bg-brand)' : ''}
+            className={`marquee absolute flex overflow-hidden mx-[-5vw]
+                ${isItem1 ? 'origin-center -rotate-4 bg-(--bg-brand-tertiary)' : ''} 
+                ${isItem2 ? 'top-[15vh] max-md:top-[8vh] origin-center rotate-4 bg-(--bg-brand-secondary) z-[100]' : ''} 
+                ${isItem3 ? 'top-[60vh] max-md:top-[27vh] origin-center -rotate-4 bg-(--bg-brand)' : ''}
         `}>
             <div className='marquee-inner flex shrink-0'>
               <div className='flex items-center gap-0 shrink-0 font-serif-semi-bold'>
-                <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
+                <h1 className='text-display2 uppercase text-(--content-primary) selection:bg-(--bg-brand)'>
                   {marquee.textA}
                 </h1>
                 <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
@@ -76,7 +80,7 @@ const MarqueeMadness = () => {
                     src={marquee.stickerA}
                   />
                 </div>
-                <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
+                <h1 className='text-display2 uppercase text-(--content-primary) selection:bg-(--bg-brand)'>
                   {marquee.textB}
                 </h1>
                 <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
