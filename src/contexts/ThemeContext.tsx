@@ -12,14 +12,14 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
+export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
   const pathname = usePathname();
   const router = useRouter();
 
   const themeSegment = pathname?.split('/')[1];
   const isTheme = isValidThemeName(themeSegment);
 
-  const currentTheme = isTheme ? (themeSegment as ThemeName) : null;
+  const currentTheme = isTheme ? themeSegment : null;
   const setTheme = (theme: ThemeName | null) => {
     if (theme) {
       router.push(`/${theme}`);

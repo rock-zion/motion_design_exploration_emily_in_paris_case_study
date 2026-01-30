@@ -92,10 +92,11 @@ const Explore = () => {
       <div
         ref={imageCanvas}
         className='image-canvas absolute inset-0 z-[-1] max-md:hidden'></div>
-      <span className='font-mango px-[12px] mb-6 uppercase text-[32px] text-(--bg-inverse) bg-(--bg-brand-secondary) block max-md:mt-[15vh]'>
+      <span className='font-mango px-[12px] mb-6 uppercase text-[32px] text-(--primitive-neutral-900) bg-(--bg-brand-secondary) block max-md:mt-[15vh]'>
         {theme.unlockExperience.title}
       </span>
-      <h2 className='w-[11ch] text-(--bg-inverse) mb-6 text-center'>
+
+      <h2 className='w-[11ch] text-(--bg-inverse)  mb-6 text-center'>
         {parse(theme.unlockExperience.cta)}
       </h2>
 
