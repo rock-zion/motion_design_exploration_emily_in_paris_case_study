@@ -127,4 +127,49 @@ export const rome = {
       stickerB: '/images/stickers/sticker-croissant-making-workshop.avif',
     },
   ],
+
+  activities: [
+    {
+      id: '1',
+      title: 'Walking Tour',
+      category: 'WALKING TOURS',
+      duration: '2.5 HOURS',
+      price: 'FROM 69 €',
+    },
+    {
+      id: '2',
+      title: 'Vespa Tour',
+      category: 'VESPA',
+      duration: '2.5 HOURS',
+      price: 'FROM 199 €',
+    },
+    {
+      id: '3',
+      title: 'Ravioli Making with Spritz',
+      category: 'WORKSHOPS',
+      duration: '2.5 HOURS',
+      price: 'FROM 118 €',
+    },
+    {
+      id: '4',
+      title: 'Pasta and Tiramisu Making',
+      category: 'WORKSHOPS',
+      duration: '2.5 HOURS',
+      price: 'FROM 118 €',
+    },
+    {
+      id: '5',
+      title: 'Food Tour',
+      category: 'WALKING TOURS',
+      duration: '2.5 HOURS',
+      price: 'FROM 129 €',
+    },
+    {
+      id: '6',
+      title: 'Wine & Aperitivo Tasting',
+      category: 'WORKSHOPS',
+      duration: '2.5 HOURS',
+      price: 'FROM 99 €',
+    },
+  ],
 };

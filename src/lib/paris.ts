@@ -132,42 +132,49 @@ export const paris = {
 
   activities: [
     {
+      id: '1',
       title: 'Walk in the footsteps of Emily',
       category: 'WALKING TOURS',
       duration: '2.5 HOURS',
       price: 'FROM82 €',
     },
     {
+      id: '2',
       title: 'Croissant-Making Workshop',
       category: 'WORKSHOPS',
       duration: '2.5 HOURS',
       price: 'FROM131 €',
     },
     {
+      id: '3',
       title: 'Macaron-Making Workshop',
       category: 'WORKSHOPS',
       duration: '2.5 HOURS',
       price: 'FROM101 €',
     },
     {
+      id: '4',
       title: 'Champagne Seine Cruise',
       category: 'BOAT CRUISE',
       duration: '1.5 HOURS',
       price: 'FROM115 €',
     },
     {
+      id: '5',
       title: 'Food Tour',
       category: 'WALKING TOURS',
       duration: '2.5 HOURS',
       price: 'FROM122 €',
     },
     {
+      id: '6',
       title: 'Montmartre Tour',
       category: 'WALKING TOURS',
       duration: '2 HOURS',
       price: 'FROM60 €',
     },
     {
+      id: '7',
       title: 'Wine, Cheese & Butter Tasting',
       category: 'WORKSHOPS',
       duration: '2 HOURS',
