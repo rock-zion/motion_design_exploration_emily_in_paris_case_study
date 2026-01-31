@@ -54,6 +54,7 @@
   --font-size-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
   --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
   --font-size-lg: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 1.15rem + 0.25vw, 1.5rem);
 
   /* Headings */
   --font-size-h6: clamp(1rem, 0.7rem + 1vw, 1.5rem);
@@ -202,6 +203,10 @@
   @apply bg-gradient-to-b from-black/50 to-black;
 }
 
+@utility arrow-icon-style {
+  @apply flex justify-center items-center w-[calc(64px-0.5rem)] h-[calc(64px-0.5rem)] max-md:w-[calc(56px-0.5rem)] max-md:h-[calc(56px-0.5rem)] rounded-full overflow-hidden;
+}
+
 @theme inline {
   --font-serif: 'Roslindale', serif;
   --font-serif-semi-bold: 'RoslindaleSemiBold', serif;
@@ -281,6 +286,11 @@ p,
 
 .text-large {
   font-size: var(--font-size-lg);
+  line-height: 1.5;
+}
+
+.text-XL {
+  font-size: var(--font-size-xl);
   line-height: 1.5;
 }
 
@@ -365,7 +375,7 @@ small,
 .stylised-rome.web {
   max-width: 200px;
   top: 40px;
-  left: 80%
+  left: 80%;
 }
 
 @media (max-width: 768px) {
@@ -382,5 +392,37 @@ small,
 @media (max-width: 768px) {
   .stylised-rome.mobile {
     display: inline-block;
+  }
+}
+
+#mouse-tracker {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+#mouse-tracker.marquee__tracker {
+  width: 150px;
+}
+
+#mouse-tracker p {
+  flex-shrink: 0;
+  color: var(--primitive-neutral-900);
+  padding: 0 8px;
+  white-space: nowrap;
+  font-size: 32px !important;
+
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-name: marquee-content;
+  animation-timing-function: linear;
+}
+
+@keyframes marquee-content {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
   }
 }
