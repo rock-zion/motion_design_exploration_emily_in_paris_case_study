@@ -7,6 +7,7 @@ const MarqueeMadness = () => {
   const { theme } = useTheme();
   const containerRef = useRef<HTMLElement>(null);
 
+
   useGSAP(
     () => {
       if (!containerRef.current) return;
@@ -51,7 +52,7 @@ const MarqueeMadness = () => {
 
   return (
     <section
-      className='my-[15vh] min-h-[80vh] max-md:min-h-fit w-screen overflow-x-clip flex items-center flex-col relative'
+      className='my-[15vh] h-[80vh] max-lg:h-fit max-md:h-fit w-screen overflow-x-clip flex items-center flex-col relative'
       ref={containerRef}>
       {theme.maequeeMadness.map((marquee, index) => {
         const isItem1 = index % 3 === 0;
@@ -61,14 +62,14 @@ const MarqueeMadness = () => {
         return (
           <div
             key={marquee.id}
-            className={`marquee absolute flex overflow-hidden mx-[-5vw]
+            className={`marquee flex overflow-hidden mx-[-5vw]
                 ${isItem1 ? 'origin-center -rotate-4 bg-(--bg-brand-tertiary)' : ''} 
-                ${isItem2 ? 'top-[15vh] max-md:top-[8vh] origin-center rotate-4 bg-(--bg-brand-secondary) z-[100]' : ''} 
-                ${isItem3 ? 'top-[60vh] max-md:top-[27vh] origin-center -rotate-4 bg-(--bg-brand)' : ''}
+                ${isItem2 ? 'origin-center z-50 translate-y-[-6vh] rotate-4 bg-(--bg-brand-secondary)' : ''} 
+                ${isItem3 ? 'origin-center -rotate-4 bg-(--bg-brand)' : ''}
         `}>
             <div className='marquee-inner flex shrink-0'>
               <div className='flex items-center gap-0 shrink-0 font-serif-semi-bold'>
-                <h1 className='text-display2 uppercase text-(--content-primary) selection:bg-(--bg-brand)'>
+                <h1 className='text-display uppercase text-(--content-primary) selection:bg-(--bg-brand)'>
                   {marquee.textA}
                 </h1>
                 <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
@@ -78,7 +79,7 @@ const MarqueeMadness = () => {
                     src={marquee.stickerA}
                   />
                 </div>
-                <h1 className='text-display2 uppercase text-(--content-primary) selection:bg-(--bg-brand)'>
+                <h1 className='text-display uppercase text-(--content-primary) selection:bg-(--bg-brand)'>
                   {marquee.textB}
                 </h1>
                 <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
