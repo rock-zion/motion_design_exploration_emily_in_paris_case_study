@@ -396,21 +396,30 @@ small,
 }
 
 #mouse-tracker {
-  display: flex;
   align-items: center;
-  overflow: hidden;
+  background: var(--bg-brand-secondary);
 }
 
-#mouse-tracker.marquee__tracker {
+#mouse-tracker .tracker-marquee__wrapper {
+  display: flex;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-brand-secondary);
+  transform-origin: center;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  rotate: -4deg;
   width: 150px;
 }
 
-#mouse-tracker p {
+#mouse-tracker .tracker-marquee__wrapper p {
   flex-shrink: 0;
   color: var(--primitive-neutral-900);
   padding: 0 8px;
   white-space: nowrap;
   font-size: 32px !important;
+  text-wrap: nowrap;
 
   animation-duration: 3s;
   animation-iteration-count: infinite;
@@ -425,4 +434,28 @@ small,
   to {
     transform: translateX(-100%);
   }
+}
+
+#mouse-tracker .mouse-tracker-backdrop .mouse-tracker-backdrop_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#mouse-tracker .mouse-tracker-backdrop {
+  pointer-events: none;
+  position: absolute;
+  overflow: hidden;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 24px;
+  width: 350px;
+  height: 450px;
+}
+
+#mouse-tracker .mouse-tracker-backdrop > div {
+  width: 100%;
+  height: 100%;
 }

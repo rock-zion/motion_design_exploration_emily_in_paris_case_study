@@ -3,11 +3,16 @@ import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { useRef, useState } from 'react';
 import { BsArrowUpRight } from 'react-icons/bs';
+import { useMediaQuery } from 'react-responsive';
 
 const TourList = () => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isTab = useMediaQuery({ maxWidth: 990 });
+
   const { theme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState(-1);
+  const prevIndex = useRef<number>(-1);
 
   const detailsStyle =
     'font-mango border rounded-full px-[16px] text-h5-sm leading-0 flex items-center pt-[6px]';
@@ -17,16 +22,20 @@ const TourList = () => {
       if (!containerRef.current) return;
 
       const activities: HTMLElement[] = gsap.utils.toArray('.activities');
-
+      const activeTweens: gsap.core.Tween[] = [];
       const cleanupFunctions: (() => void)[] = [];
       const mouseTracker = document.querySelector('#mouse-tracker');
-      const imageContainer = document.createElement('div');
+      const DURATION = 0.1;
 
       if (!mouseTracker) return;
 
       activities.forEach((activity, index) => {
-        let trackerTextContent: HTMLParagraphElement | null;
-        let requiredClones: number;
+        let imageWrapper: HTMLDivElement | null = null;
+        let imageInner: HTMLDivElement | null = null;
+        let image: HTMLImageElement;
+        let trackerMarqueeWrapper: HTMLDivElement | null = null;
+        let trackerTextContent: HTMLParagraphElement | null = null;
+
         const spacers = activity.querySelectorAll('.spacer');
         const icon = activity.querySelector('.arrow-icon-style');
 
@@ -39,94 +48,171 @@ const TourList = () => {
             'font-mango',
             'text-XL',
           );
-          mouseTracker.appendChild(trackerTextContent);
+
+          if (!trackerMarqueeWrapper) {
+            trackerMarqueeWrapper = document.createElement('div');
+            trackerMarqueeWrapper.classList.add('tracker-marquee__wrapper');
+          }
+
+          mouseTracker.appendChild(trackerMarqueeWrapper);
+          trackerMarqueeWrapper.appendChild(trackerTextContent);
 
           const width = trackerTextContent.getBoundingClientRect().width;
-          requiredClones = Math.ceil(150 / width) + 2;
+          const requiredClones = Math.ceil(150 / width) + 2;
 
-          console.log({ requiredClones, width, trackerTextContent });
-          if (requiredClones)
-            for (let i = 0; i < requiredClones; i++) {
-              const cloneP = trackerTextContent.cloneNode(
-                true,
-              ) as HTMLParagraphElement;
-              cloneP.setAttribute('aria-hidden', 'true');
-              mouseTracker.appendChild(cloneP);
-            }
+          for (let i = 0; i < requiredClones; i++) {
+            const cloneP = trackerTextContent.cloneNode(
+              true,
+            ) as HTMLParagraphElement;
+            cloneP.setAttribute('aria-hidden', 'true');
+
+            trackerMarqueeWrapper.appendChild(cloneP);
+          }
         };
 
         const removeTextContent = () => {
-          if (mouseTracker) mouseTracker.innerHTML = '';
-          mouseTracker.classList.remove('marquee__tracker');
+          if (mouseTracker) {
+            mouseTracker.innerHTML = '';
+            mouseTracker.classList.remove('marquee__tracker');
+          }
+
+          const oldBackdrop = mouseTracker.querySelector(
+            '.mouse-tracker-backdrop',
+          );
+
+          if (oldBackdrop) {
+            const tween = gsap.to(oldBackdrop, {
+              opacity: 0,
+              scale: 0,
+              duration: 0.3,
+              onComplete: () => {
+                oldBackdrop.remove();
+                imageWrapper = null;
+                imageInner = null;
+              },
+            });
+            activeTweens.push(tween);
+          }
+
+          trackerMarqueeWrapper = null;
+          trackerTextContent = null;
+        };
+
+        const createImageAnimation = (prevIndex: number, index: number) => {
+          imageWrapper = document.createElement('div');
+          imageWrapper.classList.add('mouse-tracker-backdrop');
+          imageInner = document.createElement('div');
+
+          imageWrapper.appendChild(imageInner);
+
+          for (const activity of theme.activities) {
+            image = document.createElement('img');
+            image.src = activity.bg;
+            image.classList.add('mouse-tracker-backdrop_image');
+            imageInner.appendChild(image);
+          }
+
+          const destinationY = -(index * 450);
+
+          if (prevIndex !== -1) {
+            gsap.set(imageInner, { y: -(prevIndex * 450) });
+          }
+
+          gsap.to(imageInner, {
+            y: destinationY,
+            duration: 0.8,
+            ease: 'expo.out',
+          });
+
+          mouseTracker.insertBefore(imageWrapper, mouseTracker.firstChild);
         };
 
         const onEnter = () => {
+          const previousIndex = prevIndex.current;
+          prevIndex.current = index;
           setHoverIndex(index);
 
-          gsap.to(mouseTracker, {
+          const tween1 = gsap.to(trackerMarqueeWrapper, {
             height: '32px',
             width: '150px',
-            xPercent: -50,
-            yPercent: -50,
+
             borderRadius: '0px',
             overwrite: 'auto',
-            duration: 0.3,
+            duration: DURATION,
           });
 
-          gsap.to(spacers, {
-            height: '150px',
-            width: '150px',
+          const tween2 = gsap.to(spacers, {
+            height: '100px',
+            width: '100px',
             duration: 1,
             ease: 'power2.inOut',
           });
 
-          gsap.to(icon, {
+          const tween3 = gsap.to(icon, {
             rotate: '45deg',
-            duration: 0.3,
+            duration: DURATION,
             ease: 'power2.inOut',
           });
 
           const otherActivities = activities.filter((el, i) => i !== index);
 
-          gsap.to(otherActivities, {
+          const tween4 = gsap.to(otherActivities, {
             opacity: 0.7,
-            duration: 0.3,
+            duration: DURATION,
             ease: 'power2.inOut',
           });
 
-          createTextContent();
+          const tween5 = gsap.to(activity, {
+            backgroundColor: theme.activities[index].hoverBg,
+            duration: DURATION,
+            ease: 'power2.inOut',
+          });
+
+          activeTweens.push(tween1, tween2, tween3, tween4, tween5);
+
+          if (!isMobile && !isTab) {
+            createImageAnimation(previousIndex, index);
+            createTextContent();
+          }
         };
 
         const onLeave = () => {
           setHoverIndex(-1);
-          gsap.to(mouseTracker, {
+
+          const tween1 = gsap.to(trackerMarqueeWrapper, {
             height: '8px',
             width: '8px',
             borderRadius: '100%',
             overwrite: 'auto',
-            xPercent: 0,
-            yPercent: -0,
-            duration: 0.3,
+            duration: DURATION,
           });
 
-          gsap.to(spacers, {
+          const tween2 = gsap.to(spacers, {
             height: '0px',
             width: '0px',
             duration: 1,
             ease: 'power2.inOut',
           });
 
-          gsap.to(icon, {
+          const tween3 = gsap.to(icon, {
             rotate: '0deg',
-            duration: 0.3,
+            duration: DURATION,
             ease: 'power2.inOut',
           });
 
-          gsap.to(activities, {
+          const tween4 = gsap.to(activities, {
             opacity: 1,
-            duration: 0.3,
+            duration: DURATION,
             ease: 'power2.inOut',
           });
+
+          const tween5 = gsap.to(activity, {
+            backgroundColor: '',
+            duration: DURATION,
+            ease: 'power2.inOut',
+          });
+
+          activeTweens.push(tween1, tween2, tween3, tween4, tween5);
 
           removeTextContent();
         };
@@ -141,29 +227,38 @@ const TourList = () => {
       });
 
       return () => {
+        activeTweens.forEach(tween => {
+          if (tween && tween.kill) {
+            tween.kill();
+          }
+        });
+        activeTweens.length = 0;
+
         mouseTracker.classList.remove('marquee__tracker');
         mouseTracker.innerHTML = '';
-        cleanupFunctions.forEach(func => {
-          func();
-        });
+        cleanupFunctions.forEach(func => func());
       };
     },
-    {
-      scope: containerRef,
-    },
+    { scope: containerRef },
   );
 
   return (
     <div ref={containerRef} className='h-fit my-[15vh]'>
-      <div className='w-[90vw] mx-auto'>
+      <div className='w-[90vw] mx-auto max-[990px]:grid max-[990px]:grid-cols-2 max-md:grid-cols-1 gap-[16px] group'>
         {theme.activities.map(activity => (
           <div
             key={activity.id}
-            className={`activities h-[196px] border-t flex items-center justify-between cursor-pointer text-(--content-primary)`}>
+            className={`activities h-[196px] max-[990px]:h-fit border-t max-[990px]:border-0 flex items-center justify-between cursor-pointer text-(--content-primary) transition-colors duration-300 bg-amber-50/0`}>
             <div className='flex items-center'>
-              <div className='spacer w-[0px] h-[0px]'></div>
+              <div className='spacer w-[0px] h-[0px] max-[990px]:hidden'></div>
               <div>
                 <div>
+                  <div className='overflow-hidden hidden max-[990px]:block rounded-1xl w-[100%] h-[auto] aspect-[16/9] '>
+                    <img
+                      className='w-full h-full object-cover'
+                      src={activity.bg}
+                    />
+                  </div>
                   <h4 className='mb-4 '>{activity.title}</h4>
                 </div>
                 <div className='flex'>
@@ -173,7 +268,7 @@ const TourList = () => {
                 </div>
               </div>
             </div>
-            <div className='flex items-center'>
+            <div className='flex items-center max-[990px]:hidden'>
               <div className='arrow-icon-style border border-(--content-primary) w-[64px] h-[64px]'>
                 <BsArrowUpRight size={24} />
               </div>

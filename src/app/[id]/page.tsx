@@ -7,6 +7,7 @@ import Explore from './Explore';
 import VideoSection from './VideoSection';
 import Activities from './Activities';
 import MarqueeMadness from './MarqueeMadness';
+import TourList from './TourList';
 
 export const HomePage = () => {
   const navBarRef = useRef<INavbarHandle>(null);
@@ -23,6 +24,7 @@ export const HomePage = () => {
       <VideoSection />
       <Activities />
       <MarqueeMadness />
+      <TourList />
     </main>
   );
 };
