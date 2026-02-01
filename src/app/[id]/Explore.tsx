@@ -108,7 +108,7 @@ const Explore = () => {
         <div className='marquee-inner flex flex-auto gap-x-[16px] h-[30vh] w-fit'>
           {theme.unlockExperience.cursorTrailImages.map(img => (
             <div
-              className='marquee-image-wrapper h-full w-[45vw] overflow-hidden shrink-[0] rounded-4xl'
+              className='marquee-image-wrapper fixed h-full w-[45vw] overflow-hidden shrink-[0] rounded-4xl'
               key={`first-${img.id}`}>
               <img
                 className='h-full w-full object-cover'

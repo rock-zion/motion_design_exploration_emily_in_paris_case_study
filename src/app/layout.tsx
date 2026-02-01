@@ -17,7 +17,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
         <div>
           <div
             id='mouse-tracker'
-            className='fixed z-[800] -rotate-4 origin-center pointer-events-none w-[8px] h-[8px] rounded-full bg-(--bg-brand-secondary)'></div>
+            className='fixed z-[800] origin-center pointer-events-none w-[8px] h-[8px] rounded-full '></div>
 
           {children}
         </div>
