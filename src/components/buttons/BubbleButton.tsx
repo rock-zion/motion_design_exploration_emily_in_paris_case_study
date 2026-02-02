@@ -39,7 +39,6 @@ const BubbleButton = ({
     (_, contextSafe) => {
       if (!containerRef.current) return;
       const container = containerRef.current;
-      gsap.set('.icon-wrapper-left', { width: 0, height: 0, scale: 0 });
 
       const onEnter = contextSafe!(() => {
         gsap.to('.icon-wrapper-right', {
@@ -102,7 +101,7 @@ const BubbleButton = ({
   const InnerContent = (
     <>
       <div
-        className={`icon-wrapper-left arrow-icon-style ${buttonPRoperties.leftIconBg}`}>
+        className={`icon-wrapper-left w-0 h-0 scale-0 arrow-icon-style ${buttonPRoperties.leftIconBg}`}>
         <BsArrowUpRight size={24} />
       </div>
 
