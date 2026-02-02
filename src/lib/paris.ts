@@ -133,6 +133,9 @@ export const paris = {
   activities: [
     {
       id: '1',
+      leadingSticker: '',
+      hoverBg: 'var(--bg-brand)',
+      bg: '/images/Walking_Tour_guests_holding_pastry_like_emily_in_paris-p-800.avif',
       title: 'Walk in the footsteps of Emily',
       category: 'WALKING TOURS',
       duration: '2.5 HOURS',
@@ -140,6 +143,9 @@ export const paris = {
     },
     {
       id: '2',
+      leadingSticker: '',
+      hoverBg: 'var(--bg-brand-secondary)',
+      bg: '/images/Croissant_making_end_products_with_red_croissants.avif',
       title: 'Croissant-Making Workshop',
       category: 'WORKSHOPS',
       duration: '2.5 HOURS',
@@ -147,6 +153,9 @@ export const paris = {
     },
     {
       id: '3',
+      leadingSticker: '',
+      hoverBg: 'var(--bg-brand-secondary)',
+      bg: '/images/Macron_making_guest_piping_macaroons.avif',
       title: 'Macaron-Making Workshop',
       category: 'WORKSHOPS',
       duration: '2.5 HOURS',
@@ -154,6 +163,9 @@ export const paris = {
     },
     {
       id: '4',
+      leadingSticker: '',
+      hoverBg: 'var(--bg-brand-tertiary)',
+      bg: '/images/Seine_Cruise_Captain_and_guest_heart_hands-p-800.avif',
       title: 'Champagne Seine Cruise',
       category: 'BOAT CRUISE',
       duration: '1.5 HOURS',
@@ -161,6 +173,9 @@ export const paris = {
     },
     {
       id: '5',
+      leadingSticker: '',
+      hoverBg: 'var(--bg-brand)',
+      bg: '/images/Screenshot_2025-07-22_at_15.27.4.avif',
       title: 'Food Tour',
       category: 'WALKING TOURS',
       duration: '2.5 HOURS',
@@ -168,6 +183,9 @@ export const paris = {
     },
     {
       id: '6',
+      leadingSticker: '',
+      hoverBg: 'var(--bg-brand)',
+      bg: '/images/Montmartre_Walking_Tour_Selfie_stick_Wall_of_Love.avif',
       title: 'Montmartre Tour',
       category: 'WALKING TOURS',
       duration: '2 HOURS',
@@ -175,6 +193,9 @@ export const paris = {
     },
     {
       id: '7',
+      leadingSticker: '',
+      hoverBg: 'var(--bg-brand-secondary)',
+      bg: '/images/Wine_and_cheese_tasting_cutting_the_cheese-p-800.avif',
       title: 'Wine, Cheese & Butter Tasting',
       category: 'WORKSHOPS',
       duration: '2 HOURS',

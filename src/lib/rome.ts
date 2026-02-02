@@ -131,6 +131,9 @@ export const rome = {
   activities: [
     {
       id: '1',
+      bg: '',
+      leadingSticker: '',
+      hoverBg: '',
       title: 'Walking Tour',
       category: 'WALKING TOURS',
       duration: '2.5 HOURS',
@@ -138,6 +141,9 @@ export const rome = {
     },
     {
       id: '2',
+      bg: '',
+      leadingSticker: '',
+      hoverBg: '',
       title: 'Vespa Tour',
       category: 'VESPA',
       duration: '2.5 HOURS',
@@ -145,6 +151,9 @@ export const rome = {
     },
     {
       id: '3',
+      bg: '',
+      leadingSticker: '',
+      hoverBg: '',
       title: 'Ravioli Making with Spritz',
       category: 'WORKSHOPS',
       duration: '2.5 HOURS',
@@ -152,6 +161,9 @@ export const rome = {
     },
     {
       id: '4',
+      bg: '',
+      leadingSticker: '',
+      hoverBg: '',
       title: 'Pasta and Tiramisu Making',
       category: 'WORKSHOPS',
       duration: '2.5 HOURS',
@@ -159,6 +171,9 @@ export const rome = {
     },
     {
       id: '5',
+      bg: '',
+      leadingSticker: '',
+      hoverBg: '',
       title: 'Food Tour',
       category: 'WALKING TOURS',
       duration: '2.5 HOURS',
@@ -166,6 +181,9 @@ export const rome = {
     },
     {
       id: '6',
+      bg: '',
+      leadingSticker: '',
+      hoverBg: '',
       title: 'Wine & Aperitivo Tasting',
       category: 'WORKSHOPS',
       duration: '2.5 HOURS',
