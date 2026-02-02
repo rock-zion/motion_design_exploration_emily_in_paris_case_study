@@ -1,6 +1,6 @@
 import { useTheme } from '@/contexts/ThemeContext';
-import { nanoid } from 'nanoid';
-import { useEffect, useRef, forwardRef, useMemo } from 'react';
+import { useEffect, useRef, forwardRef } from 'react';
+
 const VideoSection = () => {
   const { theme } = useTheme();
   const containerRef = useRef<HTMLElement>(null);
@@ -16,12 +16,13 @@ const VideoSection = () => {
     const observerCallback: IntersectionObserverCallback = entries => {
       entries.forEach(el => {
         const action = el.isIntersecting ? 'play' : 'pause';
+
         playPauseVideos(action);
       });
     };
 
     const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.01,
+      threshold: 0.1,
     });
 
     if (!containerRef.current) return;
@@ -32,16 +33,11 @@ const VideoSection = () => {
     };
   });
 
-  const items = useMemo(
-    () => new Array(20).fill('').map(() => ({ id: nanoid() })),
-    [],
-  );
-
   return (
     <section
       ref={containerRef}
-      className='w-screen max-md:px-[24px] max-md:mt-[5vh] overflow-hidden'>
-      <div className='z-[10] max-w-[1080px] w-[70%] max-md:w-[100%]  aspect-square mx-auto rounded-4xl relative '>
+      className='w-screen overflow-x-clip max-md:px-[24px] max-md:mt-[5vh]'>
+      <div className='z-[10] max-w-[1080px] w-[70%] max-md:w-[100%]  aspect-square mx-auto rounded-4xl relative'>
         <video
           ref={mainVideoRef}
           playsInline
@@ -73,27 +69,6 @@ const VideoSection = () => {
             );
           },
         )}
-      </div>
-
-      <div className='marquee relative w-[100vw] overflow-hidden pt-[20vh] max-md:pt-[10vh]'>
-        <div className='marquee-inner flex w-fit'>
-          {items.map(item => (
-            <div
-              className='flex items-center gap-0 shrink-0 font-serif-bold'
-              key={item.id}>
-              <h1 className='text-display text-(--content-primary) selection:bg-(--bg-brand)'>
-                {theme.unlockExperience.videoSection.marqueeText}
-              </h1>
-              <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
-                <img
-                  className='w-full h-full'
-                  alt={theme.unlockExperience.videoSection.marqueeText}
-                  src={theme.unlockExperience.videoSection.marqueeSticker}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
