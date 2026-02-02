@@ -102,7 +102,7 @@ const BubbleButton = ({
   const InnerContent = (
     <>
       <div
-        className={`icon-wrapper-left ${iconBaseStyles} ${buttonPRoperties.leftIconBg}`}>
+        className={`icon-wrapper-left arrow-icon-style ${buttonPRoperties.leftIconBg}`}>
         <BsArrowUpRight size={24} />
       </div>
 
@@ -117,7 +117,7 @@ const BubbleButton = ({
       )}
 
       <div
-        className={`icon-wrapper-right ${iconBaseStyles} ${buttonPRoperties.rightIconBg}`}>
+        className={`icon-wrapper-right arrow-icon-style  ${buttonPRoperties.rightIconBg}`}>
         <BsArrowUpRight size={24} />
       </div>
     </>
