@@ -4,12 +4,12 @@ import parse from 'html-react-parser';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef } from 'react';
-import useMarquee from '@/hooks/useMarquee';
 
 const Explore = () => {
   const { theme } = useTheme();
   const container = useRef<HTMLElement>(null);
   const imageCanvas = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     (_, contextSafe) => {
@@ -78,12 +78,70 @@ const Explore = () => {
     { scope: container },
   );
 
-  useMarquee({
-    scope: container,
-    xPercent: -100,
-    duration: 120,
-    dependencies: [],
-  });
+  useGSAP(
+    () => {
+      if (!marqueeRef.current) return;
+
+      const marqueeContent = marqueeRef.current.querySelector(
+        '.marquee-inner',
+      ) as HTMLElement;
+      if (!marqueeContent) return;
+
+      const existingClones = marqueeRef.current.querySelectorAll(
+        '.marquee-inner[aria-hidden="true"]',
+      );
+      existingClones.forEach(clone => clone.remove());
+
+      const screenWidth = window.innerWidth;
+      const width = marqueeContent.offsetWidth;
+
+      const requiredClones = Math.ceil(screenWidth / width) + 2;
+
+      for (let i = 0; i < requiredClones; i++) {
+        const clone = marqueeContent.cloneNode(true) as HTMLElement;
+        clone.setAttribute('aria-hidden', 'true');
+        marqueeRef.current.append(clone);
+      }
+
+      const allTracks = marqueeRef.current.querySelectorAll('.marquee-inner');
+
+      const tween = gsap
+        .to(allTracks, {
+          xPercent: '-=100',
+          duration: 30,
+          ease: 'none',
+          repeat: -1,
+          modifiers: {
+            xPercent: gsap.utils.unitize(v => {
+              const val = Number.parseFloat(v);
+              return ((val % 100) - 100) % 100;
+            }),
+          },
+        })
+        .totalProgress(0.5);
+
+      let currentScroll = 0;
+      const scrollHandler = () => {
+        const isScrollingDown = window.pageYOffset > currentScroll;
+
+        gsap.to(tween, {
+          timeScale: isScrollingDown ? 1 : -1,
+          duration: 0.5,
+          ease: 'power1.out',
+        });
+
+        currentScroll = window.pageYOffset;
+      };
+
+      window.addEventListener('scroll', scrollHandler);
+
+      return () => {
+        tween.kill();
+        window.removeEventListener('scroll', scrollHandler);
+      };
+    },
+    { scope: container },
+  );
 
   return (
     <section
@@ -104,24 +162,14 @@ const Explore = () => {
         {theme.unlockExperience.ctaBtnText}
       </BubbleButton>
 
-      <div className='marquee relative w-[100vw] mt-16 overflow-hidden hidden max-md:block'>
-        <div className='marquee-inner flex flex-auto gap-x-[16px] h-[30vh] w-fit'>
+      <div
+        ref={marqueeRef}
+        className='marquee relative w-[100vw] mt-16 overflow-hidden hidden max-md:flex'>
+        <div className='marquee-inner flex flex-auto h-[30vh] w-fit'>
           {theme.unlockExperience.cursorTrailImages.map(img => (
             <div
-              className='marquee-image-wrapper fixed h-full w-[45vw] overflow-hidden shrink-[0] rounded-4xl'
+              className='marquee-image-wrapper h-full w-[45vw] mr-[16px] overflow-hidden shrink-0 rounded-4xl'
               key={`first-${img.id}`}>
-              <img
-                className='h-full w-full object-cover'
-                src={img.img}
-                alt={img.img.split('/')[2].replaceAll('_', ' ') ?? 'Image'}
-              />
-            </div>
-          ))}
-
-          {theme.unlockExperience.cursorTrailImages.map((img, index) => (
-            <div
-              className='marquee-image-wrapper h-full w-[40vw] overflow-hidden shrink-[0] rounded-2xl'
-              key={`second-${img.id}`}>
               <img
                 className='h-full w-full object-cover'
                 src={img.img}

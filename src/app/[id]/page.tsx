@@ -8,20 +8,109 @@ import VideoSection from './VideoSection';
 import Activities from './Activities';
 import MarqueeMadness from './MarqueeMadness';
 import TourList from './TourList';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export const HomePage = () => {
+  const containerRef = useRef<HTMLElement>(null);
   const navBarRef = useRef<INavbarHandle>(null);
+  const { theme } = useTheme();
 
   const triggerMenuReveal = () => {
     navBarRef.current?.triggerMyFunction();
   };
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!marqueeRef.current) return;
+
+      const marqueeContent = marqueeRef.current.querySelector(
+        '.marquee-inner',
+      ) as HTMLElement;
+      if (!marqueeContent) return;
+
+      const existingClones = marqueeRef.current.querySelectorAll(
+        '.marquee-inner[aria-hidden="true"]',
+      );
+      existingClones.forEach(clone => clone.remove());
+
+      const screenWidth = window.innerWidth;
+      const width = marqueeContent.offsetWidth;
+
+      const requiredClones = Math.ceil(screenWidth / width) + 2;
+
+      for (let i = 0; i < requiredClones; i++) {
+        const clone = marqueeContent.cloneNode(true) as HTMLElement;
+        clone.setAttribute('aria-hidden', 'true');
+        marqueeRef.current.append(clone);
+      }
+
+      const allTracks = marqueeRef.current.querySelectorAll('.marquee-inner');
+
+      const tween = gsap
+        .to(allTracks, {
+          xPercent: '-=100',
+          duration: 5,
+          ease: 'none',
+          repeat: -1,
+          modifiers: {
+            xPercent: gsap.utils.unitize(v => {
+              const val = Number.parseFloat(v);
+              return ((val % 100) - 100) % 100;
+            }),
+          },
+        })
+        .totalProgress(0.5);
+
+      let currentScroll = 0;
+      const scrollHandler = () => {
+        const isScrollingDown = window.pageYOffset > currentScroll;
+
+        gsap.to(tween, {
+          timeScale: isScrollingDown ? 1 : -1,
+          duration: 0.5,
+          ease: 'power1.out',
+        });
+
+        currentScroll = window.pageYOffset;
+      };
+
+      window.addEventListener('scroll', scrollHandler);
+
+      return () => {
+        tween.kill();
+        window.removeEventListener('scroll', scrollHandler);
+      };
+    },
+    { scope: containerRef },
+  );
 
   return (
-    <main id='scrollArea'>
+    <main ref={containerRef} id='scrollArea'>
       <Navbar ref={navBarRef} />
       <Hero triggerMenuReveal={triggerMenuReveal} />
       <Explore />
       <VideoSection />
+
+      <div
+        ref={marqueeRef}
+        className='marquee flex overflow-hidden pt-[20vh] max-md:pt-[10vh] whitespace-nowrap'>
+        <div className='marquee-inner flex items-center shrink-0'>
+          <h1 className='text-(--content-primary) selection:bg-(--bg-brand) font-bold font-serif-bold'>
+            {theme.unlockExperience.videoSection.marqueeText}
+          </h1>
+          <div className='w-64 aspect-square ml-4 max-md:w-32  shrink-0'>
+            <img
+              className='w-full h-full'
+              alt={theme.unlockExperience.videoSection.marqueeText}
+              src={theme.unlockExperience.videoSection.marqueeSticker}
+            />
+          </div>
+        </div>
+      </div>
+
       <Activities />
       <MarqueeMadness />
       <TourList />
