@@ -11,6 +11,7 @@ import TourList from './TourList';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useTheme } from '@/contexts/ThemeContext';
+import Review from './Review';
 
 export const HomePage = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -39,7 +40,7 @@ export const HomePage = () => {
       const screenWidth = window.innerWidth;
       const width = marqueeContent.offsetWidth;
       if (width == 0) return;
-      
+
       const requiredClones = Math.ceil(screenWidth / width) + 2;
 
       for (let i = 0; i < requiredClones; i++) {
@@ -115,6 +116,7 @@ export const HomePage = () => {
       <Activities />
       <MarqueeMadness />
       <TourList />
+      <Review />
     </main>
   );
 };
