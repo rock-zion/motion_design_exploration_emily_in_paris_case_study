@@ -12,6 +12,7 @@ type BubbleButtonProps = {
   href?: string;
   onClick?: () => void;
   variant?: 'in' | 'out';
+  altLeft?: boolean;
 };
 
 const BubbleButton = ({
@@ -19,19 +20,31 @@ const BubbleButton = ({
   href,
   onClick,
   variant = 'in',
+  altLeft,
 }: BubbleButtonProps) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const containerRef = useRef<HTMLDivElement>(null);
 
   const isBubbleIn = variant === 'in';
 
+  const resolveLeftIconBg = () => {
+    let bg = '';
+    if (!isBubbleIn && altLeft) {
+      bg = 'bg-(--bg-brand-tertiary)';
+    } else if (isBubbleIn) {
+      bg = 'bg-(--bg-brand-tertiary)';
+    } else {
+      bg = 'bg-(--bg-brand-secondary)';
+    }
+
+    return bg;
+  };
+
   const buttonPRoperties = {
     duration: 0.3,
     rightOrigin: isBubbleIn ? 'bottom right' : 'center',
     containerClasses: isBubbleIn ? 'bg-white' : '',
-    leftIconBg: isBubbleIn
-      ? 'bg-(--bg-brand-tertiary)'
-      : 'bg-(--bg-brand-secondary)',
+    leftIconBg: resolveLeftIconBg(),
     rightIconBg: isBubbleIn ? 'bg-(--bg-brand-secondary)' : 'bg-(--bg-brand)',
   };
 
@@ -96,7 +109,6 @@ const BubbleButton = ({
   );
 
   const baseStyles = `flex items-center h-[64px] max-md:h-[56px] text-black rounded-full p-1 cursor-pointer ${buttonPRoperties.containerClasses}`;
-  const iconBaseStyles = `flex justify-center items-center w-[calc(64px-0.5rem)] h-[calc(64px-0.5rem)] max-md:w-[calc(56px-0.5rem)] max-md:h-[calc(56px-0.5rem)] rounded-full overflow-hidden`;
 
   const InnerContent = (
     <>
