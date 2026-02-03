@@ -10,10 +10,10 @@ const Events = () => {
   const containerRef = useRef<HTMLElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const { theme } = useTheme();
+  gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(
     () => {
-      gsap.registerPlugin(ScrollTrigger);
       if (!containerRef.current) return;
 
       const activities: HTMLElement[] = gsap.utils.toArray('.activity-wrapper');
