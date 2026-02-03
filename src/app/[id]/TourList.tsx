@@ -58,6 +58,8 @@ const TourList = () => {
           trackerMarqueeWrapper.appendChild(trackerTextContent);
 
           const width = trackerTextContent.getBoundingClientRect().width;
+          if (width == 0) return;
+
           const requiredClones = Math.ceil(150 / width) + 2;
 
           for (let i = 0; i < requiredClones; i++) {

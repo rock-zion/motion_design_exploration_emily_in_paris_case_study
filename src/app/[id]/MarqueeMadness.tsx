@@ -7,7 +7,6 @@ const MarqueeMadness = () => {
   const { theme } = useTheme();
   const containerRef = useRef<HTMLElement>(null);
 
-
   useGSAP(
     () => {
       if (!containerRef.current) return;
@@ -24,6 +23,7 @@ const MarqueeMadness = () => {
         const width = marqueeContent.scrollWidth;
         const screenWidth = window.innerWidth;
 
+        if (width == 0) return;
         const requiredClones = Math.ceil(screenWidth / width) + 2;
 
         for (let i = 0; i < requiredClones; i++) {

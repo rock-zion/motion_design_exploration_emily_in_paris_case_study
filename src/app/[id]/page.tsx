@@ -38,7 +38,8 @@ export const HomePage = () => {
 
       const screenWidth = window.innerWidth;
       const width = marqueeContent.offsetWidth;
-
+      if (width == 0) return;
+      
       const requiredClones = Math.ceil(screenWidth / width) + 2;
 
       for (let i = 0; i < requiredClones; i++) {
