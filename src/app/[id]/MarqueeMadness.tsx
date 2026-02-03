@@ -16,11 +16,13 @@ const MarqueeMadness = () => {
         const isEven = (index + 1) % 2 == 0;
         if (!marquee) return;
 
-        const marqueeContent = marquee.querySelector('.marquee-inner');
+        const marqueeContent = marquee.querySelector(
+          '.marquee-inner',
+        ) as HTMLElement;
 
         if (!marqueeContent) return;
 
-        const width = marqueeContent.scrollWidth;
+        const width = marqueeContent.offsetWidth;
         const screenWidth = window.innerWidth;
 
         if (width == 0) return;
@@ -62,29 +64,29 @@ const MarqueeMadness = () => {
         return (
           <div
             key={marquee.id}
-            className={`marquee flex overflow-hidden mx-[-5vw]
+            className={`marquee flex overflow-x-clip mx-[-5vw]
                 ${isItem1 ? 'origin-center -rotate-4 bg-(--bg-brand-tertiary)' : ''} 
                 ${isItem2 ? 'origin-center z-50 translate-y-[-6vh] rotate-4 bg-(--bg-brand-secondary)' : ''} 
                 ${isItem3 ? 'origin-center -rotate-4 bg-(--bg-brand)' : ''}
         `}>
             <div className='marquee-inner flex shrink-0'>
               <div className='flex items-center gap-0 shrink-0 font-serif-semi-bold'>
-                <h1 className='text-display uppercase text-(--content-primary) selection:bg-(--bg-brand)'>
+                <h1 className='text-display uppercase text-(--primitive-neutral-1000) selection:bg-(--bg-brand)'>
                   {marquee.textA}
                 </h1>
                 <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
                   <img
-                    className='w-full h-full'
+                    className='w-full h-full object-contain'
                     alt={marquee.textA}
                     src={marquee.stickerA}
                   />
                 </div>
-                <h1 className='text-display uppercase text-(--content-primary) selection:bg-(--bg-brand)'>
+                <h1 className='text-display uppercase text-(--primitive-neutral-1000) selection:bg-(--bg-brand)'>
                   {marquee.textB}
                 </h1>
                 <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
                   <img
-                    className='w-full h-full'
+                    className='w-full h-full object-contain'
                     alt={marquee.textB}
                     src={marquee.stickerB}
                   />

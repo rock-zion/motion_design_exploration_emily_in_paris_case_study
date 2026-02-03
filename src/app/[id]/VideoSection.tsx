@@ -31,7 +31,7 @@ const VideoSection = () => {
     return () => {
       observer.disconnect();
     };
-  });
+  }, []);
 
   return (
     <section

@@ -162,6 +162,11 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
         },
         '<',
       );
+
+      return () => {
+        title.revert();
+        subTitle.revert();
+      };
     },
     { scope: containerRef },
   );
@@ -187,7 +192,7 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
     return () => {
       observer.disconnect();
     };
-  });
+  }, []);
 
   return (
     <section

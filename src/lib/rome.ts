@@ -108,30 +108,30 @@ export const rome = {
     {
       id: '1',
       textA: 'Walking Tour',
-      stickerA: '/images/stickers/sticker-montmartre-tour.avif',
+      stickerA: '/images/stickers/rome/EMIP_Misc25_Icon_007.png',
       textB: 'Food Tour',
-      stickerB: '/images/stickers/sticker-food-tour.avif',
+      stickerB: '/images/stickers/rome/EMIP_Misc25_Icon_011.png',
     },
     {
       id: '2',
       textA: 'Pizza',
-      stickerA: '/images/stickers/sticker-wine-cheese-tasting.avif',
+      stickerA: '/images/stickers/rome/EMIP_Misc25_Icon_008.png',
       textB: 'Pasta',
-      stickerB: '/images/stickers/sticker-champagne-seine-cruise.avif',
+      stickerB: '/images/stickers/rome/EMIP_Misc25_Icon_009.png',
     },
     {
       id: '3',
       textA: 'APEROL',
-      stickerA: '/images/stickers/sticker-macaron-making-workshop.avif',
+      stickerA: '/images/stickers/rome/EMIP_Misc25_Icon_006.png',
       textB: 'RAVIOLI',
-      stickerB: '/images/stickers/sticker-croissant-making-workshop.avif',
+      stickerB: '/images/stickers/rome/EMIP_Misc25_Icon_010.png',
     },
   ],
 
   activities: [
     {
       id: '1',
-      bg: '',
+      bg: '/images/rome/Walking_Tour_(V2)_-_Croissant_+_Fountain_Portrait.avif',
       leadingSticker: '',
       hoverBg: '',
       title: 'Walking Tour',
@@ -141,7 +141,7 @@ export const rome = {
     },
     {
       id: '2',
-      bg: '',
+      bg: '/images/rome/b_Vespa_(V2)_-_Infront_of_colosseum-2.avif',
       leadingSticker: '',
       hoverBg: '',
       title: 'Vespa Tour',
@@ -151,7 +151,7 @@ export const rome = {
     },
     {
       id: '3',
-      bg: '',
+      bg: '/images/rome/e_Ravioli_(V2)_-_2_people_making_ravioli.avif',
       leadingSticker: '',
       hoverBg: '',
       title: 'Ravioli Making with Spritz',
@@ -161,7 +161,7 @@ export const rome = {
     },
     {
       id: '4',
-      bg: '',
+      bg: '/images/rome/Pasta_(V2)_-_making_pasta.avif',
       leadingSticker: '',
       hoverBg: '',
       title: 'Pasta and Tiramisu Making',
@@ -171,7 +171,7 @@ export const rome = {
     },
     {
       id: '5',
-      bg: '',
+      bg: '/images/rome/Food_Tour_(V2)_-_table_of_food.avif',
       leadingSticker: '',
       hoverBg: '',
       title: 'Food Tour',
@@ -181,7 +181,7 @@ export const rome = {
     },
     {
       id: '6',
-      bg: '',
+      bg: '/images/rome/Wine_&_Aperitivo_(V2)_-_wine_infront_of_the_sign.avif',
       leadingSticker: '',
       hoverBg: '',
       title: 'Wine & Aperitivo Tasting',

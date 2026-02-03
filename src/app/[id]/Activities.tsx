@@ -81,7 +81,7 @@ const Events = () => {
             />
           </div>
           <div className='bg-black/0.5 p-[40px] w-full max-md:flex max-md:flex-col max-md:items-center'>
-            <div className='font-mango text-h5 leading-0 px-[24px] pt-[6px] bg-(--bg-brand-secondary) w-fit text-(--content-primary) '>
+            <div className='font-mango text-h5 leading-0 px-[24px] pt-[6px] bg-(--bg-brand-secondary) w-fit text-(--primitive-neutral-1000) '>
               {theme.unlockExperience.emilyActivities[index].type}
             </div>
             <h2 className='font-serif-bold text-start max-md:text-center my-4'>
@@ -89,12 +89,12 @@ const Events = () => {
             </h2>
             <div className='flex justify-between items-center max-md:flex-col'>
               <div className='flex max-md:mb-4'>
-                <div className='flex items-center font-mango text-h5 pt-[6px] leading-0 px-[32px] bg-(--bg-brand-secondary) rounded-full text-(--content-primary) '>
+                <div className='flex items-center font-mango text-h5 pt-[6px] leading-0 px-[32px] bg-(--bg-brand-secondary) rounded-full text-(--primitive-neutral-1000) '>
                   <span>
                     {theme.unlockExperience.emilyActivities[index].duration}
                   </span>
                 </div>
-                <div className='flex items-center font-mango text-h5 pt-[6px] leading-0 px-[32px] bg-(--bg-brand-secondary) rounded-full text-(--content-primary) '>
+                <div className='flex items-center font-mango text-h5 pt-[6px] leading-0 px-[32px] bg-(--bg-brand-secondary) rounded-full text-(--primitive-neutral-1000) '>
                   <span>
                     {theme.unlockExperience.emilyActivities[index].price}
                   </span>

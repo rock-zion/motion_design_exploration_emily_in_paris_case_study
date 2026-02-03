@@ -114,6 +114,7 @@ const TourList = () => {
             imageInner.appendChild(image);
           }
 
+          if (!mouseTracker) return;
           const destinationY = -(index * 450);
 
           if (prevIndex !== -1) {
