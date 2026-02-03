@@ -202,4 +202,11 @@ export const paris = {
       price: 'FROM118 €',
     },
   ],
+
+  review: {
+    text: 'It was such a joyful and affirming experience. Thank you, Guillaume, for such a memorable and enriching workshop. We can’t recommend it highly enough!',
+    imageA: '/images/Croissant_making_guests_eating_their_final_products.avif',
+    imageB:
+      '/images/Croissant_making_two_guests_holding_their_raw_croissants.avif',
+  },
 };

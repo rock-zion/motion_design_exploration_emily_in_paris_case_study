@@ -190,4 +190,10 @@ export const rome = {
       price: 'FROM 99 €',
     },
   ],
+  review: {
+    text: 'Highlight of our Rome trip! So fun getting to go on the back of a vespa with the added Emily in Paris touch!',
+    imageA: '/images/rome/Vespa_(V2)_-_Infront_of_colosseum.avif',
+    imageB:
+      '/images/rome/Vespa_Tour_-_butterfly_bag_from_emily_in_paris_vespa_helmet_and_red_vespa_red_hair_tie.avif',
+  },
 };
