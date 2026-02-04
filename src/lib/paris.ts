@@ -204,9 +204,55 @@ export const paris = {
   ],
 
   review: {
+    name: 'Danielle, Netherlands',
     text: 'It was such a joyful and affirming experience. Thank you, Guillaume, for such a memorable and enriching workshop. We can’t recommend it highly enough!',
     imageA: '/images/Croissant_making_guests_eating_their_final_products.avif',
     imageB:
       '/images/Croissant_making_two_guests_holding_their_raw_croissants.avif',
+    reviews: [
+      {
+        profile: '',
+        id: '1',
+        name: 'Elsa',
+        location: 'United Kingdom',
+        experience: 'Wine, Cheese & Butter Tasting',
+        image:
+          '/images/Wine_and_cheese_tasting_paris_by_emily_board_and_cheese.avif',
+      },
+      {
+        profile: '',
+        id: '2',
+        name: 'Katie',
+        location: 'United Kingdom',
+        experience: 'Walk in the footsteps of Emily',
+        image:
+          '/images/Walking_Tour_emily_in_paris_guests_posing_for_photo_outside_emilys_apartment.avif',
+      },
+      {
+        profile: '',
+        id: '3',
+        name: 'Arina',
+        location: 'France',
+        experience: 'Champagne Seine Cruise',
+        image: '/images/Seine_Cruise_Macarons_Polaroid.avif',
+      },
+      {
+        profile: '',
+        id: '4',
+        name: 'Christopher',
+        location: 'United States',
+        experience: 'Croissant-Making Workshop',
+        image: '/images/Croissant_making_three_guests_cutting_the_pastry.avif',
+      },
+      {
+        profile: '',
+        id: '5',
+        name: 'Stacey',
+        location: 'United Kingdom',
+        experience: 'Macaron-Making Workshop',
+        image:
+          '/images/Macaron_making_workshop_with_paris_by_emily_glasses_and_champagne.avif',
+      },
+    ],
   },
 };

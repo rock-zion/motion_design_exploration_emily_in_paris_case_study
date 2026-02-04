@@ -191,9 +191,56 @@ export const rome = {
     },
   ],
   review: {
+    name: 'Amy',
     text: 'Highlight of our Rome trip! So fun getting to go on the back of a vespa with the added Emily in Paris touch!',
     imageA: '/images/rome/Vespa_(V2)_-_Infront_of_colosseum.avif',
     imageB:
       '/images/rome/Vespa_Tour_-_butterfly_bag_from_emily_in_paris_vespa_helmet_and_red_vespa_red_hair_tie.avif',
+
+    reviews: [
+      {
+        profile: '',
+        id: '1',
+        name: 'Marcus',
+        experience: 'Wine & Aperitivo Tasting',
+        image:
+          '/images/rome/Wine - 2 glasses infront of the rome by emily sign.avif',
+        location: '',
+      },
+      {
+        profile: '',
+        id: '2',
+        name: 'Emma',
+        experience: 'Wine & Aperitivo Tasting',
+        image: '/images/rome/Wine - table layout-2.avif',
+        location: '',
+      },
+      {
+        profile: '',
+        id: '3',
+        name: 'Matteo',
+        experience: 'Wine & Aperitivo Tasting',
+        image: '/images/rome/Wine - cocktails on tray.avif',
+        location: '',
+      },
+      {
+        profile: '',
+        id: '4',
+        name: 'Wendy',
+        experience: 'Walking Tour',
+        image:
+          '/images/rome/Walking tour - group of friends sat by fountain.avif',
+        location: '',
+      },
+      {
+        profile: '',
+        id: '5',
+        name: 'Stella',
+        experience: 'Food Tour',
+        image:
+          '/images/rome/Food_Tour_-_Aperol_spritz_and_food_group_of_friends_at_a_table.avif',
+        location: '',
+      },
+    ],
   },
 };
