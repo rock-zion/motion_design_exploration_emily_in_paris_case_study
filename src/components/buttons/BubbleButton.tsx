@@ -13,6 +13,7 @@ type BubbleButtonProps = {
   onClick?: () => void;
   variant?: 'in' | 'out';
   altLeft?: boolean;
+  size?: 'default' | 'xl';
 };
 
 const BubbleButton = ({
@@ -21,6 +22,7 @@ const BubbleButton = ({
   onClick,
   variant = 'in',
   altLeft,
+  size = 'default',
 }: BubbleButtonProps) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,6 +41,34 @@ const BubbleButton = ({
 
     return bg;
   };
+
+  const sizeConfig = {
+    default: {
+      arrowIconSize: 'w-[calc(64px-0.5rem)] h-[calc(64px-0.5rem)]',
+      containerHeight: 'h-[64px] max-md:h-[56px]',
+      iconSize: isMobile ? '48px' : '56px',
+      arrowSize: 24,
+      innerHeight: 'h-[60px] max-md:h-[52px]',
+      padding: 'p-1',
+      textSize: 'text-p',
+      horizontalPadding: 'px-[32px]',
+      horizontalMargin: 'mx-[32px]',
+    },
+
+    xl: {
+      arrowIconSize: 'w-[calc(110px-0.5rem)] h-[calc(110px-0.5rem)]',
+      containerHeight: 'h-[110px] max-md:h-[90px]',
+      iconSize: isMobile ? 80 : 96,
+      arrowSize: isMobile ? 36 : 42,
+      innerHeight: 'h-[106px] max-md:h-[86px]',
+      padding: 'p-2',
+      textSize: 'text-XL',
+      horizontalPadding: 'px-[48px]',
+      horizontalMargin: 'mx-[48px]',
+    },
+  };
+
+  const config = sizeConfig[size];
 
   const buttonPRoperties = {
     duration: 0.3,
@@ -67,8 +97,8 @@ const BubbleButton = ({
         gsap.to('.icon-wrapper-left', {
           duration: buttonPRoperties.duration,
           ease: 'power2.inOut',
-          width: isMobile ? '48px' : '56px',
-          height: isMobile ? '48px' : '56px',
+          width: config.iconSize,
+          height: config.iconSize,
           scale: 1,
           rotate: '45deg',
           transformOrigin: 'center',
@@ -80,8 +110,8 @@ const BubbleButton = ({
           duration: buttonPRoperties.duration,
           ease: 'power2.inOut',
           rotate: '0deg',
-          width: isMobile ? '48px' : '56px',
-          height: isMobile ? '48px' : '56px',
+          width: config.iconSize,
+          height: config.iconSize,
           scale: 1,
           transformOrigin: buttonPRoperties.rightOrigin,
         });
@@ -101,35 +131,37 @@ const BubbleButton = ({
       container.addEventListener('mouseleave', onLeave);
 
       return () => {
-        container.addEventListener('mouseenter', onEnter);
-        container.addEventListener('mouseleave', onLeave);
+        container.removeEventListener('mouseenter', onEnter);
+        container.removeEventListener('mouseleave', onLeave);
       };
     },
     { scope: containerRef },
   );
 
-  const baseStyles = `flex items-center h-[64px] max-md:h-[56px] text-black rounded-full p-1 cursor-pointer ${buttonPRoperties.containerClasses}`;
+  const baseStyles = `flex items-center ${config.containerHeight} text-black rounded-full ${config.padding} cursor-pointer ${buttonPRoperties.containerClasses}`;
 
   const InnerContent = (
     <>
       <div
-        className={`icon-wrapper-left w-0 h-0 scale-0 arrow-icon-style ${buttonPRoperties.leftIconBg}`}>
-        <BsArrowUpRight size={24} />
+        className={`icon-wrapper-left w-0 h-0 scale-0 arrow-icon-style ${config.arrowIconSize} ${buttonPRoperties.leftIconBg}`}>
+        <BsArrowUpRight size={config.arrowSize} />
       </div>
 
       {isBubbleIn ? (
-        <span className='font-montreal-medium text-p text-center block mx-[32px]'>
+        <span
+          className={`font-montreal-medium ${config.textSize} text-center block mx-[32px]`}>
           {children}
         </span>
       ) : (
-        <div className='font-montreal-medium bg-white text-p h-[60px] max-md:h-[52px] flex items-center rounded-full px-[32px]'>
+        <div
+          className={`font-montreal-medium bg-white ${config.textSize} ${config.innerHeight} flex items-center rounded-full ${config.horizontalPadding}`}>
           {children}
         </div>
       )}
 
       <div
-        className={`icon-wrapper-right arrow-icon-style  ${buttonPRoperties.rightIconBg}`}>
-        <BsArrowUpRight size={24} />
+        className={`icon-wrapper-right arrow-icon-style ${config.arrowIconSize}  ${buttonPRoperties.rightIconBg}`}>
+        <BsArrowUpRight size={config.arrowSize} />
       </div>
     </>
   );
