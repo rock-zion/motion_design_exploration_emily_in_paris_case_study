@@ -21,7 +21,10 @@ const TourList = () => {
     () => {
       if (!containerRef.current) return;
 
+      const activityParent: HTMLElement | null =
+        containerRef.current.querySelector('.slider-wrapper');
       const activities: HTMLElement[] = gsap.utils.toArray('.activities');
+
       const activeTweens: gsap.core.Tween[] = [];
       const cleanupFunctions: (() => void)[] = [];
       const mouseTracker = document.querySelector('#mouse-tracker');
@@ -29,91 +32,98 @@ const TourList = () => {
 
       if (!mouseTracker) return;
 
-      activities.forEach((activity, index) => {
-        let imageWrapper: HTMLDivElement | null = null;
-        let imageInner: HTMLDivElement | null = null;
-        let image: HTMLImageElement;
-        let trackerMarqueeWrapper: HTMLDivElement | null = null;
-        let trackerTextContent: HTMLParagraphElement | null = null;
+      const handleActivityParentEnter = () => {
+        createImageBackdrop();
+      };
+      const handleActivityParentLeave = () => {};
 
+      let imageWrapper: HTMLDivElement | null = null;
+      let imageInner: HTMLDivElement | null = null;
+      let image: HTMLImageElement;
+      let trackerMarqueeWrapper: HTMLDivElement | null = null;
+      let trackerTextContent: HTMLParagraphElement | null = null;
+
+      const createImageBackdrop = () => {
+        imageWrapper = document.createElement('div');
+        imageWrapper.classList.add('mouse-tracker-backdrop');
+        imageInner = document.createElement('div');
+
+        imageWrapper.appendChild(imageInner);
+
+        for (const activity of theme.activities) {
+          image = document.createElement('img');
+          image.src = activity.bg;
+          image.classList.add('mouse-tracker-backdrop_image');
+          imageInner.appendChild(image);
+        }
+      };
+
+      const createTextContent = () => {
+        mouseTracker.classList.add('marquee__tracker');
+        trackerTextContent = document.createElement('p');
+        trackerTextContent.innerText = 'EXPLORE MORE';
+        trackerTextContent.classList.add(
+          'marquee__text',
+          'font-mango',
+          'text-XL',
+        );
+
+        if (!trackerMarqueeWrapper) {
+          trackerMarqueeWrapper = document.createElement('div');
+          trackerMarqueeWrapper.classList.add('tracker-marquee__wrapper');
+        }
+
+        mouseTracker.appendChild(trackerMarqueeWrapper);
+        trackerMarqueeWrapper.appendChild(trackerTextContent);
+
+        const width = trackerTextContent.getBoundingClientRect().width;
+        if (width == 0) return;
+
+        const requiredClones = Math.ceil(150 / width) + 2;
+
+        for (let i = 0; i < requiredClones; i++) {
+          const cloneP = trackerTextContent.cloneNode(
+            true,
+          ) as HTMLParagraphElement;
+          cloneP.setAttribute('aria-hidden', 'true');
+
+          trackerMarqueeWrapper.appendChild(cloneP);
+        }
+      };
+
+      const removeTextContent = () => {
+        if (mouseTracker) {
+          mouseTracker.innerHTML = '';
+          mouseTracker.classList.remove('marquee__tracker');
+        }
+
+        const oldBackdrop = mouseTracker.querySelector(
+          '.mouse-tracker-backdrop',
+        );
+
+        if (oldBackdrop) {
+          const tween = gsap.to(oldBackdrop, {
+            opacity: 0,
+            scale: 0,
+            duration: 0.3,
+            onComplete: () => {
+              oldBackdrop.remove();
+              imageWrapper = null;
+              imageInner = null;
+            },
+          });
+          activeTweens.push(tween);
+        }
+
+        trackerMarqueeWrapper = null;
+        trackerTextContent = null;
+      };
+
+      activities.forEach((activity, index) => {
         const spacers = activity.querySelectorAll('.spacer');
         const icon = activity.querySelector('.arrow-icon-style');
 
-        const createTextContent = () => {
-          mouseTracker.classList.add('marquee__tracker');
-          trackerTextContent = document.createElement('p');
-          trackerTextContent.innerText = 'EXPLORE MORE';
-          trackerTextContent.classList.add(
-            'marquee__text',
-            'font-mango',
-            'text-XL',
-          );
-
-          if (!trackerMarqueeWrapper) {
-            trackerMarqueeWrapper = document.createElement('div');
-            trackerMarqueeWrapper.classList.add('tracker-marquee__wrapper');
-          }
-
-          mouseTracker.appendChild(trackerMarqueeWrapper);
-          trackerMarqueeWrapper.appendChild(trackerTextContent);
-
-          const width = trackerTextContent.getBoundingClientRect().width;
-          if (width == 0) return;
-
-          const requiredClones = Math.ceil(150 / width) + 2;
-
-          for (let i = 0; i < requiredClones; i++) {
-            const cloneP = trackerTextContent.cloneNode(
-              true,
-            ) as HTMLParagraphElement;
-            cloneP.setAttribute('aria-hidden', 'true');
-
-            trackerMarqueeWrapper.appendChild(cloneP);
-          }
-        };
-
-        const removeTextContent = () => {
-          if (mouseTracker) {
-            mouseTracker.innerHTML = '';
-            mouseTracker.classList.remove('marquee__tracker');
-          }
-
-          const oldBackdrop = mouseTracker.querySelector(
-            '.mouse-tracker-backdrop',
-          );
-
-          if (oldBackdrop) {
-            const tween = gsap.to(oldBackdrop, {
-              opacity: 0,
-              scale: 0,
-              duration: 0.3,
-              onComplete: () => {
-                oldBackdrop.remove();
-                imageWrapper = null;
-                imageInner = null;
-              },
-            });
-            activeTweens.push(tween);
-          }
-
-          trackerMarqueeWrapper = null;
-          trackerTextContent = null;
-        };
-
-        const createImageAnimation = (prevIndex: number, index: number) => {
-          imageWrapper = document.createElement('div');
-          imageWrapper.classList.add('mouse-tracker-backdrop');
-          imageInner = document.createElement('div');
-
-          imageWrapper.appendChild(imageInner);
-
-          for (const activity of theme.activities) {
-            image = document.createElement('img');
-            image.src = activity.bg;
-            image.classList.add('mouse-tracker-backdrop_image');
-            imageInner.appendChild(image);
-          }
-
+        const animateImageBackDrop = (prevIndex: number, index: number) => {
           if (!mouseTracker) return;
           const destinationY = -(index * 450);
 
@@ -127,6 +137,7 @@ const TourList = () => {
             ease: 'expo.out',
           });
 
+          if (!imageWrapper) return;
           mouseTracker.insertBefore(imageWrapper, mouseTracker.firstChild);
         };
 
@@ -174,7 +185,7 @@ const TourList = () => {
           activeTweens.push(tween1, tween2, tween3, tween4, tween5);
 
           if (!isMobile && !isTab) {
-            createImageAnimation(previousIndex, index);
+            animateImageBackDrop(previousIndex, index);
             createTextContent();
           }
         };
@@ -229,6 +240,10 @@ const TourList = () => {
         });
       });
 
+      if (!activityParent) return;
+      activityParent.addEventListener('mouseenter', handleActivityParentEnter);
+      activityParent.addEventListener('mouseleave', handleActivityParentLeave);
+
       return () => {
         activeTweens.forEach(tween => {
           if (tween && tween.kill) {
@@ -240,6 +255,14 @@ const TourList = () => {
         mouseTracker.classList.remove('marquee__tracker');
         mouseTracker.innerHTML = '';
         cleanupFunctions.forEach(func => func());
+        activityParent.removeEventListener(
+          'mouseenter',
+          handleActivityParentEnter,
+        );
+        activityParent.removeEventListener(
+          'mouseleave',
+          handleActivityParentLeave,
+        );
       };
     },
     { scope: containerRef },
@@ -247,7 +270,7 @@ const TourList = () => {
 
   return (
     <div ref={containerRef} className='h-fit my-[15vh]'>
-      <div className='w-[90vw] mx-auto max-[990px]:grid max-[990px]:grid-cols-2 max-md:grid-cols-1 gap-[16px] group'>
+      <div className='w-[90vw] slider-wrapper mx-auto max-[990px]:grid max-[990px]:grid-cols-2 max-md:grid-cols-1 gap-[16px] group'>
         {theme.activities.map(activity => (
           <div
             key={activity.id}
