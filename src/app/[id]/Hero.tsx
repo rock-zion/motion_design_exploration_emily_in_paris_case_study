@@ -203,6 +203,7 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
         <div className='center-absolute video-wrapper rounded-[32px] overflow-hidden w-full h-full'>
           <div className='absolute rounded-[32px] video-overlay inset-0 z-10 bg-black' />
           <video
+            poster='/images/hero_poster.avif'
             playsInline
             muted
             loop

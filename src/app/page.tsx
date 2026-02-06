@@ -175,6 +175,7 @@ export default function Home() {
                 loop
                 autoPlay
                 muted
+                poster='/images/hero_poster.avif'
                 src={themes[key as ThemeName].heroVideo}
                 className='h-full w-full object-cover pointer-events-none'
               />
