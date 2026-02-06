@@ -82,8 +82,15 @@ export const HomePage = () => {
         currentScroll = globalThis.pageYOffset;
       };
 
+      let lastWidth = globalThis.innerWidth;
+
       const handleResize = () => {
-        globalThis.location.reload();
+        const currentWidth = globalThis.innerWidth;
+
+        if (currentWidth !== lastWidth) {
+          lastWidth = currentWidth;
+          globalThis.location.reload();
+        }
       };
 
       globalThis.addEventListener('resize', handleResize);
