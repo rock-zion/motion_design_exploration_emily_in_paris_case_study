@@ -255,4 +255,7 @@ export const paris = {
       },
     ],
   },
+  outro: {
+    text: "<span className='text-h3 flex items-center flex-wrap w-[53vw] max-md:w-[95%] mx-auto text-(--content-primary)'>From<img className='mx-2 object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/sticker-croissant-making-workshop.avif'/><span className='bg-(--bg-brand-tertiary)'>croissant-making</span>&thinsp; workshops to<img className='mx-2 object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/sticker-champagne-seine-cruise.avif'/><span className='bg-(--bg-brand-secondary)'>champagne Seine cruises,</span>&thinsp;<span>discover</span><img className='mx-2 object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/sticker-montmartre-tour.avif'/><span className='bg-(--bg-brand)'>secret streets</span>&thinsp;<span>and Paris moments à la Emily.</span></span>",
+  },
 };
