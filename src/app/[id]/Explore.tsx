@@ -15,6 +15,7 @@ const Explore = () => {
     (_, contextSafe) => {
       if (!container.current) return;
 
+      const tweenFlush: gsap.core.Tween[] = [];
       let currentImageIndex = 0;
       let lastX = 0;
       let lastY = 0;
@@ -56,14 +57,16 @@ const Explore = () => {
           opacity: 0,
         });
 
-        gsap.to(img, {
+        const tweenA = gsap.to(img, {
           scale: 1,
           opacity: 1,
           duration: 0.4,
           ease: 'power2.out',
         });
 
-        gsap.to(img, {
+        tweenFlush.push(tweenA);
+
+        const tweenB = gsap.to(img, {
           scale: 0.2,
           opacity: 0,
           duration: 1,
@@ -72,6 +75,14 @@ const Explore = () => {
           onComplete: () => {
             img.remove();
           },
+        });
+        tweenFlush.push(tweenB);
+      };
+
+      return () => {
+        container.current?.removeEventListener('mousemove', mouseMoveListener);
+        tweenFlush.forEach(tween => {
+          if (tween && tween.kill) tween.kill();
         });
       };
     },
