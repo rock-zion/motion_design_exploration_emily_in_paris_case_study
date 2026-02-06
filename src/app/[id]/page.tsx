@@ -12,6 +12,9 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useTheme } from '@/contexts/ThemeContext';
 import Review from './Review';
+import WallOfLove from './WallOfLove';
+import Outro from './Outro';
+import Footer from './Footer';
 
 export const HomePage = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -37,7 +40,7 @@ export const HomePage = () => {
       );
       existingClones.forEach(clone => clone.remove());
 
-      const screenWidth = window.innerWidth;
+      const screenWidth = globalThis.innerWidth;
       const width = marqueeContent.offsetWidth;
       if (width == 0) return;
 
@@ -68,7 +71,7 @@ export const HomePage = () => {
 
       let currentScroll = 0;
       const scrollHandler = () => {
-        const isScrollingDown = window.pageYOffset > currentScroll;
+        const isScrollingDown = globalThis.pageYOffset > currentScroll;
 
         gsap.to(tween, {
           timeScale: isScrollingDown ? 1 : -1,
@@ -76,14 +79,20 @@ export const HomePage = () => {
           ease: 'power1.out',
         });
 
-        currentScroll = window.pageYOffset;
+        currentScroll = globalThis.pageYOffset;
       };
 
-      window.addEventListener('scroll', scrollHandler);
+      const handleResize = () => {
+        globalThis.location.reload();
+      };
+
+      globalThis.addEventListener('resize', handleResize);
+      globalThis.addEventListener('scroll', scrollHandler);
 
       return () => {
         tween.kill();
-        window.removeEventListener('scroll', scrollHandler);
+        globalThis.removeEventListener('scroll', scrollHandler);
+        globalThis.removeEventListener('resize', handleResize);
       };
     },
     { scope: containerRef },
@@ -117,6 +126,9 @@ export const HomePage = () => {
       <MarqueeMadness />
       <TourList />
       <Review />
+      <WallOfLove />
+      <Outro />
+      <Footer />
     </main>
   );
 };
