@@ -6,6 +6,9 @@ import React, { useRef } from 'react';
 import { BsArrowUpRight } from 'react-icons/bs';
 import { gsap } from 'gsap';
 import { useMediaQuery } from 'react-responsive';
+import dynamic from 'next/dynamic';
+
+const NoSSR = dynamic(() => import('@/components/no-ssr'), { ssr: false });
 
 type BubbleButtonProps = {
   children: React.ReactNode;
@@ -143,7 +146,7 @@ const BubbleButton = ({
   const InnerContent = (
     <>
       <div
-        className={`icon-wrapper-left w-0 h-0 scale-0 arrow-icon-style ${config.arrowIconSize} ${buttonPRoperties.leftIconBg}`}>
+        className={`icon-wrapper-left w-0 h-0 scale-0 arrow-icon-style ${buttonPRoperties.leftIconBg}`}>
         <BsArrowUpRight size={config.arrowSize} />
       </div>
 
@@ -167,17 +170,19 @@ const BubbleButton = ({
   );
 
   return (
-    <div ref={containerRef} className='inline-block'>
-      {href ? (
-        <Link href={href} className={baseStyles}>
-          {InnerContent}
-        </Link>
-      ) : (
-        <button onClick={onClick} className={baseStyles}>
-          {InnerContent}
-        </button>
-      )}
-    </div>
+    <NoSSR>
+      <div ref={containerRef} className='inline-block'>
+        {href ? (
+          <Link href={href} className={baseStyles}>
+            {InnerContent}
+          </Link>
+        ) : (
+          <button onClick={onClick} className={baseStyles}>
+            {InnerContent}
+          </button>
+        )}
+      </div>
+    </NoSSR>
   );
 };
 
