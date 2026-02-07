@@ -115,10 +115,6 @@ const WallOfLove = () => {
       scrollTrigger: {
         trigger: container,
         start: 'top 50%',
-        markers: {
-          startColor: 'white',
-          endColor: 'white',
-        },
       },
     });
 
