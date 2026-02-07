@@ -12,6 +12,7 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useTheme } from '@/contexts/ThemeContext';
 import Review from './Review';
+
 import WallOfLove from './WallOfLove';
 import Outro from './Outro';
 import Footer from './Footer';
@@ -106,37 +107,45 @@ export const HomePage = () => {
   );
 
   return (
-    <main ref={containerRef} id='scrollArea'>
-      <Navbar ref={navBarRef} />
-      <Hero triggerMenuReveal={triggerMenuReveal} />
-      <Explore />
-      <VideoSection />
+    <>
+      <main
+        data-theme={theme}
+        className='relative bg-(--background) gradient-bg'
+        ref={containerRef}
+        id='scrollArea'>
+        <Navbar ref={navBarRef} />
 
-      <div
-        ref={marqueeRef}
-        className='marquee flex overflow-hidden pt-[20vh] max-md:pt-[10vh] whitespace-nowrap'>
-        <div className='marquee-inner flex items-center shrink-0'>
-          <h1 className='text-(--content-primary) selection:bg-(--bg-brand) font-bold font-serif-bold'>
-            {theme.unlockExperience.videoSection.marqueeText}
-          </h1>
-          <div className='w-64 aspect-square ml-4 max-md:w-32  shrink-0'>
-            <img
-              className='w-full h-full'
-              alt={theme.unlockExperience.videoSection.marqueeText}
-              src={theme.unlockExperience.videoSection.marqueeSticker}
-            />
+        {/* <div className='bg-(--background) gradient-bg overflow-scroll'> */}
+        <Hero triggerMenuReveal={triggerMenuReveal} />
+        <Explore />
+        <VideoSection />
+
+        <div
+          ref={marqueeRef}
+          className='marquee flex overflow-hidden pt-[20vh] max-md:pt-[10vh] whitespace-nowrap'>
+          <div className='marquee-inner flex items-center shrink-0'>
+            <h1 className='text-(--content-primary) selection:bg-(--bg-brand) font-bold font-serif-bold'>
+              {theme.unlockExperience.videoSection.marqueeText}
+            </h1>
+            <div className='w-64 aspect-square ml-4 max-md:w-32  shrink-0'>
+              <img
+                className='w-full h-full'
+                alt={theme.unlockExperience.videoSection.marqueeText}
+                src={theme.unlockExperience.videoSection.marqueeSticker}
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      <Activities />
-      <MarqueeMadness />
-      <TourList />
-      <Review />
-      <WallOfLove />
-      <Outro />
+        <Activities />
+        <MarqueeMadness />
+        <TourList />
+        <Review />
+        <WallOfLove />
+        <Outro />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 };
 export default HomePage;

@@ -62,7 +62,7 @@ const Events = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className='pt-[5vh]'>
+    <section id="experiences" ref={containerRef} className='pt-[5vh]'>
       {theme.unlockExperience.emilyActivities.map((activity, index) => (
         <div
           key={activity.id}
@@ -100,7 +100,7 @@ const Events = () => {
                   </span>
                 </div>
               </div>
-              <BubbleButton href='/' variant='out'>
+              <BubbleButton href='' variant='out'>
                 Explore More
               </BubbleButton>
             </div>

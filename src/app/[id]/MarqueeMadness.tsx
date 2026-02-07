@@ -54,7 +54,7 @@ const MarqueeMadness = () => {
 
   return (
     <section
-      className='my-[15vh] h-[80vh] max-lg:h-fit max-md:h-fit w-screen overflow-x-clip flex items-center flex-col relative'
+      className='my-[15vh] h-[80vh] max-lg:h-fit max-md:h-fit w-screen overflow-x-clip flex items-center flex-col relative '
       ref={containerRef}>
       {theme.maequeeMadness.map((marquee, index) => {
         const isItem1 = index % 3 === 0;

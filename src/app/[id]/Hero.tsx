@@ -47,7 +47,7 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
       });
 
       gsap.set(containerRef.current, {
-        background: '#000000',
+        background: 'none',
       });
 
       //   tweens
@@ -198,7 +198,7 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
     <section
       ref={containerRef}
       id='hero'
-      className='h-screen w-screen bg-background p-2 overflow-hidden'>
+      className='h-screen w-screen p-2 overflow-hidden'>
       <div className='w-full h-full flex-col-center relative'>
         <div className='center-absolute video-wrapper rounded-[32px] overflow-hidden w-full h-full'>
           <div className='absolute rounded-[32px] video-overlay inset-0 z-10 bg-black' />
@@ -220,7 +220,7 @@ const Hero = ({ triggerMenuReveal }: { triggerMenuReveal: () => void }) => {
                 <h5 className='selection:bg-(--bg-brand) selection:text-black leading-5 mb-4 max-md:my-4'>
                   {theme.hero.subtitle}
                 </h5>
-                <BubbleButton variant='in' href='mxm'>
+                <BubbleButton variant='in' href='#experiences'>
                   View Experience
                 </BubbleButton>
               </div>

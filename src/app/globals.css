@@ -50,6 +50,9 @@
   --black: #000000;
   --lavender: #d3d3ff;
 
+  --gradient-start: #eacbaa;
+  --gradient-end: #ebe3d7;
+
   /* Body text */
   --font-size-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
   --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
@@ -153,6 +156,9 @@
   --button-primary-border: var(--primitive-neutral-900);
   --button-primary-bg-hover: var(--primitive-neutral-1000);
   --button-primary-text-hover: var(--primitive-neutral-0);
+
+  --gradient-start: #eacbaa;
+  --gradient-end: #ebe3d7;
 }
 
 [data-theme='rome'] {
@@ -189,6 +195,9 @@
 
   --background: var(--primitive-dark-amaranth-500);
   --foreground: var(--primitive-neutral-0);
+
+  --gradient-start: #a5495b;
+  --gradient-end: #721628;
 }
 
 @utility center-absolute {
@@ -217,6 +226,16 @@
   --font-mango: 'MangoRegular', sans-serif;
 }
 
+.gradient-bg {
+  background-image: linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
+
+  width: 100vw;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -225,7 +244,6 @@
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
   font-family: Roslindale, serif;
 }
