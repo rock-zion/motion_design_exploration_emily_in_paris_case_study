@@ -5,8 +5,10 @@ import BubbleButton from '@/components/buttons/BubbleButton';
 import { AiFillStar } from 'react-icons/ai';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
+import { useMediaQuery } from 'react-responsive';
 
 const Review = () => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const { theme } = useTheme();
   const containerRef = useRef<HTMLElement>(null);
   gsap.registerPlugin(ScrollTrigger);
@@ -23,6 +25,8 @@ const Review = () => {
           start: 'top bottom',
           end: 'bottom bottom',
           scrub: true,
+          normalizeScroll: true,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -43,10 +47,12 @@ const Review = () => {
           scrollTrigger: {
             trigger: containerRef.current,
             start: 'bottom bottom',
-            end: '+=100%',
+            end: isMobile ? '+=180%' : '+=100%',
             scrub: 1,
             pin: true,
             pinSpacing: true,
+            normalizeScroll: true,
+            invalidateOnRefresh: true,
           },
         })
         .to('.buffer', {
@@ -61,7 +67,7 @@ const Review = () => {
     <section
       className='w-screen h-screen overflow-hidden relative flex justify-center items-center'
       ref={containerRef}>
-      <div className='relative w-[90%] h-[90%] rounded-2xl flex-col-center bg-(--bg-brand-secondary)'>
+      <div className='relative w-[90%] h-[90%] max-md:[100vh] rounded-2xl flex-col-center bg-(--bg-brand-secondary)'>
         <div className='flex'>
           {[...Array(5)].map((_, i) => (
             <AiFillStar
