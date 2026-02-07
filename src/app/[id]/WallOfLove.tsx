@@ -4,25 +4,21 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { InertiaPlugin, Draggable, Flip } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
-import { useMediaQuery } from 'react-responsive';
 import { BsArrowRepeat } from 'react-icons/bs';
-import dynamic from 'next/dynamic';
-
-const NoSSR = dynamic(() => import('@/components/no-ssr'), { ssr: false });
 
 const WallOfLove = () => {
   const containerRef = useRef<HTMLElement>(null);
   const { theme } = useTheme();
   gsap.registerPlugin(Draggable, Flip, InertiaPlugin);
-  const isMobile = useMediaQuery({ maxWidth: 768 });
-  const isTab = useMediaQuery({ maxWidth: 990 });
+
+  const isMobile = globalThis.innerWidth <= 768;
 
   useGSAP(
     () => {
       if (!containerRef.current) return;
       const container = containerRef.current;
 
-      if (!isMobile && !isTab) {
+      if (!isMobile) {
         Draggable.create('.draggable', {
           bounds: containerRef.current,
           inertia: true,
@@ -51,7 +47,6 @@ const WallOfLove = () => {
           trackerMarqueeWrapper = document.createElement('div');
           trackerMarqueeWrapper.classList.add('tracker-marquee__wrapper');
         }
-        console.log('yrea1');
 
         mouseTracker.appendChild(trackerMarqueeWrapper);
         trackerMarqueeWrapper.appendChild(trackerTextContent);
@@ -90,7 +85,7 @@ const WallOfLove = () => {
         });
         activeTweens.push(tween1);
 
-        if (!isMobile && !isTab) {
+        if (!isMobile) {
           createTextContent();
         }
       };
@@ -201,7 +196,7 @@ const WallOfLove = () => {
               transformOrigin: 'center',
               opacity: 0,
               ease: 'expo.out',
-              onComplete() {
+              onComplete: () => {
                 slider.removeChild(element[0]);
               },
             });
@@ -231,74 +226,21 @@ const WallOfLove = () => {
     { scope: containerRef },
   );
 
-  if (isMobile || isTab) {
+  if (isMobile) {
     return (
-      <NoSSR>
-        <section
-          className='w-screen h-screen overflow-hidden relative'
-          ref={containerRef}>
-          <button className='h-[64px] px-[32px] shuffle rounded-full bg-(--bg-brand-secondary) text-(--primitive-neutral-1000) font-montreal-medium left-[50%] -translate-x-[50%] flex items-center absolute w-fit z-[100] top-[67%]'>
-            <BsArrowRepeat /> <span className='ml-2'>Shuffle</span>
-          </button>
-
-          <div className='absolute w-[350px] h-[350px] slider center-absolute z-50'>
-            {theme.review.reviews.map((review, index) => {
-              return (
-                <div
-                  key={review.id}
-                  className={`w-0 h-0 opacity-0 flex flex-col p-[20px] origin-center draggable bg-shadow post-card bg-(--bg-brand-secondary) absolute ${(index + 1) % 2 === 0 ? 'rotate-2' : '-rotate-2'}`}>
-                  <div className='w-full h-[85%] overflow-hidden shrink-0'>
-                    <img
-                      src={review.image}
-                      alt=''
-                      className='w-full h-full object-cover event-image'
-                    />
-                  </div>
-                  <div className='flex items-center h-full font-montreal-book text-(--primitive-neutral-1000)'>
-                    <div className='w-[42px] h-[42px] rounded-full overflow-hidden shrink-0'>
-                      {review.profile && (
-                        <img className='w-full h-full rounded-full profile-image' />
-                      )}
-                    </div>
-                    <div>
-                      <div>
-                        <span className='name'>{review.name}</span>,{' '}
-                        <span className='location'>{review.location}</span>
-                      </div>
-
-                      <span className='experience'>{review.experience}</span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      </NoSSR>
-    );
-  }
-
-  return (
-    <NoSSR>
       <section
         className='w-screen h-screen overflow-hidden relative'
         ref={containerRef}>
-        <h1 className='center-absolute z-0 pointer-events-none text-center text-display2 text-(--content-primary) max-md:hidden font-serif-bold'>
-          WALL <br /> OF <br /> LOVE
-        </h1>
+        <button className='h-[64px] px-[32px] shuffle rounded-full bg-(--bg-brand-secondary) text-(--primitive-neutral-1000) font-montreal-medium left-[50%] -translate-x-[50%] flex items-center absolute w-fit z-[100] top-[67%]'>
+          <BsArrowRepeat /> <span className='ml-2'>Shuffle</span>
+        </button>
 
-        <div className='center-absolute z-1 max-md:hidden'>
-          <BubbleButton size='xl' variant='out'>
-            Book Now
-          </BubbleButton>
-        </div>
-
-        <div className='absolute slider center-absolute z-50'>
+        <div className='absolute w-[350px] h-[350px] slider center-absolute z-50'>
           {theme.review.reviews.map((review, index) => {
             return (
               <div
                 key={review.id}
-                className={`w-0 h-0 opacity-0 flex flex-col p-[20px] origin-center draggable bg-shadow post-card bg-(--bg-brand-secondary) center-absolute ${(index + 1) % 2 === 0 ? 'rotate-2' : '-rotate-2'}`}>
+                className={`w-0 h-0 opacity-0 flex flex-col p-[20px] origin-center draggable bg-shadow post-card bg-(--bg-brand-secondary) absolute ${(index + 1) % 2 === 0 ? 'rotate-2' : '-rotate-2'}`}>
                 <div className='w-full h-[85%] overflow-hidden shrink-0'>
                   <img
                     src={review.image}
@@ -326,7 +268,56 @@ const WallOfLove = () => {
           })}
         </div>
       </section>
-    </NoSSR>
+    );
+  }
+
+  return (
+    <section
+      className='w-screen h-screen overflow-hidden relative'
+      ref={containerRef}>
+      <h1 className='center-absolute z-0 pointer-events-none text-center text-display2 text-(--content-primary) max-md:hidden font-serif-bold'>
+        WALL <br /> OF <br /> LOVE
+      </h1>
+
+      <div className='center-absolute z-1 max-md:hidden'>
+        <BubbleButton size='xl' variant='out'>
+          Book Now
+        </BubbleButton>
+      </div>
+
+      <div className='absolute slider center-absolute z-50'>
+        {theme.review.reviews.map((review, index) => {
+          return (
+            <div
+              key={review.id}
+              className={`w-0 h-0 opacity-0 flex flex-col p-[20px] origin-center draggable bg-shadow post-card bg-(--bg-brand-secondary) center-absolute ${(index + 1) % 2 === 0 ? 'rotate-2' : '-rotate-2'}`}>
+              <div className='w-full h-[85%] overflow-hidden shrink-0'>
+                <img
+                  src={review.image}
+                  alt=''
+                  className='w-full h-full object-cover event-image'
+                />
+              </div>
+              <div className='flex items-center h-full font-montreal-book text-(--primitive-neutral-1000)'>
+                <div className='w-[42px] h-[42px] rounded-full overflow-hidden shrink-0'>
+                  {review.profile && (
+                    <img className='w-full h-full rounded-full profile-image' />
+                  )}
+                </div>
+                <div>
+                  <div>
+                    <span className='name'>{review.name}</span>,{' '}
+                    <span className='location'>{review.location}</span>
+                  </div>
+
+                  <span className='experience'>{review.experience}</span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 };
 

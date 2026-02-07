@@ -6,9 +6,6 @@ import React, { useRef } from 'react';
 import { BsArrowUpRight } from 'react-icons/bs';
 import { gsap } from 'gsap';
 import { useMediaQuery } from 'react-responsive';
-import dynamic from 'next/dynamic';
-
-const NoSSR = dynamic(() => import('@/components/no-ssr'), { ssr: false });
 
 type BubbleButtonProps = {
   children: React.ReactNode;
@@ -47,7 +44,8 @@ const BubbleButton = ({
 
   const sizeConfig = {
     default: {
-      arrowIconSize: 'w-[calc(64px-0.5rem)] h-[calc(64px-0.5rem)]',
+      arrowIconSize:
+        'w-[calc(64px-0.5rem)] h-[calc(64px-0.5rem)] max-md:w-[calc(56px-0.5rem)] max-md:h-[calc(56px-0.5rem)]',
       containerHeight: 'h-[64px] max-md:h-[56px]',
       iconSize: isMobile ? '48px' : '56px',
       arrowSize: 24,
@@ -59,7 +57,8 @@ const BubbleButton = ({
     },
 
     xl: {
-      arrowIconSize: 'w-[calc(110px-0.5rem)] h-[calc(110px-0.5rem)]',
+      arrowIconSize:
+        'w-[calc(110px-0.5rem)] h-[calc(110px-0.5rem)] max-md:w-[calc(90px-0.5rem)] max-md:h-[calc(90px-0.5rem)]',
       containerHeight: 'h-[110px] max-md:h-[90px]',
       iconSize: isMobile ? 80 : 96,
       arrowSize: isMobile ? 36 : 42,
@@ -170,19 +169,17 @@ const BubbleButton = ({
   );
 
   return (
-    <NoSSR>
-      <div ref={containerRef} className='inline-block'>
-        {href ? (
-          <Link href={href} className={baseStyles}>
-            {InnerContent}
-          </Link>
-        ) : (
-          <button onClick={onClick} className={baseStyles}>
-            {InnerContent}
-          </button>
-        )}
-      </div>
-    </NoSSR>
+    <div ref={containerRef} className='inline-block'>
+      {href ? (
+        <Link href={href} className={baseStyles}>
+          {InnerContent}
+        </Link>
+      ) : (
+        <button onClick={onClick} className={baseStyles}>
+          {InnerContent}
+        </button>
+      )}
+    </div>
   );
 };
 
