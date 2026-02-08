@@ -157,11 +157,11 @@ const Explore = () => {
   return (
     <section
       ref={container}
-      className='h-[95vh] w-screen flex-col-center max-md:justify-start relative pointer-events-auto'>
+      className='min-h-[95vh] w-screen flex-col-center max-md:justify-start relative pointer-events-auto'>
       <div
         ref={imageCanvas}
-        className='image-canvas absolute inset-0 max-md:hidden'></div>
-      <div className='flex flex-col items-center center-absolute'>
+        className='image-canvas absolute inset-0 max-md:hidden z-[0]'></div>
+      <div className='flex flex-col items-center z-[1]'>
         <span className='font-mango px-[12px] mb-6 uppercase text-[32px] text-(--primitive-neutral-900) bg-(--bg-brand-secondary) block max-md:mt-[15vh]'>
           {theme.unlockExperience.title}
         </span>
