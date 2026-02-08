@@ -2,15 +2,20 @@ import { useRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
+import { useLenis } from '../layout';
+import Lenis from 'lenis';
 
 const MarqueeMadness = () => {
   const { theme } = useTheme();
   const containerRef = useRef<HTMLElement>(null);
+  const lenis = useLenis();
 
   useGSAP(
     () => {
       if (!containerRef.current) return;
       const marquees: HTMLElement[] = gsap.utils.toArray('.marquee');
+      const activeTweens: gsap.core.Tween[] = [];
+      let currentScroll = 0;
 
       marquees.forEach((marquee, index) => {
         const isEven = (index + 1) % 2 == 0;
@@ -41,15 +46,48 @@ const MarqueeMadness = () => {
           gsap.set(marquee, { x: distanceToTranslate });
         }
 
-        gsap.to(allTracks, {
-          x: isEven ? -distanceToTranslate : distanceToTranslate,
-          duration: 30,
-          ease: 'none',
-          repeat: -1,
-        });
+        const tween = gsap
+          .to(allTracks, {
+            xPercent: isEven ? '+=100' : '-=100',
+            duration: 15,
+            ease: 'none',
+            repeat: -1,
+            modifiers: {
+              xPercent: gsap.utils.unitize(v => {
+                const val = Number.parseFloat(v);
+                return ((val % 100) - 100) % 100;
+              }),
+            },
+          })
+          .totalProgress(0.5);
+
+        activeTweens.push(tween);
       });
+
+      const scrollHandler = (lenisEvent: Lenis) => {
+        const scrollY = lenisEvent.scroll;
+        const isScrollingDown = scrollY > currentScroll;
+        gsap.to(activeTweens, {
+          timeScale: isScrollingDown ? 1 : -1,
+          duration: 0.5,
+          ease: 'power1.out',
+        });
+        currentScroll = scrollY;
+      };
+
+      if (!lenis) return;
+      lenis.on('scroll', scrollHandler);
+
+      return () => {
+        lenis.off('scroll', scrollHandler);
+        activeTweens.forEach(tween => {
+          if (tween && tween.kill) {
+            tween.kill();
+          }
+        });
+      };
     },
-    { scope: containerRef },
+    { scope: containerRef, dependencies: [lenis] },
   );
 
   return (
