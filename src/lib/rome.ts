@@ -53,6 +53,7 @@ export const rome = {
     ],
 
     videoSection: {
+      poster: '/video/paris-hero-b-video.avif',
       video: '/video/paris-hero-b-video.mp4',
       marqueeText: 'Discover Experiences',
       marqueeSticker: '/images/stickers/sticker-montmartre-tour.avif',

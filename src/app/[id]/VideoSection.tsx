@@ -43,6 +43,7 @@ const VideoSection = () => {
           playsInline
           muted
           loop
+          poster={theme.unlockExperience.videoSection.poster}
           src={theme.unlockExperience.videoSection.video}
           className='pointer-events-none absolute inset-0 w-full h-full object-cover rounded-4xl'
         />
