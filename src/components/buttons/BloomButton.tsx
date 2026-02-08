@@ -17,11 +17,16 @@ const BloomButton = ({ href, onClick, children }: BloomButtonProps) => {
       if (!containerRef.current) return;
       const container = containerRef.current;
 
+      const isTouchDevice =
+        'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+      if (isTouchDevice) return;
+
       const mouseTracker = document.querySelector('#mouse-tracker');
       if (!mouseTracker) return;
 
       let bloom: HTMLDivElement | null;
-      const child = container.querySelector('a, button') as HTMLElement | null;
+      const child = container.querySelector('a, button');
 
       const onEnter = (e: MouseEvent) => {
         bloom = document.createElement('div');
@@ -78,7 +83,7 @@ const BloomButton = ({ href, onClick, children }: BloomButtonProps) => {
           },
         });
 
-        gsap.to(children, {
+        gsap.to(child, {
           color: targetColor,
         });
       };

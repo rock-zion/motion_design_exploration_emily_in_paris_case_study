@@ -85,6 +85,11 @@ const BubbleButton = ({
       if (!containerRef.current) return;
       const container = containerRef.current;
 
+      const isTouchDevice =
+        'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+      if (isTouchDevice) return;
+
       const onEnter = contextSafe!(() => {
         gsap.to('.icon-wrapper-right', {
           duration: buttonPRoperties.duration,
