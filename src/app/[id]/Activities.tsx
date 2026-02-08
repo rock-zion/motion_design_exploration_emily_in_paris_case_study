@@ -101,7 +101,7 @@ const Events = () => {
                   </span>
                 </div>
               </div>
-              <BubbleButton href='' variant='out'>
+              <BubbleButton href='#tourlist' variant='out'>
                 Explore More
               </BubbleButton>
             </div>
