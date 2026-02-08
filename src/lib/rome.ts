@@ -15,7 +15,7 @@ export const rome = {
   unlockExperience: {
     title: 'Explore at your own pace',
     ctaBtnText: 'View Experiences',
-    cta: "<div class='relative unlock-experiences'>Unlock The <span class='inline-flex justify-center flex-wrap'><span class='inline-flex justify-around w-fit'><span>Emily in&nbsp;</span><img src='/images/6943dc7b97964d70a5d73e58_rome_text.svg' class='stylised-rome mobile' /></span><span class='struckout relative'>Paris<img src='/images/6943dc7b97964d70a5d73e58_rome_text.svg' class='absolute stylised-rome web' /></span></span> Experiences</div>",
+    cta: "<div class='relative unlock-experiences'>Unlock The <span class='inline-flex justify-center flex-wrap'><span class='inline-flex justify-around w-fit'><span>Emily in&nbsp;</span><img loading='lazy' src='/images/6943dc7b97964d70a5d73e58_rome_text.svg' class='stylised-rome mobile' /></span><span class='struckout relative'>Paris<img loading='lazy' src='/images/6943dc7b97964d70a5d73e58_rome_text.svg' class='absolute stylised-rome web' /></span></span> Experiences</div>",
     cursorTrailImages: [
       {
         id: '1',
@@ -60,15 +60,18 @@ export const rome = {
         main1: {
           title: 'MONTMARTRE TOUR',
           video: '/video/montmarte-b-transcode.mp4',
+          poster: '/video/montmarte-b-transcode.avif',
         },
         main2: {
           title: 'CHAMPAGNE SEINE CRUISE',
           video: '/video/croissants-a-transcode.mp4',
+          poster: '/video/croissants-a-transcode.avif',
         },
 
         main3: {
           title: 'WINE & CHEESE TASTING',
           video: '/video/wine-tasting-b-transcode.mp4',
+          poster: '/video/wine-tasting-b-transcode.avif',
         },
       },
     },
@@ -82,6 +85,7 @@ export const rome = {
         duration: '2.5HOURS',
         price: 'FROM52€',
         category: 'tour',
+        poster: '/video/food-tour-a-transcode.avif',
       },
       {
         id: '2',
@@ -91,6 +95,7 @@ export const rome = {
         duration: '2.5HOURS',
         price: 'FROM131€',
         category: 'workshop',
+        poster: '/video/croissants-a-transcode.avif',
       },
       {
         id: '3',
@@ -100,6 +105,7 @@ export const rome = {
         duration: '2.5HOURS',
         price: 'FROM131€',
         category: 'workshop',
+        poster: '/video/macarons-a-transcode.avif',
       },
     ],
   },
@@ -244,6 +250,6 @@ export const rome = {
     ],
   },
   outro: {
-    text: "<span class='text-h3 flex items-center flex-wrap w-[50vw] max-md:w-[95%] mx-auto text-(--content-primary)'>From<img class='mx-2 flex-none object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/rome/EMIP_Misc25_Icon_009.png'/><span class='bg-(--bg-brand-tertiary)'>pasta-making</span>&thinsp; workshops to<img class='mx-2 flex-none object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/rome/EMIP_Misc25_Icon_006.png'/><span class='bg-(--border-tertiary)'>Vespa rides through Rome</span><span>discover iconic locations,</span><img class='mx-2 flex-none object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/rome/EMIP_Misc25_Icon_010.png'/><span class='bg-(--bg-brand)'>secret streets</span><span>and Roman moments à la Emily.</span></span>",
+    text: "<span class='text-h3 flex items-center flex-wrap w-[50vw] max-md:w-[95%] mx-auto text-(--content-primary)'>From<img loading='lazy' class='mx-2 flex-none object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/rome/EMIP_Misc25_Icon_009.png'/><span class='bg-(--bg-brand-tertiary)'>pasta-making</span>&thinsp; workshops to<img loading='lazy' class='mx-2 flex-none object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/rome/EMIP_Misc25_Icon_006.png'/><span class='bg-(--border-tertiary)'>Vespa rides through Rome</span><span>discover iconic locations,</span><img loading='lazy' class='mx-2 flex-none object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/rome/EMIP_Misc25_Icon_010.png'/><span class='bg-(--bg-brand)'>secret streets</span><span>and Roman moments à la Emily.</span></span>",
   },
 };

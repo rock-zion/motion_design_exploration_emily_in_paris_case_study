@@ -6,6 +6,7 @@ const Footer = () => {
       <div className='grid grid-cols-[60%_1fr_1fr] w-[95vw] mx-auto pt-[10vh] max-md:flex flex-col'>
         <div className='flex flex-col max-md:my-[24px]'>
           <img
+            loading='lazy'
             className=' w-[150px]'
             src={'/images/Netflix_Logo_RGB.png'}
             alt='netflix logo'

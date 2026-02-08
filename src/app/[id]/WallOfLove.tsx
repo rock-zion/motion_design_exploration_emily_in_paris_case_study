@@ -151,6 +151,7 @@ const WallOfLove = () => {
         newItem.innerHTML = `
           <div class='w-full h-[85%] overflow-hidden shrink-0'>
             <img
+              loading='lazy' 
               src="${oldImg ? oldImg.src : ''}"
               alt=''
               class='w-full h-full object-cover'
@@ -158,7 +159,7 @@ const WallOfLove = () => {
           </div>
           <div class='flex items-center h-full font-montreal-book text-(--primitive-neutral-1000)'>
             <div class='w-[42px] h-[42px] rounded-full overflow-hidden shrink-0'>
-              ${oldProfileImage ? `<img class='w-full h-full rounded-full' src=${oldProfileImage.src} />` : ''}
+              ${oldProfileImage ? `<img loading="lazy" class='w-full h-full rounded-full' src=${oldProfileImage.src} />` : ''}
             </div>
             <div>
               <div>
@@ -229,7 +230,7 @@ const WallOfLove = () => {
   if (isMobile) {
     return (
       <section
-        className='w-screen h-screen overflow-hidden relative'
+        className='w-screen h-screen overflow-hidden relative pointer-events-auto'
         ref={containerRef}>
         <button className='h-[64px] px-[32px] shuffle rounded-full bg-(--bg-brand-secondary) text-(--primitive-neutral-1000) font-montreal-medium left-[50%] -translate-x-[50%] flex items-center absolute w-fit z-[100] top-[75%]'>
           <BsArrowRepeat /> <span className='ml-2'>Shuffle</span>
@@ -243,6 +244,7 @@ const WallOfLove = () => {
                 className={`w-0 h-0 opacity-0 flex flex-col p-[20px] origin-center draggable bg-shadow post-card bg-(--bg-brand-secondary) absolute ${(index + 1) % 2 === 0 ? 'rotate-2' : '-rotate-2'}`}>
                 <div className='w-full h-[85%] overflow-hidden shrink-0'>
                   <img
+                    loading='lazy'
                     src={review.image}
                     alt=''
                     className='w-full h-full object-cover event-image'
@@ -251,7 +253,10 @@ const WallOfLove = () => {
                 <div className='flex items-center h-full font-montreal-book text-(--primitive-neutral-1000)'>
                   <div className='w-[42px] h-[42px] rounded-full overflow-hidden shrink-0'>
                     {review.profile && (
-                      <img className='w-full h-full rounded-full profile-image' />
+                      <img
+                        loading='lazy'
+                        className='w-full h-full rounded-full profile-image'
+                      />
                     )}
                   </div>
                   <div>
@@ -273,7 +278,7 @@ const WallOfLove = () => {
 
   return (
     <section
-      className='w-screen h-screen overflow-hidden relative'
+      className='w-screen h-screen overflow-hidden relative pointer-events-auto'
       ref={containerRef}>
       <h1 className='center-absolute z-0 pointer-events-none text-center text-display2 text-(--content-primary) max-md:hidden font-serif-bold'>
         WALL <br /> OF <br /> LOVE
@@ -293,6 +298,7 @@ const WallOfLove = () => {
               className={`w-0 h-0 opacity-0 flex flex-col p-[20px] origin-center draggable bg-shadow post-card bg-(--bg-brand-secondary) center-absolute ${(index + 1) % 2 === 0 ? 'rotate-2' : '-rotate-2'}`}>
               <div className='w-full h-[85%] overflow-hidden shrink-0'>
                 <img
+                  loading='lazy'
                   src={review.image}
                   alt=''
                   className='w-full h-full object-cover event-image'
@@ -301,7 +307,10 @@ const WallOfLove = () => {
               <div className='flex items-center h-full font-montreal-book text-(--primitive-neutral-1000)'>
                 <div className='w-[42px] h-[42px] rounded-full overflow-hidden shrink-0'>
                   {review.profile && (
-                    <img className='w-full h-full rounded-full profile-image' />
+                    <img
+                      loading='lazy'
+                      className='w-full h-full rounded-full profile-image'
+                    />
                   )}
                 </div>
                 <div>

@@ -157,21 +157,23 @@ const Explore = () => {
   return (
     <section
       ref={container}
-      className='h-[95vh] w-screen flex-col-center max-md:justify-start relative'>
+      className='h-[95vh] w-screen flex-col-center max-md:justify-start relative pointer-events-auto'>
       <div
         ref={imageCanvas}
-        className='image-canvas absolute inset-0 z-[-1] max-md:hidden'></div>
-      <span className='font-mango px-[12px] mb-6 uppercase text-[32px] text-(--primitive-neutral-900) bg-(--bg-brand-secondary) block max-md:mt-[15vh]'>
-        {theme.unlockExperience.title}
-      </span>
+        className='image-canvas absolute inset-0 max-md:hidden'></div>
+      <div className='flex flex-col items-center center-absolute'>
+        <span className='font-mango px-[12px] mb-6 uppercase text-[32px] text-(--primitive-neutral-900) bg-(--bg-brand-secondary) block max-md:mt-[15vh]'>
+          {theme.unlockExperience.title}
+        </span>
 
-      <h2 className='w-[11ch] text-(--bg-inverse)  mb-6 text-center'>
-        {parse(theme.unlockExperience.cta)}
-      </h2>
+        <h2 className='w-[11ch] text-(--bg-inverse)  mb-6 text-center'>
+          {parse(theme.unlockExperience.cta)}
+        </h2>
 
-      <BubbleButton variant='out'>
-        {theme.unlockExperience.ctaBtnText}
-      </BubbleButton>
+        <BubbleButton variant='out'>
+          {theme.unlockExperience.ctaBtnText}
+        </BubbleButton>
+      </div>
 
       <div
         ref={marqueeRef}
@@ -179,7 +181,7 @@ const Explore = () => {
         <div className='marquee-inner flex flex-auto h-[30vh] w-fit'>
           {theme.unlockExperience.cursorTrailImages.map(img => (
             <div
-              className='marquee-image-wrapper h-full w-[45vw] mr-[16px] overflow-hidden shrink-0 rounded-4xl'
+              className='marquee-image-wrapper h-full w-[45vw] mr-[16px] overflow-hidden shrink-0 rounded-4xl z-50'
               key={`first-${img.id}`}>
               <img
                 className='h-full w-full object-cover'

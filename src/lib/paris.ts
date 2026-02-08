@@ -63,15 +63,18 @@ export const paris = {
         main1: {
           title: 'MONTMARTRE TOUR',
           video: '/video/montmarte-b-transcode.mp4',
+          poster: '/video/montmarte-b-transcode.avif',
         },
         main2: {
           title: 'CHAMPAGNE SEINE CRUISE',
           video: '/video/croissants-a-transcode.mp4',
+          poster: '/video/croissants-a-transcode.avif',
         },
 
         main3: {
           title: 'WINE & CHEESE TASTING',
           video: '/video/wine-tasting-b-transcode.mp4',
+          poster: '/video/wine-tasting-b-transcode.avif',
         },
       },
     },
@@ -84,6 +87,7 @@ export const paris = {
         duration: '2.5HOURS',
         price: 'FROM52€',
         category: 'tour',
+        poster: '/video/food-tour-a-transcode.avif',
       },
       {
         id: '2',
@@ -93,6 +97,7 @@ export const paris = {
         duration: '2.5HOURS',
         price: 'FROM131€',
         category: 'workshop',
+        poster: '/video/croissants-a-transcode.avif',
       },
       {
         id: '3',
@@ -102,6 +107,7 @@ export const paris = {
         duration: '2.5HOURS',
         price: 'FROM131€',
         category: 'workshop',
+        poster: '/video/macarons-a-transcode.avif',
       },
     ],
   },
@@ -256,6 +262,6 @@ export const paris = {
     ],
   },
   outro: {
-    text: "<span className='text-h3 flex items-center flex-wrap w-[53vw] max-md:w-[95%] mx-auto text-(--content-primary)'>From<img className='mx-2 object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/sticker-croissant-making-workshop.avif'/><span className='bg-(--bg-brand-tertiary)'>croissant-making</span>&thinsp; workshops to<img className='mx-2 object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/sticker-champagne-seine-cruise.avif'/><span className='bg-(--bg-brand-secondary)'>champagne Seine cruises,</span>&thinsp;<span>discover</span><img className='mx-2 object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/sticker-montmartre-tour.avif'/><span className='bg-(--bg-brand)'>secret streets</span>&thinsp;<span>and Paris moments à la Emily.</span></span>",
+    text: "<span className='text-h3 flex items-center flex-wrap w-[53vw] max-md:w-[95%] mx-auto text-(--content-primary)'>From<img loading='lazy' className='mx-2 object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/sticker-croissant-making-workshop.avif'/><span className='bg-(--bg-brand-tertiary)'>croissant-making</span>&thinsp; workshops to<img loading='lazy' className='mx-2 object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/sticker-champagne-seine-cruise.avif'/><span className='bg-(--bg-brand-secondary)'>champagne Seine cruises,</span>&thinsp;<span>discover</span><img loading='lazy' className='mx-2 object-contain h-[clamp(52.7px,5.4vw+35.4px,102.4px)] w-[clamp(52.7px,5.4vw+35.4px,102.4px)] aspect-square' src='/images/stickers/sticker-montmartre-tour.avif'/><span className='bg-(--bg-brand)'>secret streets</span>&thinsp;<span>and Paris moments à la Emily.</span></span>",
   },
 };

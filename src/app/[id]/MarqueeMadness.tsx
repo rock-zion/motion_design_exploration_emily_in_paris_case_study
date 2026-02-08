@@ -76,6 +76,7 @@ const MarqueeMadness = () => {
                 </h1>
                 <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
                   <img
+                    loading='lazy'
                     className='w-full h-full object-contain'
                     alt={marquee.textA}
                     src={marquee.stickerA}
@@ -86,6 +87,7 @@ const MarqueeMadness = () => {
                 </h1>
                 <div className='w-[clamp(100px,15vw,250px)] aspect-square'>
                   <img
+                    loading='lazy'
                     className='w-full h-full object-contain'
                     alt={marquee.textB}
                     src={marquee.stickerB}

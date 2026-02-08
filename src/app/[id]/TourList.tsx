@@ -269,7 +269,7 @@ const TourList = () => {
   );
 
   return (
-    <div ref={containerRef} className='h-fit my-[15vh]'>
+    <div ref={containerRef} className='h-fit my-[15vh] pointer-events-auto'>
       <div className='w-[90vw] slider-wrapper mx-auto max-[990px]:grid max-[990px]:grid-cols-2 max-md:grid-cols-1 gap-[16px] group'>
         {theme.activities.map(activity => (
           <div
@@ -281,6 +281,7 @@ const TourList = () => {
                 <div>
                   <div className='overflow-hidden hidden max-[990px]:block rounded-1xl w-[100%] h-[auto] aspect-[16/9] '>
                     <img
+                      loading='lazy'
                       className='w-full h-full object-cover'
                       src={activity.bg}
                     />

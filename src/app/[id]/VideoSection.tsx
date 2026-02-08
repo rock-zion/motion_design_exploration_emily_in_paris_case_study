@@ -55,6 +55,7 @@ const VideoSection = () => {
 
             return (
               <VideoSectioBubble
+                srcPoster={value.poster}
                 ref={el => {
                   subVideosRef.current[index] = el;
                 }}
@@ -77,7 +78,7 @@ const VideoSection = () => {
 export default VideoSection;
 
 const VideoSectioBubble = forwardRef<HTMLVideoElement, VideoSectioBubbleProps>(
-  ({ classNames, srcImgs }, ref) => {
+  ({ classNames, srcImgs, srcPoster }, ref) => {
     return (
       <div
         className={`absolute overflow-hidden z-[50] ${classNames} aspect-square rounded-4xl`}>
@@ -88,6 +89,7 @@ const VideoSectioBubble = forwardRef<HTMLVideoElement, VideoSectioBubbleProps>(
           muted
           loop
           src={srcImgs}
+          poster={srcPoster}
           className='pointer-events-none absolute inset-0 w-full h-full object-cover'
         />
       </div>
@@ -100,4 +102,5 @@ VideoSectioBubble.displayName = 'VideoSectioBubble';
 type VideoSectioBubbleProps = {
   classNames: string;
   srcImgs: string;
+  srcPoster: string;
 };

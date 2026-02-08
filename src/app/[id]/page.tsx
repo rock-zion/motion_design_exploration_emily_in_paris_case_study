@@ -128,6 +128,7 @@ export const HomePage = () => {
             </h1>
             <div className='w-64 aspect-square ml-4 max-md:w-32  shrink-0'>
               <img
+                loading='lazy'
                 className='w-full h-full'
                 alt={theme.unlockExperience.videoSection.marqueeText}
                 src={theme.unlockExperience.videoSection.marqueeSticker}

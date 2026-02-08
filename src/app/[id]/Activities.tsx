@@ -77,6 +77,7 @@ const Events = () => {
               autoPlay
               loop
               src={activity.video}
+              poster={activity.poster}
               className='pointer-events-none w-full h-full object-cover'
             />
           </div>

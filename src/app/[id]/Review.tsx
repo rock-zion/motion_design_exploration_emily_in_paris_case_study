@@ -66,7 +66,7 @@ const Review = () => {
 
   return (
     <section
-      className='w-screen h-screen overflow-hidden relative flex justify-center items-center'
+      className='w-screen h-screen overflow-hidden relative flex justify-center items-center pointer-events-auto'
       ref={containerRef}>
       <div className='relative w-[90%] h-[90%] max-md:[100vh] rounded-2xl flex-col-center bg-(--bg-brand-secondary)'>
         <div className='flex'>
@@ -90,6 +90,7 @@ const Review = () => {
       </div>
       <div className='absolute image-wrapper z-10 w-[40vw] max-md:w-[60vw] h-[70vh] overflow-hidden rounded-2xl -rotate-4'>
         <img
+          loading='lazy'
           className='w-full h-full object-cover'
           src={theme.review.imageA}
           alt=''
@@ -97,6 +98,7 @@ const Review = () => {
       </div>
       <div className='absolute  image-wrapper z-10 w-[40vw] max-md:w-[60vw] h-[70vh] overflow-hidden rounded-2xl rotate-4'>
         <img
+          loading='lazy'
           className='w-full h-full object-cover'
           src={theme.review.imageB}
           alt=''
