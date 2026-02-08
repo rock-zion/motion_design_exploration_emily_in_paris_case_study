@@ -70,6 +70,15 @@ export default function Home() {
       const onEnterHandler = contextSafe!(
         ({ index, alternate }: { index: number; alternate: number }) => {
           return () => {
+            const targetColor =
+              (index + 1) % 2 == 0
+                ? getComputedStyle(document.documentElement)
+                    .getPropertyValue('--primitive-dark-amaranth-500')
+                    .trim()
+                : getComputedStyle(document.documentElement)
+                    .getPropertyValue('--primitive-nude-400')
+                    .trim();
+
             gsap.to(adventureCards[index], {
               rotate: 0,
               scale: 1.1,
@@ -81,10 +90,7 @@ export default function Home() {
             });
 
             gsap.to(container.current, {
-              background:
-                (index + 1) % 2 == 0
-                  ? 'var(--primitive-dark-amaranth-500)'
-                  : 'var(--primitive-nude-400)',
+              background: targetColor,
             });
           };
         },
@@ -95,6 +101,9 @@ export default function Home() {
           return (e: MouseEvent) => {
             const rect = adventureCards[index].getBoundingClientRect();
             let movingToNeighbour = false;
+            const targetColor = getComputedStyle(document.documentElement)
+              .getPropertyValue('--primitive-neutral-1000')
+              .trim();
 
             if (index % 2 === 0) {
               if (e.clientX >= rect.right) {
@@ -118,7 +127,7 @@ export default function Home() {
 
             if (!movingToNeighbour) {
               gsap.to(container.current, {
-                background: 'var(--bg)',
+                background: targetColor,
               });
             } else {
               onEnterHandler({ index: alternate, alternate: index })();
@@ -157,7 +166,7 @@ export default function Home() {
   return (
     <section
       ref={container}
-      className='w-screen h-screen flex justify-center items-center bg-background'>
+      className='w-screen h-screen flex justify-center items-center bg-(--primitive-neutral-1000) pointer-events-auto'>
       <div className=' pb-[10] invisible home_headline overflow-hidden'>
         <h1 className='max-w-[14ch] text-center '>
           Where will your Emily story begin?
