@@ -13,141 +13,142 @@ const WallOfLove = () => {
 
   const isMobile = globalThis.innerWidth <= 768;
 
-  useGSAP(() => {
-    if (!containerRef.current) return;
-    const container = containerRef.current;
-
-    if (!isMobile) {
-      Draggable.create('.draggable', {
-        bounds: containerRef.current,
-        inertia: true,
-      });
-    }
-
-    const DURATION = 0.1;
-    const mouseTracker = document.querySelector('#mouse-tracker');
-    let trackerMarqueeWrapper: HTMLDivElement | null = null;
-    let trackerTextContent: HTMLParagraphElement | null = null;
-    const activeTweens: gsap.core.Tween[] = [];
-
-    const createTextContent = () => {
-      if (!mouseTracker) return;
-
-      mouseTracker.classList.add('marquee__tracker');
-      trackerTextContent = document.createElement('p');
-      trackerTextContent.innerText = 'DRAG ME';
-      trackerTextContent.classList.add(
-        'marquee__text',
-        'font-mango',
-        'text-XL',
-      );
-
-      if (!trackerMarqueeWrapper) {
-        trackerMarqueeWrapper = document.createElement('div');
-        trackerMarqueeWrapper.classList.add('tracker-marquee__wrapper');
-      }
-
-      mouseTracker.appendChild(trackerMarqueeWrapper);
-      trackerMarqueeWrapper.appendChild(trackerTextContent);
-      const width = trackerTextContent.getBoundingClientRect().width;
-      if (width == 0) return;
-      console.log('yreah');
-      const requiredClones = Math.ceil(150 / width) + 2;
-
-      for (let i = 0; i < requiredClones; i++) {
-        const cloneP = trackerTextContent.cloneNode(
-          true,
-        ) as HTMLParagraphElement;
-        cloneP.setAttribute('aria-hidden', 'true');
-
-        trackerMarqueeWrapper.appendChild(cloneP);
-      }
-    };
-
-    const removeTextContent = () => {
-      if (mouseTracker) {
-        mouseTracker.innerHTML = '';
-        mouseTracker.classList.remove('marquee__tracker');
-      }
-      trackerMarqueeWrapper = null;
-      trackerTextContent = null;
-    };
-
-    const onEnter = () => {
-      console.log('a');
-      const tween1 = gsap.to(trackerMarqueeWrapper, {
-        height: '32px',
-        width: '150px',
-        borderRadius: '0px',
-        overwrite: 'auto',
-        duration: DURATION,
-      });
-      activeTweens.push(tween1);
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
+      const container = containerRef.current;
 
       if (!isMobile) {
-        createTextContent();
+        Draggable.create('.draggable', {
+          bounds: containerRef.current,
+          inertia: true,
+        });
       }
-    };
 
-    const onLeave = () => {
-      const tween1 = gsap.to(trackerMarqueeWrapper, {
-        height: '8px',
-        width: '8px',
-        borderRadius: '100%',
-        overwrite: 'auto',
-        duration: DURATION,
+      const DURATION = 0.1;
+      const mouseTracker = document.querySelector('#mouse-tracker');
+      let trackerMarqueeWrapper: HTMLDivElement | null = null;
+      let trackerTextContent: HTMLParagraphElement | null = null;
+      const activeTweens: gsap.core.Tween[] = [];
+
+      const createTextContent = () => {
+        if (!mouseTracker) return;
+
+        mouseTracker.classList.add('marquee__tracker');
+        trackerTextContent = document.createElement('p');
+        trackerTextContent.innerText = 'DRAG ME';
+        trackerTextContent.classList.add(
+          'marquee__text',
+          'font-mango',
+          'text-XL',
+        );
+
+        if (!trackerMarqueeWrapper) {
+          trackerMarqueeWrapper = document.createElement('div');
+          trackerMarqueeWrapper.classList.add('tracker-marquee__wrapper');
+        }
+
+        mouseTracker.appendChild(trackerMarqueeWrapper);
+        trackerMarqueeWrapper.appendChild(trackerTextContent);
+        const width = trackerTextContent.getBoundingClientRect().width;
+        if (width == 0) return;
+        console.log('yreah');
+        const requiredClones = Math.ceil(150 / width) + 2;
+
+        for (let i = 0; i < requiredClones; i++) {
+          const cloneP = trackerTextContent.cloneNode(
+            true,
+          ) as HTMLParagraphElement;
+          cloneP.setAttribute('aria-hidden', 'true');
+
+          trackerMarqueeWrapper.appendChild(cloneP);
+        }
+      };
+
+      const removeTextContent = () => {
+        if (mouseTracker) {
+          mouseTracker.innerHTML = '';
+          mouseTracker.classList.remove('marquee__tracker');
+        }
+        trackerMarqueeWrapper = null;
+        trackerTextContent = null;
+      };
+
+      const onEnter = () => {
+        console.log('a');
+        const tween1 = gsap.to(trackerMarqueeWrapper, {
+          height: '32px',
+          width: '150px',
+          borderRadius: '0px',
+          overwrite: 'auto',
+          duration: DURATION,
+        });
+        activeTweens.push(tween1);
+
+        if (!isMobile) {
+          createTextContent();
+        }
+      };
+
+      const onLeave = () => {
+        const tween1 = gsap.to(trackerMarqueeWrapper, {
+          height: '8px',
+          width: '8px',
+          borderRadius: '100%',
+          overwrite: 'auto',
+          duration: DURATION,
+        });
+
+        activeTweens.push(tween1);
+        removeTextContent();
+      };
+
+      // paint cards on screen
+      const draggables = gsap.utils.toArray('.draggable') as HTMLElement[];
+
+      const tween = gsap?.to(draggables, {
+        width: isMobile ? '350px' : '400px',
+        height: isMobile ? '350px' : '400px',
+        scale: 1,
+        opacity: 1,
+        stagger: 0.1,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: container,
+          start: 'top 50%',
+        },
       });
 
-      activeTweens.push(tween1);
-      removeTextContent();
-    };
+      activeTweens.push(tween);
 
-    // paint cards on screen
-    const draggables = gsap.utils.toArray('.draggable') as HTMLElement[];
+      const shuffleButton = document.querySelector('.shuffle');
+      const slider = document.querySelector('.slider');
 
-    const tween = gsap?.to(draggables, {
-      width: isMobile ? '350px' : '400px',
-      height: isMobile ? '350px' : '400px',
-      scale: 1,
-      opacity: 1,
-      stagger: 0.1,
-      ease: 'power2.inOut',
-      scrollTrigger: {
-        trigger: container,
-        start: 'top 50%',
-      },
-    });
+      if (!slider) return;
 
-    activeTweens.push(tween);
+      const handleCreateNewCard = () => {
+        const lastItem = slider.querySelector(
+          '.draggable:last-child',
+        ) as HTMLElement;
 
-    const shuffleButton = document.querySelector('.shuffle');
-    const slider = document.querySelector('.slider');
+        if (!lastItem) return;
 
-    if (!slider) return;
+        lastItem.style.display = 'none';
+        const newItem = document.createElement('div');
 
-    const handleCreateNewCard = () => {
-      const lastItem = slider.querySelector(
-        '.draggable:last-child',
-      ) as HTMLElement;
+        newItem.className = `w-[350px] h-[350px] flex flex-col p-[20px] origin-center draggable bg-shadow post-card bg-(--bg-brand-secondary) absolute ${lastItem.classList[lastItem.classList.length - 1]}`;
 
-      if (!lastItem) return;
+        const oldImg = lastItem.querySelector('img');
+        const oldName = lastItem.querySelector('.name')?.textContent || '';
+        const oldLocation =
+          lastItem.querySelector('.location')?.textContent || '';
+        const oldExperience =
+          lastItem.querySelector('.experience')?.textContent || '';
+        const oldProfileImage = lastItem.querySelector(
+          '.profile-image',
+        ) as HTMLImageElement;
 
-      lastItem.style.display = 'none';
-      const newItem = document.createElement('div');
-
-      newItem.className = `w-[350px] h-[350px] flex flex-col p-[20px] origin-center draggable bg-shadow post-card bg-(--bg-brand-secondary) absolute ${lastItem.classList[lastItem.classList.length - 1]}`;
-
-      const oldImg = lastItem.querySelector('img');
-      const oldName = lastItem.querySelector('.name')?.textContent || '';
-      const oldLocation =
-        lastItem.querySelector('.location')?.textContent || '';
-      const oldExperience =
-        lastItem.querySelector('.experience')?.textContent || '';
-      const oldProfileImage = lastItem.querySelector(
-        '.profile-image',
-      ) as HTMLImageElement;
-
-      newItem.innerHTML = `
+        newItem.innerHTML = `
           <div class='w-full h-[85%] overflow-hidden shrink-0'>
             <img
               src="${oldImg ? oldImg.src : ''}"
@@ -168,60 +169,62 @@ const WallOfLove = () => {
             </div>
           </div>
         `;
-      slider.insertBefore(newItem, slider.firstChild);
-    };
+        slider.insertBefore(newItem, slider.firstChild);
+      };
 
-    const handleMoveCard = () => {
-      const state = Flip.getState('.draggable');
+      const handleMoveCard = () => {
+        const state = Flip.getState('.draggable');
 
-      handleCreateNewCard();
+        handleCreateNewCard();
 
-      Flip.from(state, {
-        targets: '.draggable',
-        ease: 'sine.inOut',
-        absolute: true,
-        onEnter: elements => {
-          return gsap.from(elements, {
-            duration: 1,
-            xPercent: -200,
-            opacity: 0,
-            ease: 'expo.out',
-          });
-        },
-        onLeave: element => {
-          return gsap.to(element, {
-            duration: 1,
-            xPercent: -200,
-            transformOrigin: 'center',
-            opacity: 0,
-            ease: 'expo.out',
-            onComplete: () => {
-              slider.removeChild(element[0]);
-            },
-          });
-        },
-      });
-    };
+        Flip.from(state, {
+          targets: '.draggable',
+          ease: 'sine.inOut',
+          absolute: true,
+          onEnter: elements => {
+            return gsap.from(elements, {
+              duration: 1,
+              xPercent: -200,
+              opacity: 0,
+              ease: 'expo.out',
+            });
+          },
+          onLeave: element => {
+            return gsap.to(element, {
+              duration: 1,
+              xPercent: -200,
+              transformOrigin: 'center',
+              opacity: 0,
+              ease: 'expo.out',
+              onComplete: () => {
+                slider.removeChild(element[0]);
+              },
+            });
+          },
+        });
+      };
 
-    container.addEventListener('mouseenter', onEnter);
-    container.addEventListener('mouseleave', onLeave);
+      container.addEventListener('mouseenter', onEnter);
+      container.addEventListener('mouseleave', onLeave);
 
-    if (!shuffleButton) return;
-    shuffleButton.addEventListener('click', handleMoveCard);
+      if (!shuffleButton) return;
+      shuffleButton.addEventListener('click', handleMoveCard);
 
-    return () => {
-      shuffleButton.removeEventListener('click', handleMoveCard);
-      container.removeEventListener('mouseenter', onEnter);
-      container.removeEventListener('mouseleave', onLeave);
+      return () => {
+        shuffleButton.removeEventListener('click', handleMoveCard);
+        container.removeEventListener('mouseenter', onEnter);
+        container.removeEventListener('mouseleave', onLeave);
 
-      activeTweens.forEach(tween => {
-        if (tween && tween.kill) {
-          tween.kill();
-        }
-      });
-      activeTweens.length = 0;
-    };
-  });
+        activeTweens.forEach(tween => {
+          if (tween && tween.kill) {
+            tween.kill();
+          }
+        });
+        activeTweens.length = 0;
+      };
+    },
+    { scope: containerRef },
+  );
 
   if (isMobile) {
     return (
