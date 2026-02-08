@@ -16,11 +16,14 @@ import Review from './Review';
 import WallOfLove from './WallOfLove';
 import Outro from './Outro';
 import Footer from './Footer';
+import Lenis from 'lenis';
+import { useLenis } from '../layout';
 
 export const HomePage = () => {
   const containerRef = useRef<HTMLElement>(null);
   const navBarRef = useRef<INavbarHandle>(null);
   const { theme } = useTheme();
+  const lenis = useLenis();
 
   const triggerMenuReveal = () => {
     navBarRef.current?.triggerMyFunction();
@@ -71,8 +74,10 @@ export const HomePage = () => {
         .totalProgress(0.5);
 
       let currentScroll = 0;
-      const scrollHandler = () => {
-        const isScrollingDown = globalThis.pageYOffset > currentScroll;
+
+      const scrollHandler = (lenisInstance: Lenis) => {
+        const scrollY = lenisInstance.scroll;
+        const isScrollingDown = scrollY > currentScroll;
 
         gsap.to(tween, {
           timeScale: isScrollingDown ? 1 : -1,
@@ -80,7 +85,7 @@ export const HomePage = () => {
           ease: 'power1.out',
         });
 
-        currentScroll = globalThis.pageYOffset;
+        currentScroll = scrollY;
       };
 
       let lastWidth = globalThis.innerWidth;
@@ -95,22 +100,24 @@ export const HomePage = () => {
       };
 
       globalThis.addEventListener('resize', handleResize);
-      globalThis.addEventListener('scroll', scrollHandler);
+
+      if (!lenis) return;
+      lenis.on('scroll', scrollHandler);
 
       return () => {
         tween.kill();
-        globalThis.removeEventListener('scroll', scrollHandler);
+        lenis.off('scroll', scrollHandler);
         globalThis.removeEventListener('resize', handleResize);
       };
     },
-    { scope: containerRef },
+    { scope: containerRef, dependencies: [lenis] },
   );
 
   return (
     <>
       <main
         data-theme={theme}
-        className='relative bg-(--background) gradient-bg'
+        className='relative bg-(--background) gradient-bg pointer-events-auto'
         ref={containerRef}
         id='scrollArea'>
         <Navbar ref={navBarRef} />
