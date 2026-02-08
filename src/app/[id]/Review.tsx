@@ -15,6 +15,8 @@ const Review = () => {
 
   useGSAP(
     () => {
+      ScrollTrigger.normalizeScroll(true);
+
       if (!containerRef.current) return;
 
       const imageWrappers: HTMLElement[] = gsap.utils.toArray('.image-wrapper');
@@ -25,7 +27,6 @@ const Review = () => {
           start: 'top bottom',
           end: 'bottom bottom',
           scrub: true,
-          normalizeScroll: true,
           invalidateOnRefresh: true,
         },
       });
@@ -47,11 +48,11 @@ const Review = () => {
           scrollTrigger: {
             trigger: containerRef.current,
             start: 'bottom bottom',
-            end: isMobile ? '+=180%' : '+=100%',
+            end: isMobile ? '+=200vh' : '+=100%',
             scrub: 1,
             pin: true,
             pinSpacing: true,
-            normalizeScroll: true,
+
             invalidateOnRefresh: true,
           },
         })
