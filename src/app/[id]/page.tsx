@@ -115,7 +115,6 @@ export const HomePage = () => {
         id='scrollArea'>
         <Navbar ref={navBarRef} />
 
-        {/* <div className='bg-(--background) gradient-bg overflow-scroll'> */}
         <Hero triggerMenuReveal={triggerMenuReveal} />
         <Explore />
         <VideoSection />

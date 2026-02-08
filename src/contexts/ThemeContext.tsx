@@ -39,7 +39,7 @@ export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
         theme: themes[currentTheme!],
         setTheme,
       }}>
-      <body data-theme={currentTheme}>{children}</body>
+      <body className='pointer-events-none' data-theme={currentTheme}>{children}</body>
     </ThemeContext.Provider>
   );
 }
