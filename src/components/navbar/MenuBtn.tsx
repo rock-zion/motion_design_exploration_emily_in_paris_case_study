@@ -2,19 +2,22 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef } from 'react';
 
-const MenuBtn = () => {
+const MenuBtn = ({ dark }: Readonly<{ dark: boolean }>) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const positionMenuBalls = (index: number): string => {
-    return index == 0
-      ? 'right-[4px] bottom-[4px]'
-      : index == 1
-        ? 'left-[4px] bottom-[4px]'
-        : index == 2
-          ? 'right-[4px] top-[4px]'
-          : index == 3
-            ? 'left-[4px] top-[4px]'
-            : '';
+    let positionStyle = '';
+    if (index === 0) {
+      positionStyle = 'right-[4px] bottom-[4px]';
+    } else if (index == 1) {
+      positionStyle = 'left-[4px] bottom-[4px]';
+    } else if (index == 2) {
+      positionStyle = 'right-[4px] top-[4px]';
+    } else if (index == 3) {
+      positionStyle = 'left-[4px] top-[4px]';
+    }
+
+    return positionStyle;
   };
 
   useGSAP(
@@ -78,8 +81,14 @@ const MenuBtn = () => {
         </div>
       </div>
       <div className='h-[18px] overflow-hidden font-montreal-medium block mx-[24px] hide-in-mobile relative menu-text'>
-        <div className='leading-[18px]'>Menu</div>
-        <div className='leading-[18px] absolute inner-menu'>Menu</div>
+        <div
+          className={`${dark ? 'text-(--content-primary)' : ''} transition-all duration-1000 leading-[18px]`}>
+          Menu
+        </div>
+        <div
+          className={`${dark ? 'text-(--content-primary)' : ''} transition-all duration-1000 leading-[18px] absolute inner-menu`}>
+          Menu
+        </div>
       </div>
     </button>
   );
