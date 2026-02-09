@@ -128,15 +128,15 @@ export const HomePage = () => {
 
         <div
           ref={marqueeRef}
-          className='marquee flex overflow-hidden pt-[20vh] max-md:pt-[10vh] whitespace-nowrap'>
+          className='marquee flex pt-[20vh] max-md:pt-[10vh] whitespace-nowrap overflow-hidden'>
           <div className='marquee-inner flex items-center shrink-0'>
             <h1 className='text-(--content-primary) selection:bg-(--bg-brand) font-bold font-serif-bold'>
               {theme.unlockExperience.videoSection.marqueeText}
             </h1>
-            <div className='w-64 aspect-square ml-4 max-md:w-32  shrink-0'>
+            <div className='w-64 aspect-square ml-4 max-md:w-32  shrink-0 flex items-center justify-center'>
               <img
                 loading='lazy'
-                className='w-full h-full'
+                className='w-full h-full object-contain'
                 alt={theme.unlockExperience.videoSection.marqueeText}
                 src={theme.unlockExperience.videoSection.marqueeSticker}
               />

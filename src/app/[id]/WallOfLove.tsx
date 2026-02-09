@@ -52,7 +52,7 @@ const WallOfLove = () => {
         trackerMarqueeWrapper.appendChild(trackerTextContent);
         const width = trackerTextContent.getBoundingClientRect().width;
         if (width == 0) return;
-        console.log('yreah');
+
         const requiredClones = Math.ceil(150 / width) + 2;
 
         for (let i = 0; i < requiredClones; i++) {
@@ -75,7 +75,6 @@ const WallOfLove = () => {
       };
 
       const onEnter = () => {
-        console.log('a');
         const tween1 = gsap.to(trackerMarqueeWrapper, {
           height: '32px',
           width: '150px',

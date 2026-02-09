@@ -269,7 +269,7 @@ const TourList = () => {
   );
 
   return (
-    <div id="tourlist" ref={containerRef} className='h-fit my-[15vh] pointer-events-auto'>
+    <div id="tourlist" ref={containerRef} className='h-fit py-[15vh] pointer-events-auto'>
       <div className='w-[90vw] slider-wrapper mx-auto max-[990px]:grid max-[990px]:grid-cols-2 max-md:grid-cols-1 gap-[16px] group'>
         {theme.activities.map(activity => (
           <div

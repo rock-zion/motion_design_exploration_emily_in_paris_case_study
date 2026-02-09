@@ -49,8 +49,6 @@ const BloomButton = ({ href, onClick, children }: BloomButtonProps) => {
         gsap.to(child, {
           color: 'var(--primitive-neutral-900)',
         });
-
-        console.log('entering layer', e.layerX, e.layerY);
       };
 
       const onLeave = (e: MouseEvent) => {
@@ -88,18 +86,12 @@ const BloomButton = ({ href, onClick, children }: BloomButtonProps) => {
         });
       };
 
-      const onHandleMove = () => {
-        console.log('moving');
-      };
-
       container.addEventListener('mouseenter', onEnter);
       container.addEventListener('mouseleave', onLeave);
-      container.addEventListener('mousemove', onHandleMove);
 
       return () => {
         container.removeEventListener('mouseenter', onEnter);
         container.removeEventListener('mouseleave', onLeave);
-        container.removeEventListener('mousemove', onHandleMove);
       };
     },
     { scope: containerRef },
