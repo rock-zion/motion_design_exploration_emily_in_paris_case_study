@@ -17,6 +17,7 @@ type NavbarProps = React.HTMLAttributes<HTMLDivElement>;
 
 const Navbar = forwardRef<INavbarHandle, NavbarProps>((props, ref) => {
   const navBarRef = useRef<HTMLDivElement>(null);
+  const currentScrollRef = useRef(0);
   const lenis = useLenis();
 
   const { contextSafe } = useGSAP(() => {}, { scope: navBarRef });
@@ -38,23 +39,24 @@ const Navbar = forwardRef<INavbarHandle, NavbarProps>((props, ref) => {
 
   useGSAP(
     () => {
-      let currentScroll = 0;
-      const activeTweens = [];
+      let scrollVelocity = 0;
+      const VELOCITY_THRESHOLD = 1;
 
       const scrollHandler = (lenisEvent: Lenis) => {
         const scrollY = lenisEvent.scroll;
-        const isScrollingDown = scrollY > currentScroll;
+        scrollVelocity = lenisEvent.velocity; // Lenis provides this!
 
-        if (isScrollingDown) {
-          //
-        }
+        if (Math.abs(scrollVelocity) < VELOCITY_THRESHOLD) return;
 
-        // gsap.to('.nav-wrapper', {
-        //   timeScale: isScrollingDown ? 1 : -1,
-        //   duration: 0.5,
-        //   ease: 'power1.out',
-        // });
-        currentScroll = scrollY;
+        const shouldHide = scrollVelocity > 0 && scrollY > 100;
+
+        gsap.killTweensOf(navBarRef.current);
+        gsap.to(navBarRef.current, {
+          yPercent: shouldHide ? -100 : 0,
+          duration: 0.3,
+          ease: 'power2.out',
+        });
+
       };
 
       if (!lenis) return;
