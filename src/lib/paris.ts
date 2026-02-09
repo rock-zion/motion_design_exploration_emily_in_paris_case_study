@@ -4,8 +4,10 @@ export const paris = {
 
   subtitle:
     "THE <strong>OFFICIAL</strong> TRAVEL BRAND OF NETFLIX'S EMILY IN PARIS",
-  heroVideo: '/video/paris-hero.mp4',
-  poster: '/images/paris-hero.mp4',
+  heroVideo:
+    'https://res.cloudinary.com/dixqgrowr/video/upload/v1770583238/emily_in_paris_motion_design_exploration/videos/paris-hero_ennfrl.mp4',
+  poster:
+    'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581105/emily_in_paris_motion_design_exploration/images/hero_poster_h1xlbt.avif',
   cta: 'Explore Paris',
   description: 'Discover romantic streets and café culture',
   hero: {
@@ -21,94 +23,112 @@ export const paris = {
     cursorTrailImages: [
       {
         id: '1',
-        img: '/images/Walking_Tour_guests_holding_pastry_like_emily_in_paris-p-800.avif',
+        img: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581191/emily_in_paris_motion_design_exploration/images/Walking_Tour_guests_holding_pastry_like_emily_in_paris-p-800_wbizgz.webp',
       },
       {
         id: '2',
-        img: '/images/Macaron_making_guest_pouring_the_mix_to_pipe_the_macaron-p-800.avif',
+        img: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581105/emily_in_paris_motion_design_exploration/images/Macaron_making_guest_pouring_the_mix_to_pipe_the_macaron-p-800_e0pbxl.webp',
       },
-      { id: '3', img: '/images/Macaron_making_filling_the_macarons.avif' },
+      {
+        id: '3',
+        img: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581104/emily_in_paris_motion_design_exploration/images/Macaron_making_filling_the_macarons_dvxvg8.avif',
+      },
       {
         id: '4',
-        img: '/images/Walking_Tour_Group_Photo_outside_Galerie-p-800.avif',
+        img: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581191/emily_in_paris_motion_design_exploration/images/Walking_Tour_Group_Photo_outside_Galerie-p-800_qnnqhx.webp',
       },
       {
         id: '5',
-        img: '/images/Macaron_making_tais_taking_a_picture_of_2_guests_with_the_macaron_making_class_props-p-800.avif',
+        img: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581106/emily_in_paris_motion_design_exploration/images/Macaron_making_tais_taking_a_picture_of_2_guests_with_the_macaron_making_class_props-p-800_sd3eqy.webp',
       },
       {
         id: '6',
-        img: '/images/Macaron_making_tote_bag_macarons_and_glass_of_champagne-p-800.avif',
+        img: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581105/emily_in_paris_motion_design_exploration/images/Macaron_making_tote_bag_macarons_and_glass_of_champagne-p-800_hmyhcq.webp',
       },
       {
         id: '7',
-        img: '/images/Wine_and_cheese_tasting_cutting_the_cheese-p-800.avif',
+        img: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581192/emily_in_paris_motion_design_exploration/images/Wine_and_cheese_tasting_cutting_the_cheese-p-800_z0ra4m.webp',
       },
       {
         id: '8',
-        img: '/images/Seine_Cruise_Paris_by_Emily_Boat_Logo_-p-800.avif',
+        img: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581178/emily_in_paris_motion_design_exploration/images/Seine_Cruise_Paris_by_Emily_Boat_Logo_-p-800_sf6yws.webp',
       },
       {
         id: '9',
-        img: '/images/Seine_Cruise_Captain_and_guest_heart_hands-p-800.avif',
+        img: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581178/emily_in_paris_motion_design_exploration/images/Seine_Cruise_Captain_and_guest_heart_hands-p-800_oh0buh.webp',
       },
     ],
 
     videoSection: {
-      poster: '/video/paris-hero-b-video.avif',
-      video: '/video/paris-hero-b-video.mp4',
+      poster:
+        'https://res.cloudinary.com/dixqgrowr/image/upload/v1770583173/emily_in_paris_motion_design_exploration/videos/paris-hero-b-video_ncqx85.avif',
+      video:
+        'https://res.cloudinary.com/dixqgrowr/video/upload/v1770583188/emily_in_paris_motion_design_exploration/videos/paris-hero-b-video_houykj.mp4',
       marqueeText: 'Discover Experiences',
-      marqueeSticker: '/images/stickers/sticker-montmartre-tour.avif',
+      marqueeSticker:
+        'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581271/emily_in_paris_motion_design_exploration/images/stickers/sticker-montmartre-tour_c8zn5q.avif',
 
       subSections: {
         main1: {
           title: 'MONTMARTRE TOUR',
-          video: '/video/montmarte-b-transcode.mp4',
-          poster: '/video/montmarte-b-transcode.avif',
+          video:
+            'https://res.cloudinary.com/dixqgrowr/video/upload/v1770583185/emily_in_paris_motion_design_exploration/videos/montmarte-b-transcode_ennz5b.mp4',
+          poster:
+            'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581105/emily_in_paris_motion_design_exploration/images/hero_poster_h1xlbt.avif',
         },
         main2: {
           title: 'CHAMPAGNE SEINE CRUISE',
-          video: '/video/croissants-a-transcode.mp4',
-          poster: '/video/croissants-a-transcode.avif',
+          video:
+            'https://res.cloudinary.com/dixqgrowr/video/upload/v1770583196/emily_in_paris_motion_design_exploration/videos/croissants-a-transcode_ngfkxk.mp4',
+          poster:
+            'https://res.cloudinary.com/dixqgrowr/image/upload/v1770583192/emily_in_paris_motion_design_exploration/videos/croissants-a-transcode_k9bjuv.avif',
         },
 
         main3: {
           title: 'WINE & CHEESE TASTING',
-          video: '/video/wine-tasting-b-transcode.mp4',
-          poster: '/video/wine-tasting-b-transcode.avif',
+          video:
+            'https://res.cloudinary.com/dixqgrowr/video/upload/v1770583191/emily_in_paris_motion_design_exploration/videos/wine-tasting-b-transcode_kuqeul.mp4',
+          poster:
+            'https://res.cloudinary.com/dixqgrowr/image/upload/v1770583192/emily_in_paris_motion_design_exploration/videos/wine-tasting-b-transcode_vrwh3p.avif',
         },
       },
     },
     emilyActivities: [
       {
         id: '1',
-        video: '/video/food-tour-a-transcode.mp4',
+        video:
+          'https://res.cloudinary.com/dixqgrowr/video/upload/v1770583186/emily_in_paris_motion_design_exploration/videos/food-tour-a-transcode_xjoufe.mp4',
         type: 'WALKING TOURS',
         title: '<span>Walk in the <br /> footsteps of Emily</span>',
         duration: '2.5HOURS',
         price: 'FROM52€',
         category: 'tour',
-        poster: '/video/food-tour-a-transcode.avif',
+        poster:
+          'https://res.cloudinary.com/dixqgrowr/image/upload/v1770583194/emily_in_paris_motion_design_exploration/videos/food-tour-a-transcode_mgv85m.avif',
       },
       {
         id: '2',
-        video: '/video/croissants-a-transcode.mp4',
+        video:
+          'https://res.cloudinary.com/dixqgrowr/video/upload/v1770583196/emily_in_paris_motion_design_exploration/videos/croissants-a-transcode_ngfkxk.mp4',
         type: 'WORKSHOPS',
         title: '<span>Croissant-Making <br /> Workshop</span>',
         duration: '2.5HOURS',
         price: 'FROM131€',
         category: 'workshop',
-        poster: '/video/croissants-a-transcode.avif',
+        poster:
+          'https://res.cloudinary.com/dixqgrowr/image/upload/v1770583192/emily_in_paris_motion_design_exploration/videos/croissants-a-transcode_k9bjuv.avif',
       },
       {
         id: '3',
-        video: '/video/macarons-a-transcode.mp4',
+        video:
+          'https://res.cloudinary.com/dixqgrowr/video/upload/v1770583213/emily_in_paris_motion_design_exploration/videos/macarons-a-transcode_s8ktcv.mp4',
         type: 'WORKSHOPS',
         title: '<span>Macaron-Making <br /> Workshop</span>',
         duration: '2.5HOURS',
         price: 'FROM131€',
         category: 'workshop',
-        poster: '/video/macarons-a-transcode.avif',
+        poster:
+          'https://res.cloudinary.com/dixqgrowr/image/upload/v1770583173/emily_in_paris_motion_design_exploration/videos/macarons-a-transcode_iokt0f.avif',
       },
     ],
   },
@@ -117,23 +137,29 @@ export const paris = {
     {
       id: '1',
       textA: 'Walking Tour',
-      stickerA: '/images/stickers/sticker-montmartre-tour.avif',
+      stickerA:
+        'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581271/emily_in_paris_motion_design_exploration/images/stickers/sticker-montmartre-tour_c8zn5q.avif',
       textB: 'Food Tour',
-      stickerB: '/images/stickers/sticker-food-tour.avif',
+      stickerB:
+        'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581271/emily_in_paris_motion_design_exploration/images/stickers/sticker-food-tour_ipn3mo.avif',
     },
     {
       id: '2',
       textA: 'Cheese',
-      stickerA: '/images/stickers/sticker-wine-cheese-tasting.avif',
+      stickerA:
+        'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581272/emily_in_paris_motion_design_exploration/images/stickers/sticker-wine-cheese-tasting_rqz2fm.avif',
       textB: 'Wine',
-      stickerB: '/images/stickers/sticker-champagne-seine-cruise.avif',
+      stickerB:
+        'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581270/emily_in_paris_motion_design_exploration/images/stickers/sticker-champagne-seine-cruise_ygrfc0.avif',
     },
     {
       id: '3',
       textA: 'MACARON',
-      stickerA: '/images/stickers/sticker-macaron-making-workshop.avif',
+      stickerA:
+        'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581271/emily_in_paris_motion_design_exploration/images/stickers/sticker-macaron-making-workshop_xqedyn.avif',
       textB: 'CROISSANT',
-      stickerB: '/images/stickers/sticker-croissant-making-workshop.avif',
+      stickerB:
+        'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581270/emily_in_paris_motion_design_exploration/images/stickers/sticker-croissant-making-workshop_wfhs3n.avif',
     },
   ],
 
@@ -142,7 +168,7 @@ export const paris = {
       id: '1',
       leadingSticker: '',
       hoverBg: 'var(--bg-brand)',
-      bg: '/images/Walking_Tour_guests_holding_pastry_like_emily_in_paris-p-800.avif',
+      bg: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581191/emily_in_paris_motion_design_exploration/images/Walking_Tour_guests_holding_pastry_like_emily_in_paris-p-800_wbizgz.webp',
       title: 'Walk in the footsteps of Emily',
       category: 'WALKING TOURS',
       duration: '2.5 HOURS',
@@ -152,7 +178,7 @@ export const paris = {
       id: '2',
       leadingSticker: '',
       hoverBg: 'var(--bg-brand-secondary)',
-      bg: '/images/Croissant_making_end_products_with_red_croissants.avif',
+      bg: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581102/emily_in_paris_motion_design_exploration/images/Croissant_making_end_products_with_red_croissants_j80pks.avif',
       title: 'Croissant-Making Workshop',
       category: 'WORKSHOPS',
       duration: '2.5 HOURS',
@@ -162,7 +188,7 @@ export const paris = {
       id: '3',
       leadingSticker: '',
       hoverBg: 'var(--bg-brand-secondary)',
-      bg: '/images/Macron_making_guest_piping_macaroons.avif',
+      bg: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581106/emily_in_paris_motion_design_exploration/images/Macron_making_guest_piping_macaroons_bugiaa.avif',
       title: 'Macaron-Making Workshop',
       category: 'WORKSHOPS',
       duration: '2.5 HOURS',
@@ -172,7 +198,7 @@ export const paris = {
       id: '4',
       leadingSticker: '',
       hoverBg: 'var(--bg-brand-tertiary)',
-      bg: '/images/Seine_Cruise_Captain_and_guest_heart_hands-p-800.avif',
+      bg: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581178/emily_in_paris_motion_design_exploration/images/Seine_Cruise_Captain_and_guest_heart_hands-p-800_oh0buh.webp',
       title: 'Champagne Seine Cruise',
       category: 'BOAT CRUISE',
       duration: '1.5 HOURS',
@@ -182,7 +208,7 @@ export const paris = {
       id: '5',
       leadingSticker: '',
       hoverBg: 'var(--bg-brand)',
-      bg: '/images/Screenshot_2025-07-22_at_15.27.4.avif',
+      bg: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581180/emily_in_paris_motion_design_exploration/images/Screenshot_2025-07-22_at_15.27.4_qvh4hs.avif',
       title: 'Food Tour',
       category: 'WALKING TOURS',
       duration: '2.5 HOURS',
@@ -192,7 +218,7 @@ export const paris = {
       id: '6',
       leadingSticker: '',
       hoverBg: 'var(--bg-brand)',
-      bg: '/images/Montmartre_Walking_Tour_Selfie_stick_Wall_of_Love.avif',
+      bg: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581107/emily_in_paris_motion_design_exploration/images/Montmartre_Walking_Tour_Selfie_stick_Wall_of_Love_bpznvn.avif',
       title: 'Montmartre Tour',
       category: 'WALKING TOURS',
       duration: '2 HOURS',
@@ -202,7 +228,7 @@ export const paris = {
       id: '7',
       leadingSticker: '',
       hoverBg: 'var(--bg-brand-secondary)',
-      bg: '/images/Wine_and_cheese_tasting_cutting_the_cheese-p-800.avif',
+      bg: 'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581192/emily_in_paris_motion_design_exploration/images/Wine_and_cheese_tasting_cutting_the_cheese-p-800_z0ra4m.webp',
       title: 'Wine, Cheese & Butter Tasting',
       category: 'WORKSHOPS',
       duration: '2 HOURS',
@@ -213,9 +239,10 @@ export const paris = {
   review: {
     name: 'Danielle, Netherlands',
     text: 'It was such a joyful and affirming experience. Thank you, Guillaume, for such a memorable and enriching workshop. We can’t recommend it highly enough!',
-    imageA: '/images/Croissant_making_guests_eating_their_final_products.avif',
+    imageA:
+      'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581102/emily_in_paris_motion_design_exploration/images/Croissant_making_guests_eating_their_final_products_stekcj.avif',
     imageB:
-      '/images/Croissant_making_two_guests_holding_their_raw_croissants.avif',
+      'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581104/emily_in_paris_motion_design_exploration/images/Croissant_making_two_guests_holding_their_raw_croissants_wjcp4y.avif',
     reviews: [
       {
         profile: '',
@@ -224,7 +251,7 @@ export const paris = {
         location: 'United Kingdom',
         experience: 'Wine, Cheese & Butter Tasting',
         image:
-          '/images/Wine_and_cheese_tasting_paris_by_emily_board_and_cheese.avif',
+          'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581192/emily_in_paris_motion_design_exploration/images/Wine_and_cheese_tasting_paris_by_emily_board_and_cheese_qtfjle.avif',
       },
       {
         profile: '',
@@ -233,7 +260,7 @@ export const paris = {
         location: 'United Kingdom',
         experience: 'Walk in the footsteps of Emily',
         image:
-          '/images/Walking_Tour_emily_in_paris_guests_posing_for_photo_outside_emilys_apartment.avif',
+          'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581192/emily_in_paris_motion_design_exploration/images/Walking_Tour_emily_in_paris_guests_posing_for_photo_outside_emilys_apartment_ccsplv.avif',
       },
       {
         profile: '',
@@ -241,7 +268,8 @@ export const paris = {
         name: 'Arina',
         location: 'France',
         experience: 'Champagne Seine Cruise',
-        image: '/images/Seine_Cruise_Macarons_Polaroid.avif',
+        image:
+          'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581178/emily_in_paris_motion_design_exploration/images/Seine_Cruise_Macarons_Polaroid_vly6qq.avif',
       },
       {
         profile: '',
@@ -249,7 +277,8 @@ export const paris = {
         name: 'Christopher',
         location: 'United States',
         experience: 'Croissant-Making Workshop',
-        image: '/images/Croissant_making_three_guests_cutting_the_pastry.avif',
+        image:
+          'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581102/emily_in_paris_motion_design_exploration/images/Croissant_making_three_guests_cutting_the_pastry_dt2mhr.avif',
       },
       {
         profile: '',
@@ -258,7 +287,7 @@ export const paris = {
         location: 'United Kingdom',
         experience: 'Macaron-Making Workshop',
         image:
-          '/images/Macaron_making_workshop_with_paris_by_emily_glasses_and_champagne.avif',
+          'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581106/emily_in_paris_motion_design_exploration/images/Macaron_making_workshop_with_paris_by_emily_glasses_and_champagne_l1y7hs.avif',
       },
     ],
   },

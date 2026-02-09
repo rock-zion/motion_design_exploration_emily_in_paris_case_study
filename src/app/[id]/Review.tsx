@@ -75,7 +75,7 @@ const Review = () => {
 
   return (
     <section
-      className='w-screen will-change-transform bg-amber-600 h-[100dvh] relative flex justify-center items-center pointer-events-auto overflow-x-clip'
+      className='w-screen will-change-transform h-[100dvh] relative flex justify-center items-center pointer-events-auto overflow-x-clip'
       ref={containerRef}>
       <div className='relative w-[90%]  h-[90%] max-md:[100vh] rounded-2xl flex-col-center bg-(--bg-brand-secondary)'>
         <div className='flex'>
