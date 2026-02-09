@@ -22,7 +22,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
 
   useEffect(() => {
     const lenisInstance = new Lenis({
-      duration: 4,
+      duration: 1.2,
       easing: (t: number): number => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
@@ -31,22 +31,17 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
 
     lenisInstance.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add(time => {
+    const updateLenis = (time: number) => {
       lenisInstance.raf(time * 1000);
-    });
+    };
 
+    gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
-    function raf(time: number): void {
-      lenisInstance.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
     return () => {
-      gsap.ticker.remove(lenisInstance.raf);
+      gsap.ticker.remove(updateLenis);
       lenisInstance.destroy();
+      setLenis(null);
     };
   }, []);
 
