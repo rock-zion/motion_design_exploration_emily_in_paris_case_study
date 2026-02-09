@@ -25,7 +25,7 @@ const Review = () => {
       const container = containerRef.current;
 
       const imageWrappers: HTMLElement[] = gsap.utils.toArray('.image-wrapper');
-      const buffer: HTMLElement = container.querySelector('.buffer');
+      const buffer: HTMLElement | null = container.querySelector('.buffer');
 
       const refresh = () => ScrollTrigger.refresh();
       globalThis.addEventListener('resize', refresh);
