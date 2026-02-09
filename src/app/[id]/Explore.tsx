@@ -103,7 +103,7 @@ const Explore = () => {
       );
       existingClones.forEach(clone => clone.remove());
 
-      const screenWidth = window.innerWidth;
+      const screenWidth = globalThis.innerWidth;
       const width = marqueeContent.offsetWidth;
       if (width == 0) return;
       const requiredClones = Math.ceil(screenWidth / width) + 2;
@@ -133,7 +133,7 @@ const Explore = () => {
 
       let currentScroll = 0;
       const scrollHandler = () => {
-        const isScrollingDown = window.pageYOffset > currentScroll;
+        const isScrollingDown = globalThis.pageYOffset > currentScroll;
 
         gsap.to(tween, {
           timeScale: isScrollingDown ? 1 : -1,
@@ -141,14 +141,14 @@ const Explore = () => {
           ease: 'power1.out',
         });
 
-        currentScroll = window.pageYOffset;
+        currentScroll = globalThis.pageYOffset;
       };
 
-      window.addEventListener('scroll', scrollHandler);
+      globalThis.addEventListener('scroll', scrollHandler);
 
       return () => {
         tween.kill();
-        window.removeEventListener('scroll', scrollHandler);
+        globalThis.removeEventListener('scroll', scrollHandler);
       };
     },
     { scope: container },

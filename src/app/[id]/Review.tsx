@@ -28,7 +28,7 @@ const Review = () => {
       const buffer: HTMLElement = container.querySelector('.buffer');
 
       const refresh = () => ScrollTrigger.refresh();
-      window.addEventListener('resize', refresh);
+      globalThis.addEventListener('resize', refresh);
 
       const imageTl = gsap.timeline({
         scrollTrigger: {
@@ -65,10 +65,10 @@ const Review = () => {
 
       tl.to(buffer, {
         y: '-200vh',
-        immediateRender: false, 
+        immediateRender: false,
       });
 
-      return () => window.removeEventListener('resize', refresh);
+      return () => globalThis.removeEventListener('resize', refresh);
     },
     { scope: containerRef },
   );

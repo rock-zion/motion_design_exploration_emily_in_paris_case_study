@@ -28,7 +28,7 @@ const MarqueeMadness = () => {
         if (!marqueeContent) return;
 
         const width = marqueeContent.offsetWidth;
-        const screenWidth = window.innerWidth;
+        const screenWidth = globalThis.innerWidth;
 
         if (width == 0) return;
         const requiredClones = Math.ceil(screenWidth / width) + 2;
@@ -92,7 +92,7 @@ const MarqueeMadness = () => {
 
   return (
     <section
-      className='my-[15vh] h-[80vh] max-lg:h-fit max-md:h-fit w-screen overflow-x-clip flex items-center flex-col relative '
+      className='mt-[15vh] h-[80vh] max-lg:h-fit max-md:h-fit w-screen overflow-x-clip flex items-center flex-col relative '
       ref={containerRef}>
       {theme.maequeeMadness.map((marquee, index) => {
         const isItem1 = index % 3 === 0;
