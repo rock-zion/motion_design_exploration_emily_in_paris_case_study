@@ -12,22 +12,30 @@ const Review = () => {
   const { theme } = useTheme();
   const containerRef = useRef<HTMLElement>(null);
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
 
   useGSAP(
     () => {
-      ScrollTrigger.normalizeScroll(true);
+      ScrollTrigger.normalizeScroll({
+        allowNestedScroll: true,
+        lockAxis: true,
+      });
 
       if (!containerRef.current) return;
+      const container = containerRef.current;
 
       const imageWrappers: HTMLElement[] = gsap.utils.toArray('.image-wrapper');
+      const buffer: HTMLElement = container.querySelector('.buffer');
+
+      const refresh = () => ScrollTrigger.refresh();
+      window.addEventListener('resize', refresh);
 
       const imageTl = gsap.timeline({
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: container,
           start: 'top bottom',
-          end: 'bottom bottom',
+          end: 'top top',
           scrub: true,
-          invalidateOnRefresh: true,
         },
       });
 
@@ -43,32 +51,33 @@ const Review = () => {
         );
       });
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'bottom bottom',
-            end: isMobile ? '+=200vh' : '+=100%',
-            scrub: 1,
-            pin: true,
-            pinSpacing: true,
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: 'top top',
+          end: '+=200%',
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+          pinType: isMobile ? 'transform' : 'fixed',
+        },
+      });
 
-            invalidateOnRefresh: true,
-          },
-        })
-        .to('.buffer', {
-          y: '-200vh',
-          ease: 'power1.inOut',
-        });
+      tl.to(buffer, {
+        y: '-200vh',
+        immediateRender: false, 
+      });
+
+      return () => window.removeEventListener('resize', refresh);
     },
     { scope: containerRef },
   );
 
   return (
     <section
-      className='w-screen h-screen overflow-hidden relative flex justify-center items-center pointer-events-auto'
+      className='w-screen will-change-transform bg-amber-600 h-[100dvh] relative flex justify-center items-center pointer-events-auto overflow-x-clip'
       ref={containerRef}>
-      <div className='relative w-[90%] h-[90%] max-md:[100vh] rounded-2xl flex-col-center bg-(--bg-brand-secondary)'>
+      <div className='relative w-[90%]  h-[90%] max-md:[100vh] rounded-2xl flex-col-center bg-(--bg-brand-secondary)'>
         <div className='flex'>
           {[...Array(5)].map((_, i) => (
             <AiFillStar
@@ -104,7 +113,7 @@ const Review = () => {
           alt=''
         />
       </div>
-      <div className='buffer top-[0] left-0 absolute w-[1] bg-amber-700 h-[200vh]'></div>
+      <div className='buffer will-change-transform absolute top-0 flex flex-col w-[10] h-[200vh]'></div>
     </section>
   );
 };
