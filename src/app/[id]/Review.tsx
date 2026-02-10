@@ -24,6 +24,8 @@ const Review = () => {
       if (!containerRef.current) return;
       const container = containerRef.current;
 
+      const mm = gsap.matchMedia();
+
       const imageWrappers: HTMLElement[] = gsap.utils.toArray('.image-wrapper');
       const buffer: HTMLElement | null = container.querySelector('.buffer');
 
@@ -51,21 +53,44 @@ const Review = () => {
         );
       });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          start: 'top top',
-          end: '+=200%',
-          scrub: true,
-          pin: true,
-          anticipatePin: 1,
-          pinType: isMobile ? 'transform' : 'fixed',
-        },
-      });
+      mm.add('(min-width: 800px)', () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: container,
+            start: 'top top',
+            end: '+=200%',
+            scrub: true,
+            pin: true,
+            anticipatePin: 1,
+            pinType: isMobile ? 'transform' : 'fixed',
+          },
+        });
 
-      tl.to(buffer, {
-        y: '-200vh',
-        immediateRender: false,
+        tl.to(buffer, {
+          y: '-200vh',
+          immediateRender: false,
+        });
+
+        const imageTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: container,
+            start: 'top bottom',
+            end: 'top top',
+            scrub: true,
+          },
+        });
+
+        imageWrappers.forEach((imgWrapper, index) => {
+          const isEven = (index + 1) % 2 === 0;
+          imageTl.to(
+            imgWrapper,
+            {
+              xPercent: isEven ? 120 : -120,
+              ease: 'power1.inOut',
+            },
+            0,
+          );
+        });
       });
 
       return () => globalThis.removeEventListener('resize', refresh);
