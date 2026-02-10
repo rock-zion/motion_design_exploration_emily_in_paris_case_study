@@ -17,7 +17,7 @@ export const rome = {
   unlockExperience: {
     title: 'Explore at your own pace',
     ctaBtnText: 'View Experiences',
-    cta: "<div class='relative unlock-experiences'>Unlock The <span class='inline-flex justify-center flex-wrap'><span class='inline-flex justify-around w-fit'><span>Emily in&nbsp;</span><img loading='lazy' src='/images/6943dc7b97964d70a5d73e58_rome_text.svg' class='stylised-rome mobile' /></span><span class='struckout relative'>Paris<img loading='lazy' src='/images/6943dc7b97964d70a5d73e58_rome_text.svg' class='absolute stylised-rome web' /></span></span> Experiences</div>",
+    cta: "<div class='relative unlock-experiences'>Unlock The <span class='inline-flex justify-center flex-wrap'><span class='inline-flex justify-around w-fit'><span>Emily in&nbsp;</span><img loading='lazy' src='https://res.cloudinary.com/dixqgrowr/image/upload/v1770581101/emily_in_paris_motion_design_exploration/images/6943dc7b97964d70a5d73e58_rome_text_m41d5v.svg' class='stylised-rome mobile' /></span><span class='struckout relative'>Paris<img loading='lazy' src='https://res.cloudinary.com/dixqgrowr/image/upload/v1770581101/emily_in_paris_motion_design_exploration/images/6943dc7b97964d70a5d73e58_rome_text_m41d5v.svg' class='absolute stylised-rome web' /></span></span> Experiences</div>",
     cursorTrailImages: [
       {
         id: '1',

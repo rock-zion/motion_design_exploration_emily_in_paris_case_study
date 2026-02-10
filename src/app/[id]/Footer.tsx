@@ -8,7 +8,9 @@ const Footer = () => {
           <img
             loading='lazy'
             className=' w-[150px]'
-            src={'/images/Netflix_Logo_RGB.png'}
+            src={
+              'https://res.cloudinary.com/dixqgrowr/image/upload/v1770581107/emily_in_paris_motion_design_exploration/images/Netflix_Logo_RGB_iotdxf.png'
+            }
             alt='netflix logo'
           />
           <p className='font-montreal-book ml-4'>
