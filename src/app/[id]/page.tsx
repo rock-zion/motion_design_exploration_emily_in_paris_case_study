@@ -73,19 +73,14 @@ export const HomePage = () => {
         })
         .totalProgress(0.5);
 
-      let currentScroll = 0;
-
       const scrollHandler = (lenisInstance: Lenis) => {
-        const scrollY = lenisInstance.scroll;
-        const isScrollingDown = scrollY > currentScroll;
+        const isScrollingDown = lenisInstance.direction === 1;
 
         gsap.to(tween, {
           timeScale: isScrollingDown ? 1 : -1,
           duration: 0.5,
           ease: 'power1.out',
         });
-
-        currentScroll = scrollY;
       };
 
       let lastWidth = globalThis.innerWidth;
@@ -103,7 +98,6 @@ export const HomePage = () => {
 
       if (!lenis) return;
       lenis.on('scroll', scrollHandler);
-
       return () => {
         tween.kill();
         lenis.off('scroll', scrollHandler);

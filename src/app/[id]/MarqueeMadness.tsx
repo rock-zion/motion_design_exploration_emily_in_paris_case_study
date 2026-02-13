@@ -15,7 +15,6 @@ const MarqueeMadness = () => {
       if (!containerRef.current) return;
       const marquees: HTMLElement[] = gsap.utils.toArray('.marquee');
       const activeTweens: gsap.core.Tween[] = [];
-      let currentScroll = 0;
 
       marquees.forEach((marquee, index) => {
         const isEven = (index + 1) % 2 == 0;
@@ -65,14 +64,13 @@ const MarqueeMadness = () => {
       });
 
       const scrollHandler = (lenisEvent: Lenis) => {
-        const scrollY = lenisEvent.scroll;
-        const isScrollingDown = scrollY > currentScroll;
+        const isScrollingDown = lenisEvent.direction === 1;
+
         gsap.to(activeTweens, {
           timeScale: isScrollingDown ? 1 : -1,
           duration: 0.5,
           ease: 'power1.out',
         });
-        currentScroll = scrollY;
       };
 
       if (!lenis) return;
