@@ -31,6 +31,8 @@ const WallOfLove = () => {
       let trackerTextContent: HTMLParagraphElement | null = null;
       const activeTweens: gsap.core.Tween[] = [];
 
+      if (!mouseTracker) return;
+
       const createTextContent = () => {
         mouseTracker.classList.add('marquee__tracker');
         trackerTextContent = document.createElement('p');
