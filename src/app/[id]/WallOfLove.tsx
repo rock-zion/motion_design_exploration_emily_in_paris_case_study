@@ -32,8 +32,6 @@ const WallOfLove = () => {
       const activeTweens: gsap.core.Tween[] = [];
 
       const createTextContent = () => {
-        if (!mouseTracker) return;
-
         mouseTracker.classList.add('marquee__tracker');
         trackerTextContent = document.createElement('p');
         trackerTextContent.innerText = 'DRAG ME';
@@ -50,6 +48,7 @@ const WallOfLove = () => {
 
         mouseTracker.appendChild(trackerMarqueeWrapper);
         trackerMarqueeWrapper.appendChild(trackerTextContent);
+
         const width = trackerTextContent.getBoundingClientRect().width;
         if (width == 0) return;
 
