@@ -13,7 +13,7 @@ const Footer = () => {
             }
             alt='netflix logo'
           />
-          <p className='font-montreal-book ml-4'>
+          <p className='font-montreal-book ml-4 text-(--bg-inverse)'>
             NO AFFILIATION WITH <br /> THE NETFLIX OR EMILY <br /> IN PARIS
             BRAND
           </p>
@@ -29,10 +29,10 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className='text-display font-rumble mt-[2vh] w-full text-center'>
+      <p className='text-display font-rumble mt-[2vh] w-full text-center text-(--bg-inverse)'>
         Paris By Emily
       </p>
-      <p className='font-montreal-book text-center uppercase'>
+      <p className='font-montreal-book text-center text-(--bg-inverse) uppercase'>
         No affiliation with Netflix or Emily in Paris. This landing page was
         created solely for skill demonstration purposes.
       </p>
